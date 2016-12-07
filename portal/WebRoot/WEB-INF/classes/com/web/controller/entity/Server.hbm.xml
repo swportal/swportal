@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="com.web.controller.entity.Server" table="tsdr_server">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="ip" />
+		<property name="name" />
+		<property name="useFor" />		
+		<property name="cpuCount" />
+		<property name="cpuNumber" />		
+		<property name="memCount" />
+		<property name="memSize" />		
+		<property name="hddCount" />
+		<property name="hddType" />
+		<property name="hddSize" />		
+		<property name="osVersion" />
+		<property name="manager" />					
+	</class>
+</hibernate-mapping>

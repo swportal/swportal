@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="Case" table="tsdr_case">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="prodType" />
+		<property name="chipset" />
+		<property name="model" />
+		
+		<property name="description" />
+		<property name="occurTime" />
+		<property name="occurSite" />
+		<property name="occurPhase" />
+		<property name="occurType" />
+		<property name="version" />
+		
+		<property name="rootReason" />
+		<property name="unknownReason" />	
+				
+		<property name="measureDev" />
+		<property name="measureTest" />		
+		<property name="measureType" />		
+			
+		<property name="improvedType" />	
+		<property name="checklistUpdate" />
+		<property name="tcUpdate" />
+		<property name="plmRegister" />		
+		<property name="report" />	
+		<property name="filename" />	
+		<property name="ip" />	
+		<property name="personINCharge" />	
+		<property name="propagation" />	
+		<property name="gmapRegister" />	
+		<property name="uploadTime" />
+		<property name="confirmy" />
+	</class>
+</hibernate-mapping>

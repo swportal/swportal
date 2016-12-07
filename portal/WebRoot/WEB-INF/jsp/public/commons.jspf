@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="${pageContext.request.contextPath}/js/jquery.js" charset="utf-8"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/js/pageCommon.js"  charset="utf-8"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/js/PageUtils.js" charset="utf-8"></script>
+<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/style/blue/pageCommon.css" charset="utf-8"/>
+<%  
+    String path = request.getContextPath();  
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%>  
+<script type="text/javascript">
+</script>

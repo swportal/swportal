@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="Visitor" table="tsdr_visitor">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="ip" />
+		<property name="name" />
+		<property name="part" />
+		<property name="grade" />
+		<property name="visitTime" />
+		<property name="visitDate" />	
+		<property name="visitFreq" />			
+	</class>
+</hibernate-mapping>
