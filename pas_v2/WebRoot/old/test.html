@@ -1,0 +1,37 @@
+<!-
+
+在tomcat下面测试中文可正常显示
+
+->
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+ <HTML>
+  <HEAD>
+   <TITLE> ajax test </TITLE>
+
+ </HEAD>
+ <script src="ajaxaction.js"></script>
+  <BODY>
+  <form>
+  <input type="text" name="content">
+  <input type="button" name="clickmeforget" value="clickme" onclick="sendGetAction('test.jsp?content=中文',stateChanged)">
+  <input type="button" name="clickmeforpost" value="clickme" onclick="testPostAction('test.jsp',this.form.content.value,stateChanged)">
+  </form>
+   <span id="textHit"></span>
+   <script>
+   function testPostAction(url,value,stateChanged){
+   value = encodeURI(value);
+   value = encodeURI(value);//两次，很关键,解决中文问题
+
+  sendPostAction(url,"content="+value,stateChanged);
+   };
+   function stateChanged(){
+   if (xmlHttp.readyState==4)
+   {
+   document.getElementByIdx("textHit").innerHTML=xmlHttp.responseText;
+   };
+   }
+   </script>
+  </BODY>
+ </HTML>

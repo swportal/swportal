@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+
+<struts>
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.action.extension" value="do,action"/> 
+	
+	
+	<package name="default"  extends="struts-default">
+	<!-- <package name="user" extends="struts-default,tiles-default" namespace="/">  -->
+        
+		<!-- <action name="login" class="net.nw.action.UsersAction" method="login">
+			<result type="tiles">adminTiles</result>
+			<result name="login_failure">/error.jsp</result>
+			<result name="input">/login.jsp</result>
+			<result name="success" type="tiles">adminTiles</result>
+		</action>
+		 -->
+		 <default-action-ref name="notFound" />
+	     <action name="notFound">
+	     <result>error.jsp</result>
+	     </action>
+		 <action name="login"  class="net.nw.action.UsersAction" method="login">
+		 	<result name="success">/index_pie.jsp</result>
+		 	<result name="input">/login.jsp</result>
+		 </action>
+		 
+		 <action name="logout"  class="net.nw.action.UsersAction" method="logout">
+		 	<result name="logout">/index_pie.jsp</result>
+		 </action>
+		 
+		<action name="select" class="net.nw.action.ModelcodesAction" method="login_select">
+			
+			<result name="success" >/index_pie.jsp</result>
+			<result name="error" >/error.jsp</result>
+		</action>
+		
+		<action name="selectproject" class="net.nw.action.ModelcodesAction" method="login_select_project">
+			
+			<result name="success" >/index_pie.jsp</result>
+		</action>
+		
+		<action name="type_select" class="net.nw.action.ModelcodesAction" method="login_type_select">
+			
+			<result name="success" >/index_pie.jsp</result>
+		</action>
+		
+<!-- 		<action name="randomimage" class="net.nw.util.RandomCodeAction" > -->
+<!-- 		</action> -->
+		
+		<action name="onchange" class="net.nw.action.ModelcodesAction" method="selectCode">
+			<result name="success">/index_pie.jsp</result>
+		</action>
+		<action name="searchcode" class="net.nw.action.SearchCodeAction" method="searchCode">
+			<result name="success">/index_pie.jsp</result>
+		</action>
+		
+		<action name="multiproject" class="net.nw.action.SearchCodeAction" method="multiSearchCode">
+			<result name="success">/index_pie.jsp</result>
+		</action>
+		
+		<action name="searchmodel" class="net.nw.action.SearchCodeAction" method="searchModel">
+			<result name="success">/mainpage_model.jsp</result>
+		</action>
+		
+		<action name="searchdefect" class="net.nw.action.SearchCodeAction" method="searchDefect">
+			<result name="success">/mainpage_defect.jsp</result>
+		</action>
+		
+	
+		
+		<action name="selectstatus" class="net.nw.action.SearchCodeAction" method="searchCode">
+			<result name="success">/mainpage.jsp</result>
+		</action>
+		
+	</package>
+	
+	<!-- <package name="ajax" extends="jason-default">
+		<action name="ajaxRequest" class="net.nw.action.HelloWorld">
+			<result type="json"></result>
+		</action>
+	</package>
+ -->
+</struts>    

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+
+
+        <script type="text/javascript">
+ 		
+			var chart;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({   
+					chart: {
+						renderTo: 'container',   //指向容器
+						plotBackgroundColor: null,
+						plotBorderWidth: null,
+						plotShadow: false
+					},
+					title: {
+						text: 'Browser market shares at a specific website, 2010'  //标题
+					},
+					tooltip: {  //提示框
+						formatter: function() {  
+							return '<b>'+ this.point.name +'</b>: '+ this.y +' %'; 
+						}
+					},
+					plotOptions: {
+						pie: {  //饼图
+							allowPointSelect: true,
+							cursor: 'pointer',
+							dataLabels: { 
+								enabled: true, //false 不显示指示线
+								color: '#000000',
+								connectorColor: '#000000',
+								formatter: function() {
+									return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+								}
+							}
+						}
+					},
+				    series: [{
+						type: 'pie',
+						name: 'Browser share',
+						data: [                         //数据为数组也行，对象也行
+							['Firefox',   45.0],     //这里不用写%，45.0==45%   number
+							['IE',       26.8],
+							{
+								name: 'Chrome',    
+								y: 12.8,
+								sliced: true,     //分离
+								selected: true   //选中为真
+							},
+							['Safari',    8.5],
+							['Opera',     6.2],
+							['Others',   0.7]
+						]
+					}]
+				});
+			});
+	</script>
+</head>
+<body>
+
+</body>
+</html>
