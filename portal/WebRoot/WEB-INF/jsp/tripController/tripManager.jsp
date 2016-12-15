@@ -113,7 +113,7 @@
 			.navtop-right{
 				float:right;
 				position:relative;
-				right:4%;
+				right:6%;
 			}				
 		</style>
     
@@ -288,7 +288,7 @@
 			  // alert(keyword);
 			    $.getJSON("/portal/trip/findTripList?keyword="+encodeURIComponent(keyword,"utf-8")+"&orderItem="+orderItem+"&orderKey="+orderKey+"&curpage="+cur+"&rn="+Math.random(),function(data){
 			    	   if(data[0].tripList.length!=0)
-			    	   		document.getElementById("urllink").href = data[0].report;
+			    	   		document.getElementById("urllink").href = data[0].tripList[0].report;
 			    	   curpage=data[1].curpage;
 	    			   totalpage=data[1].totalpage;
 					   var str="";

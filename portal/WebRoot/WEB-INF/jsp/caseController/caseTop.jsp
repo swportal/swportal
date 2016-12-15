@@ -123,7 +123,7 @@
 			.navtop-right{
 				float:right;
 				position:relative;
-				right:6%;
+				right:4%;
 			}	
 			select option {font-size:12px; font-family:Arial}
 		</style>
