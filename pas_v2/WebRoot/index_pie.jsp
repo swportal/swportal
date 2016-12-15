@@ -1179,11 +1179,14 @@
 		 				<a href="http://vdcosmos.sec.samsung.net/signin" target="_blank" title="VD Tizen Build & Test System"><font size=1 face="Arial">COSMOS</font></a>
 					</td>
 		 				<td width="100px" align="center">
-						<a href="http://vdswportal.sec.samsung.net/SitePages/sw_portal.aspx" target="_blank" title="Integrated SW Security Management System"><font size=1 face="Arial">ISMS</font></a>
+						<a href="http://10.40.68.68/isms/identity/anonymous/ssoLogin.do" target="_blank" title="Integrated SW Security Management System"><font size=1 face="Arial">ISMS</font></a>
 					</td>
 		 			<td width="100px" align="center">
 						<a href="http://vdsw.sec.samsung.net/SitePages/New_Home.aspx" target="_blank" title="Microsoft Office Sharepoint Server"><font size=1 face="Arial">MOSS</font></a>
 					</td>	
+					<td width="100px" align="center">
+						<a href="https://wormhole.sec.samsung.net/cnh/secure/StructureBoard.jspa" target="_blank" title="Microsoft Office Sharepoint Server"><font size=1 face="Arial">Wormhole</font></a>
+					</td>
 					<td width="100px" align="center">
 						<a href="http://109.110.41.139:8000/" target="_blank" title="What's Model"><font size=1 face="Arial">What's Model</font></a>
 					</td>
@@ -1203,7 +1206,7 @@
 						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
 					</td>
 					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.2.4</font>
+						<font color="#9d9d9d" size=1 face="Arial">V1.2.5</font>
 					</td>
 				</tr>
 			</table>	
