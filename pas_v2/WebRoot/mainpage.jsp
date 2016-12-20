@@ -219,7 +219,7 @@
 		  					html=html+"<tr bordercolor='#DEDEDE' bgcolor='#ffffff'><td align='center' width='50px' height='29px' ><input disabled='disabled' type='checkbox' name='isSelect' value="+person[i].getElementsByTagName('PjtName')[0].firstChild.data+"></input></td>";
 		  				}
 		  				if(person[i].getElementsByTagName("Milestone")[0].firstChild.data.toString()!="SRA"){
-			  				if(person[i].getElementsByTagName("Milestone")[0].firstChild.data.toString()!="null"){
+			  				if(person[i].getElementsByTagName("Milestone")[0].firstChild.data.toString()!="-"){   //2016-12-20 wuliying change from "null" to "-" to apply PLM change point
 				  				if(person[i].getElementsByTagName(person[i].getElementsByTagName("Milestone")[0].firstChild.data.toString())[0].firstChild.data.toString()=="R"){
 				  					html=html+"<td align='center' width='50px' height='29px' ><img id='obj3' src='images/chilun_red.png'  width='18' height='18'/></td>";
 				  				}
