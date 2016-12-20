@@ -784,7 +784,7 @@
 							</tr>
 						</table>
 					</td>
-					<td width="5%">
+					<td width="4%">
 					<div id="downexcel"></div>
 					</td>
 				</tr>
