@@ -46,7 +46,7 @@ public class SelectCityServlet extends HttpServlet {
          if ("spt".equals(state)){
                  sb.append("<city>Basic</city><city>Deriv</city>");
          } else if("pg".equals(state)){
-        	 	sb.append("<city>HD</city><city>LM</city><city>MFM</city><city>UT</city>");
+        	 	sb.append("<city>HD</city><city>LM</city><city>MFM</city><city>UT</city><city>QT</city>"); //2016-12-26 wuliying add QT option
          }
          else if("ps".equals(state)){
      	 	sb.append("<city>Normal In Prog.</city><city>Delay in Prog.</city><city>Normal Compl.</city><city>Delay Compl.</city>");

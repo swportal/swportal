@@ -32,8 +32,30 @@ public class RoleController {
 		roleService.save(role);
 		return "redirect:/role/getAllRole";
 	}
+	
+	@RequestMapping("/getRole")
+	public String getRole(Long id,HttpServletRequest request){
+		Role role = roleService.getById(id);
+		request.setAttribute("role", role);
+		return "/roleController/saveRole";
+	}
 	@RequestMapping("/updateRole")
 	public String updateRole(Role role,HttpServletRequest request, HttpServletResponse response){
+			/*
+			 * 2016-12-26 wuliying add to avoid privilege null.
+			 
+			List<Privilege> privilegeList = null;
+			if(roleService.getById(role.getId()).getPrivileges()!=null){
+				Long[] privilegeIds  = new Long[roleService.getById(role.getId()).getPrivileges().size()];
+				int index = 0;
+				for(Privilege priv:roleService.getById(role.getId()).getPrivileges()){
+					privilegeIds[index++]=priv.getId();
+				}
+				privilegeList = privilegeService.getByIds(privilegeIds);
+				
+			}
+			role.setPrivileges(new HashSet<Privilege>(privilegeList));
+			*/
 			roleService.update(role);
 			return "redirect:/role/getAllRole";
 		//}
@@ -45,12 +67,7 @@ public class RoleController {
 	public String toAddRole(){
 		return "/roleController/saveRole";
 	}
-	@RequestMapping("/getRole")
-	public String getRole(Long id,HttpServletRequest request){
-		Role role = roleService.getById(id);
-		request.setAttribute("role", role);
-		return "/roleController/saveRole";
-	}
+	
 	@RequestMapping("/delRole")
 	public void delRole(Long id,HttpServletResponse response){
 		String result = "{\"result\":\"success\"}";
