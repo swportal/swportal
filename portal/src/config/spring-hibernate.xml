@@ -16,7 +16,7 @@
 <!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">   -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" 	value="com.mysql.jdbc.Driver"/>
-		<property name="jdbcUrl" 				value="jdbc:mysql://109.110.100.56/tsdr"/> 
+		<property name="jdbcUrl" 				value="jdbc:mysql://109.110.100.56/tsdr_project"/> 
 		<property name="user" 		value="root"/> 
 		<property name="password" 		value=""/>
 		<!--连接池中保留的最小连接数。-->            
