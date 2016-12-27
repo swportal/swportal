@@ -921,7 +921,7 @@ public class SearchCodeAction extends ActionSupport implements RequestAware,Sess
 				String projectname= (String)request.getParameter("projectname");
 				//2016-11-25 wuliying add modelname part
 				String modelname= (String)request.getParameter("modelname");
-				String item= (String)request.getParameter("item");	
+				String item= (String)request.getParameter("item");	 //Opened?Total?
 				request.setAttribute("projectname",projectname);
 				request.setAttribute("modelname",modelname);
 				request.setAttribute("item",item);

@@ -39,7 +39,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 		getSession().flush();
 	}
 	@Transactional
+	public void merge(T entity) {
+		getSession().merge(entity);
+		getSession().flush();
+	}
+	@Transactional
 	public void update(T entity) {
+		getSession().clear(); //2016-12-26 wuliying add to make sure role privilege maintain
 		getSession().update(entity);
 		getSession().flush();		
 		/*String hql = "UPDATE User u SET u.userName=? ,u.age=? WHERE u.id=?";

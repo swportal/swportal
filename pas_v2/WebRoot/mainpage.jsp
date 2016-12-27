@@ -198,12 +198,12 @@
 					firstpagehtml= "<a><<</a>&nbsp;&nbsp;&nbsp;";
 					prevpagehtml = "<a><</a>";
 				}else{
-					firstpagehtml="<a onclick='AjaxTest(1,null,null,null);' href='javascript:void(0);'><font color='#3498db'><<&nbsp;&nbsp;&nbsp;</font></a>";
+					firstpagehtml="<a onclick='AjaxTest(1,null,keywd,ordKey);' href='javascript:void(0);'><font color='#3498db'><<&nbsp;&nbsp;&nbsp;</font></a>";
 					prevpagehtml = "<a onclick='AjaxTest("+(currpage-1)+",null,keywd,ordKey);' href='javascript:void(0);'><</a>";
 				}
 				if((currpage-0)<(pagecount-0)){
 					nextpagehtml = "<a onclick='AjaxTest("+(currpage-0+1)+",null,keywd,ordKey);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
-					lastpagehtml = " <a onclick='AjaxTest("+pagecount+",null,null,null);' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
+					lastpagehtml = " <a onclick='AjaxTest("+pagecount+",null,keywd,ordKey);' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
 				}else{
 					nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
 					lastpagehtml = "<a>>></a>";
@@ -678,11 +678,11 @@
 				window.open ("mainpage_projectstatus.jsp", "newwindow", "height=900, width=1440, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
 			}
 			function openwin_searchdefect(pn,item){	
-				window.open ("searchdefect.action?projectname="+pn+"&item="+item, "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
+				window.open ("searchdefect.action?projectname="+pn+"&item="+item, "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=60");
 				
 			}
 			function openwin_searchmodel(pn){	
-				window.open ("searchmodel.action?projectname="+pn, "newwindow", "height=600, width=1340, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
+				window.open ("searchmodel.action?projectname="+pn, "newwindow", "height=700, width=1340, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
 				
 			}
 			function openwin_histogram(){

@@ -49,7 +49,7 @@
 	} 
 </style> 
 
-<style>a{TEXT-DECORATION:none}a:hover{TEXT-DECORATION:underline}</style>
+<style>a{TEXT-DECORATION:none}a:hover{TEXT-DECORATION:none}</style>  <%-- 2016-12-27 wuliying change underline->none--%>
 <meta http-equiv="Content-Type" content="text/html; charset =UTF-8">
 <link rel="stylesheet" type="text/css" href="css/mainpagestyle.css" />
 

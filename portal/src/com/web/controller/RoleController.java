@@ -43,19 +43,19 @@ public class RoleController {
 	public String updateRole(Role role,HttpServletRequest request, HttpServletResponse response){
 			/*
 			 * 2016-12-26 wuliying add to avoid privilege null.
-			 
-			List<Privilege> privilegeList = null;
-			if(roleService.getById(role.getId()).getPrivileges()!=null){
-				Long[] privilegeIds  = new Long[roleService.getById(role.getId()).getPrivileges().size()];
+			 */
+		    Role r = roleService.getById(role.getId());
+		    List<Privilege> privilegeList = null;
+			if(r.getPrivileges()!=null){
+				Long[] privilegeIds  = new Long[r.getPrivileges().size()];
 				int index = 0;
-				for(Privilege priv:roleService.getById(role.getId()).getPrivileges()){
+				for(Privilege priv:r.getPrivileges()){
 					privilegeIds[index++]=priv.getId();
 				}
 				privilegeList = privilegeService.getByIds(privilegeIds);
 				
 			}
 			role.setPrivileges(new HashSet<Privilege>(privilegeList));
-			*/
 			roleService.update(role);
 			return "redirect:/role/getAllRole";
 		//}

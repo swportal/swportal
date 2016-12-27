@@ -35,7 +35,7 @@
 	
 	<style>
 		a{TEXT-DECORATION:none}
-		a:hover{TEXT-DECORATION:underline}
+		a:hover{TEXT-DECORATION:none}  /*2016-12-27 wuliying change underline->none*/
 	</style>
 	<style>
 		html,body{ margin:0; padding:0; height:90%}
@@ -62,8 +62,13 @@
 		}
 	</script>
 	
-	 
+	<script language="JavaScript">
+		function openwin_searchdefect(pn,mod,item){	
+			window.open ("searchdefect.action?projectname="+pn+"&modelname="+mod+"&item="+item, "newwindow2", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=100");
+		}
+	</script> 
 	<script type="text/javascript">
+		var projectname1="<%=request.getParameter("projectname")%>";
 		var js = {
 			XMLHttp:null,
 			//发送请求函数
@@ -116,43 +121,27 @@
 			var page = xmlDOM.getElementsByTagName("page")[0];
 			var currpage = page.getElementsByTagName("currpage")[0].firstChild.data;
 			var pagecount = page.getElementsByTagName("pagecount")[0].firstChild.data; 
+			var firstpagehtml; 
 			var prevpagehtml; 
 			var nextpagehtml;
+			var lastpagehtml;
 			if((currpage-0)<=1){
+				firstpagehtml= "<a><<</a>&nbsp;&nbsp;&nbsp;";
 				prevpagehtml = "<a><</a>";
 			}
 			else{
+				firstpagehtml = "<a onclick='AjaxTest(1,null);' href='javascript:void(0);'><font color='#3498db'><<&nbsp;&nbsp;&nbsp;</font></a>";
 				prevpagehtml = "<a onclick='AjaxTest("+(currpage-1)+",null);' href='javascript:void(0);'><</a>";
 			}
 			if((currpage-0)<(pagecount-0)){
-				nextpagehtml = "<a onclick='AjaxTest("+(currpage-0+1)+",null);' href='javascript:void(0);'>></a>";
+				nextpagehtml = "<a onclick='AjaxTest("+(currpage-0+1)+",null);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+				lastpagehtml = "<a onclick='AjaxTest("+pagecount+",null);' href='javascript:void(0);'>>></a>";
 			}
 			else{
-				nextpagehtml = "<a>></a>";
+				nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
+				lastpagehtml = "<a>>></a>";
 			}
-	  		var html = "<table  border-radius='5px' bordercolor='#DEDEDE' bgColor='#ffffff' border='2px' cellspacing='0px' style='border-collapse:collapse' border='1px'>";
-	  			html=html+"<tr bgcolor='#d2e9ff' bordercolor='#DEDEDE'>"
-	  			+"<td align='center' width='40px' height='40px' rowspan='2'></td>"
-	  			+"<td align='center' height='40px' width='180px' rowspan='2'><font color='#333333' style='font-weight:bold;'>Model Name</font></td>"
-	  			+"<td align='center' height='40px' width='80px' rowspan='2'><font font color='#333333' style='font-weight:bold;'>Milestone</font></td>"
-	  			+"<td align='center' height='40px' width='80px' rowspan='2'><font font color='#333333' style='font-weight:bold;'>Pjt. Type</font></td>"
-	  			+"<td align='center' height='30px' width='160px' colspan='2'><font font color='#333333' style='font-weight:bold;'>PIA</font></td>"
-	  			+"<td align='center' height='30px' width='160px' colspan='2'><font font color='#333333' style='font-weight:bold;'>PVR</font></td>"
-	  			+"<td align='center' height='30px' width='160px' colspan='2'><font font color='#333333' style='font-weight:bold;'>PRA</font></td>"
-	  			+"<td align='center' height='30px' width='320px' colspan='4'><font font color='#333333' style='font-weight:bold;'>Defects</font></td>"
-	  			+"</tr>"
-	  			+"<tr bgcolor='#d2e9ff' bordercolor='#DEDEDE'>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Plan</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Actual</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Plan</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Actual</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Plan</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Actual</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Total</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Closed</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Resolved</font></td>"
-	  			+"<td align='center' height='30px' width='80px'><font font color='#333333' style='font-weight:bold;'>Opened</font></td>"
-	  			+"</tr>";
+	  		var html = "";
 	  			
 	  		for(i=0;i<person.length;i++){
   				html=html+"<tr bordercolor='#DEDEDE'>";
@@ -334,15 +323,39 @@
 	  			}
 	  			//PRA END
 	  							   
-	  			html=html+"<td align='center'>"+person[i].getElementsByTagName("PLMTotal")[0].firstChild.data+"</td><td align='center'>"
+	  			if(person[i].getElementsByTagName("PLMTotal")[0].firstChild.data!=0){
+	  				html=html+"<td align='center'>"
+	  				+ "<a onClick='openwin_searchdefect(\""+projectname1+"\",\""+person[i].getElementsByTagName("DevModelName")[0].firstChild.data+"\",\"\")'  href='#'>"
+	  			 	+person[i].getElementsByTagName("PLMTotal")[0].firstChild.data+"</a></td>";
+	  			}
+	  			else{
+	  				html=html+"<td align='center'>"
+	  			 	+person[i].getElementsByTagName("PLMTotal")[0].firstChild.data+"</td>";
+	  			}
+	  			
+	  			html=html+"<td align='center'>"
 	  				+person[i].getElementsByTagName("PLMClosed")[0].firstChild.data+"</td><td align='center'>"
-	  				+person[i].getElementsByTagName("PLMResolved")[0].firstChild.data+"</td><td align='center'>"
+	  				+person[i].getElementsByTagName("PLMResolved")[0].firstChild.data+"</td>";
+	  			if(person[i].getElementsByTagName("PLMOpened")[0].firstChild.data!=0){
+	  				html=html+"<td align='center'>"
+	  				+ "<a onClick='openwin_searchdefect(\""+projectname1+"\",\""+person[i].getElementsByTagName("DevModelName")[0].firstChild.data+"\",\"Opened\")'  href='#'>"
+	  				+person[i].getElementsByTagName("PLMOpened")[0].firstChild.data+"</a></td>";
+	  			}
+	  			else{
+	  				html=html+"<td align='center'>"
 	  				+person[i].getElementsByTagName("PLMOpened")[0].firstChild.data+"</td>";
+	  			}
 			    html=html+"</tr>";
 	  		}  		
-	  		html = html + "<tr  bgcolor='white' bordercolor='white'> <td height='60px'colspan='16' align='center'><a onclick='AjaxTest(1,null);' href='javascript:void(0);'>&nbsp;<<&nbsp;&nbsp;&nbsp;</a>"+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+currpage+"&nbsp;/&nbsp;"+pagecount+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+" <a onclick='AjaxTest("+pagecount+",null);' href='javascript:void(0);'>&nbsp;>></a> </td></tr>";
-	  		html = html+"</table><br>";
-	  		document.getElementById("div").innerHTML=html;
+	  		
+	  		//document.getElementById("div").innerHTML=html;
+	  		$("#tableId tbody").html("");
+			$("#tableId tbody").html(html);
+	  		
+	  		html2="";		
+  			html2 = html2 + "<table ><tr  bgcolor='white' bordercolor='white'><td height='60px'   align='center'>"+firstpagehtml+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+currpage+"&nbsp;/&nbsp;"+pagecount+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+lastpagehtml+"</td></tr>";
+  			html2 = html2+"</table><br>";
+  			document.getElementById("paging").innerHTML=html2;
 		}
 			
 		function AjaxTest(currpage,projectname) {
@@ -359,17 +372,39 @@
 		<br/><br/> 	
 		<div style="height:680px;">
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Project Name: <%=request.getAttribute("projectname") %>
-			<div id="downexcel"  style="position:absolute;   left:1250px; top:30px">	 	 	
-	  		</div>
+			<div id="downexcel"  style="position:absolute;   left:1250px; top:30px"></div>
 			<center>
-				<table>		
-					<!-- <tr   height="2px"> <td width="200px"></td> <td width="3800px" > <hr color="lightgrey" /> </td><td width="200px"></td></tr> -->
-				</table>
-						
-		 		<div id="div"> </div>
-  			</center>
- 
+		 		<div id="div"> 
+			 		<table  id="tableId" border-radius="5px" bordercolor="#DEDEDE" bgColor="#ffffff" border="2px" cellspacing="0px" style="border-collapse:collapse" border="1px">
+		  				<thead>
+			  				<tr bgcolor="#d2e9ff" bordercolor="#DEDEDE">
+			  					<td align="center" width="40px" height="40px" rowspan="2"></td>
+			  			        <td align="center" height="40px" width="180px" rowspan="2"><font color="#333333" style="font-weight:bold;">Model Name</font></td>
+			  			        <td align="center" height="40px" width="80px" rowspan="2"><font font color="#333333" style="font-weight:bold;">Milestone</font></td>
+			  			        <td align="center" height="40px" width="80px" rowspan="2"><font font color="#333333" style="font-weight:bold;">Pjt. Type</font></td>
+			  			        <td align="center" height="30px" width="160px" colspan="2"><font font color="#333333" style="font-weight:bold;">PIA</font></td>
+			  			        <td align="center" height="30px" width="160px" colspan="2"><font font color="#333333" style="font-weight:bold;">PVR</font></td>
+			  			        <td align="center" height="30px" width="160px" colspan="2"><font font color="#333333" style="font-weight:bold;">PRA</font></td>
+			  			        <td align="center" height="30px" width="320px" colspan="4"><font font color="#333333" style="font-weight:bold;">Defects</font></td>
+			  			    </tr>
+			  			    <tr bgcolor="#d2e9ff" bordercolor="#DEDEDE">
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Plan</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Actual</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Plan</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Actual</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Plan</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Actual</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Total</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Closed</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Resolved</font></td>
+			  			        <td align="center" height="30px" width="80px"><font font color="#333333" style="font-weight:bold;">Opened</font></td>
+			  			    </tr>
+			  			</thead>
+			  			<tbody></tbody>
+			  		</table>
+		 		</div>
+		 		<div id="paging" style="position:absolute;bottom: 10px;margin-left:600px;"></div>
+  			</center> 
 		</div>		
-	<%System.out.println("访问者IP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~："+request.getRemoteAddr()); %>
   </body>
 </html>
