@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript">
 		function mainPas(){
-			window.location.href = "/pas_v2";
+			window.location.href = "/portal/pas/getPasList";
 		} 
 </script>
 

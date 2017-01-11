@@ -40,7 +40,7 @@ public class serverController {
 	private ServerService serverService;
 	
 	@RequestMapping("/getServerList")
-	public String getEduList(HttpServletRequest request,HttpServletResponse response){		
+	public String getServerList(HttpServletRequest request,HttpServletResponse response){		
 		return "/serverController/serverManager"; 
 	}
 	

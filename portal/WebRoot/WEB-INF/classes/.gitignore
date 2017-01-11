@@ -1,2 +1,7 @@
 /com
 /config
+/Defectinfo.class
+/Defectinfo.hbm.xml
+/Defectdaily.class
+/Defectdaily.hbm.xml
+/DefectdailyId.class

@@ -5,13 +5,20 @@
 
 <hibernate-configuration>
 	<session-factory>
-		<mapping resource ="com/web/controller/entity/User.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Role.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Privilege.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Education.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Trip.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Server.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Case.hbm.xml" />
-		<mapping resource ="com/web/controller/entity/Visitor.hbm.xml" />
+		<mapping resource="com/web/controller/entity/User.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Role.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Privilege.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Education.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Trip.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Server.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Case.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Visitor.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Pas.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Defect.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Model.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Defectinfo.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Defectdaily.hbm.xml" />
+		<mapping resource="com/web/controller/entity/Comp.hbm.xml" /> 
+ 		<mapping resource="com/web/controller/entity/Block.hbm.xml" /> 
 	</session-factory>
 </hibernate-configuration>

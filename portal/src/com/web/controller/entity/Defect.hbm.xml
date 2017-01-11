@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="Defect" table="kona_db_copy">
+		<id name="iD">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="aSSIGNED_TIME" >
+			<column name="ASSIGNED_TIME" />
+		</property>
+		<property name="cLOSEDTIME" >
+			<column name="CLOSEDTIME" />
+		</property>
+		<property name="cLOSER" >
+			<column name="CLOSER" />
+		</property>
+		<property name="cODEREVIEWER" >
+			<column name="CODEREVIEWER" />
+		</property>
+		<property name="cODEREVIEW_RESULT_TYPE" >
+			<column name="CODEREVIEW_RESULT_TYPE" />
+		</property>
+		<property name="cOMPONENTNAME" >
+			<column name="COMPONENTNAME" />
+		</property>
+		<property name="dEFECTIVEBLOCKNAME" >
+			<column name="DEFECTIVEBLOCKNAME" />
+		</property>
+		<property name="dEFECTSOLVEDVERSION" >
+			<column name="DEFECTSOLVEDVERSION" />
+		</property>
+		<property name="dESCRIPTION" >
+			<column name="DESCRIPTION" />
+		</property>
+
+		<property name="mILESTONE" >
+			<column name="MILESTONE" />
+		</property>
+		<property name="dUEDATE" >
+			<column name="DUEDATE" />
+		</property>
+		<property name="fEATURENAME" >
+			<column name="FEATURENAME" />
+		</property>
+		<property name="hEADLINE" >
+			<column name="HEADLINE" />
+		</property>
+		<property name="iNCIDENCE" >
+			<column name="INCIDENCE" />
+		</property>
+		<property name="lASTUPDATEDDATE" >
+			<column name="LASTUPDATEDDATE" />
+		</property>
+		<property name="mODELCODE" >
+			<column name="MODELCODE" />
+		</property>
+		<property name="oPENEDTIME" >
+			<column name="OPENEDTIME" />
+		</property>
+		<property name="pLMFLAG" >
+			<column name="PLMFLAG" />
+		</property>
+		<property name="pLMID" >
+			<column name="PLMID" />
+		</property>
+		<property name="pLMREJECTCAUSE" >
+			<column name="PLMREJECTCAUSE" />
+		</property>
+		<property name="pLMREJECTEDCOUNT" >
+			<column name="PLMREJECTEDCOUNT" />
+		</property>
+		<property name="pLMREJECTOR" >
+			<column name="PLMREJECTOR" />
+		</property>
+		
+		<property name="pLMURL" >
+			<column name="PLMURL" />
+		</property>
+		<property name="p_ASSIGNED_TIME" >
+			<column name="P_ASSIGNED_TIME" />
+		</property>
+		<property name="p_CLOSED_TIME" >
+			<column name="P_CLOSED_TIME" />
+		</property>
+		<property name="p_OPENED_TIME" >
+			<column name="P_OPENED_TIME" />
+		</property>
+		<property name="p_RESOLVED_TIME" >
+			<column name="P_RESOLVED_TIME" />
+		</property>
+		<property name="p_REVIEWREQUESTED_TIME" >
+			<column name="P_REVIEWREQUESTED_TIME" />
+		</property>
+		<property name="p_SUBMITTED_TIME" >
+			<column name="P_SUBMITTED_TIME" />
+		</property>
+		<property name="pLANT" >
+			<column name="PLANT" />
+		</property>
+		
+		<property name="pLATFORMDEVELOPER" >
+			<column name="PLATFORMDEVELOPER" />
+		</property>
+		<property name="pLATFORMDEVELOPER_DEPT" >
+			<column name="PLATFORMDEVELOPER_DEPT" />
+		</property>
+		<property name="pLATFORMSOLVEDVERSION" >
+			<column name="PLATFORMSOLVEDVERSION" />
+		</property>
+		<property name="pRODUCTDEVELOPER" >
+			<column name="PRODUCTDEVELOPER" />
+		</property>
+		<property name="pROJECTNAME" >
+			<column name="PROJECTNAME" />
+		</property>
+		
+		<property name="rEGISTEREDSYSTEM" >
+			<column name="REGISTEREDSYSTEM" />
+		</property>
+		<property name="rEJECTCAUSE" >
+			<column name="REJECTCAUSE" />
+		</property>
+		<property name="rEJECTEDDATE" >
+			<column name="REJECTEDDATE" />
+		</property>
+		<property name="rEQUESTER" >
+			<column name="REQUESTER" />
+		</property>
+		<property name="rEQUESTER_DEPT" >
+			<column name="REQUESTER_DEPT" />
+		</property>
+		<property name="rEQUESTERDEPT_PLM" >
+			<column name="REQUESTERDEPT_PLM" />
+		</property>
+		<property name="rESOLVED_DATE" >
+			<column name="RESOLVED_DATE" />
+		</property>
+		<property name="rEVIEWREQUESTED_TIME" >
+			<column name="REVIEWREQUESTED_TIME" />
+		</property>
+		<property name="rOUTINE_ACTIVITY" >
+			<column name="ROUTINE_ACTIVITY" />
+		</property>
+		<property name="sWCATEGORY" >
+			<column name="SWCATEGORY" />
+		</property>
+		
+		<property name="sERIOUSNESS" >
+			<column name="SERIOUSNESS" />
+		</property>
+		<property name="sEVERITY" >
+			<column name="SEVERITY" />
+		</property>
+		<property name="sTATEOWNER" >
+			<column name="STATEOWNER" />
+		</property>
+		<property name="sTATEOWNER_ENG" >
+			<column name="STATEOWNER_ENG" />
+		</property>
+		<property name="sTATEOWNER_DEPT" >
+			<column name="STATEOWNER_DEPT" />
+		</property>
+		<property name="sTATEOWNER_DEPT_FULL" >
+			<column name="STATEOWNER_DEPT_FULL" />
+		</property>
+		<property name="sTATEOWNER_SINGLEID" >
+			<column name="STATEOWNER_SINGLEID" />
+		</property>
+		<property name="sTATUS" >
+			<column name="STATUS" />
+		</property>
+		<property name="sUBCOMPONENTNAME" >
+			<column name="SUBCOMPONENTNAME" />
+		</property>
+		<property name="sUBMITTEDTIME" >
+			<column name="SUBMITTEDTIME" />
+		</property>
+		<property name="tP_0TH_COMPONENTNAME" >
+			<column name="TP_0TH_COMPONENTNAME" />
+		</property>
+		<property name="tESTPART" >
+			<column name="TESTPART" />
+		</property>
+		<property name="tYPE" >
+			<column name="TYPE" />
+		</property>
+
+			
+	</class>
+</hibernate-mapping>

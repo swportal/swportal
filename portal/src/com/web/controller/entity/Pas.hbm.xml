@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="Pas" table="project_ongoing">
+		<id name="projectid">
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="modelNum" >
+			<column name="ModelNum" />
+		</property>
+		<property name="product" >
+			<column name="Product" />
+		</property>
+		<property name="pjtName" >
+			<column name="PjtName" />
+		</property>
+		<property name="devModelName" >
+			<column name="DevModelName" />
+		</property>
+		<property name="devType" >
+			<column name="DevType" />
+		</property>
+		<property name="projType" >
+			<column name="ProjType" />
+		</property>
+		<property name="pjtRegistrationDate" >
+			<column name="PjtRegistrationDate" />
+		</property>
+		<property name="updateTime" >
+			<column name="UpdateTime" />
+		</property>
+		<property name="milestone" >
+			<column name="Milestone" />
+		</property>
+
+		<property name="pjtStatus" >
+			<column name="PjtStatus" />
+		</property>
+		<property name="devPL" >
+			<column name="DevPL" />
+		</property>
+		<property name="sWEM" >
+			<column name="SWEM" />
+		</property>
+		<property name="dIAPlanDate" >
+			<column name="DIAPlanDate" />
+		</property>
+		<property name="dIAActualDate" >
+			<column name="DIAActualDate" />
+		</property>
+		<property name="pIAPlanDate" >
+			<column name="PIAPlanDate" />
+		</property>
+		<property name="pIAActualDate" >
+			<column name="PIAActualDate" />
+		</property>
+		<property name="dVRPlanDate" >
+			<column name="DVRPlanDate" />
+		</property>
+		<property name="dVRActualDate" >
+			<column name="DVRActualDate" />
+		</property>
+		<property name="pVRPlanDate" >
+			<column name="PVRPlanDate" />
+		</property>
+		<property name="pVRActualDate" >
+			<column name="PVRActualDate" />
+		</property>
+		<property name="pRAPlanDate" >
+			<column name="PRAPlanDate" />
+		</property>
+		<property name="pRAActualDate" >
+			<column name="PRAActualDate" />
+		</property>
+		
+		<property name="sRAPlanDate" >
+			<column name="SRAPlanDate" />
+		</property>
+		<property name="sRAActualDate" >
+			<column name="SRAActualDate" />
+		</property>
+		<property name="bPAPlanDate" >
+			<column name="BPAPlanDate" />
+		</property>
+		<property name="bPAActualDate" >
+			<column name="BPAActualDate" />
+		</property>
+		<property name="bIAPlanDate" >
+			<column name="BIAPlanDate" />
+		</property>
+		<property name="bIAActualDate" >
+			<column name="BIAActualDate" />
+		</property>
+		<property name="bCAPlanDate" >
+			<column name="BCAPlanDate" />
+		</property>
+		<property name="bCAActualDate" >
+			<column name="BCAActualDate" />
+		</property>
+		
+		<property name="dIA" >
+			<column name="DIA" />
+		</property>
+		<property name="pIA" >
+			<column name="PIA" />
+		</property>
+		<property name="pVR" >
+			<column name="PVR" />
+		</property>
+		<property name="pRA" >
+			<column name="PRA" />
+		</property>
+		<property name="sRA" >
+			<column name="SRA" />
+		</property>
+		
+		<property name="pLMTotal" >
+			<column name="PLMTotal" />
+		</property>
+		<property name="pLMOpened" >
+			<column name="PLMOpened" />
+		</property>
+		<property name="pLMResolved" >
+			<column name="PLMResolved" />
+		</property>
+		<property name="pLMClosed" >
+			<column name="PLMClosed" />
+		</property>
+		<property name="waiting" >
+			<column name="Waiting" />
+		</property>
+		<property name="doing" >
+			<column name="Doing" />
+		</property>
+		<property name="requested" >
+			<column name="Requested" />
+		</property>
+		<property name="reviewed" >
+			<column name="Reviewed" />
+		</property>
+			
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="com.web.controller.entity">
+	<class name="Block" table="block_total1">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="projectName" >
+			<column name="ProjectName" />
+		</property>
+		<property name="component" >
+			<column name="Component" />
+		</property>
+		<property name="total" >
+			<column name="Total" />
+		</property>
+		<property name="cOUNT" >
+			<column name="COUNT" />
+		</property>
+	</class>
+</hibernate-mapping>
