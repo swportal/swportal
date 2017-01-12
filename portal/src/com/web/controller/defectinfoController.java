@@ -63,11 +63,68 @@ public class defectinfoController {
 	private BlockService blockService;
 		
 	@RequestMapping("/toDefectPage")
-	public String toDefectPage( String projectname, HttpServletRequest request,HttpServletResponse response){
+	public String toDefectPage( String projectname, Integer codeid,HttpServletRequest request,HttpServletResponse response){
 		request.setAttribute("projectname", projectname);
-		request.setAttribute("codeid", 0);
+		if(codeid==null){
+			codeid=0;
+			request.setAttribute("codeid", 0);
+		}
+		else
+			request.setAttribute("codeid", codeid);
 		Map<Integer,String> ma = defectinfoService.getCodes(projectname);
 		request.setAttribute("mapcode", ma);  //获取projectname下的model(defects_infor表格)
+		String modelname="";
+		if(codeid==0){
+		}
+		else{
+			modelname=defectinfoService.getNameById(codeid);
+		}
+		/*
+		 * 获取两个饼图数据
+		 */
+		List<Integer> listTotal=defectinfoService.getDefectData(projectname,modelname);
+		List<String> listDaily= defectinfoService.getDailyData(projectname,modelname);	
+		Map<String,Integer> mapComp = compService.getCompList(projectname,modelname);
+		/*
+		 * 获取component top10数据
+		 */
+		List<String> listCompName=new ArrayList<String>();
+		List<String> listCompNum=new ArrayList<String>();
+		
+		Set<String> keys=mapComp.keySet();
+		Iterator<String> iterCompName=keys.iterator();		
+		while(iterCompName.hasNext()){
+			listCompName.add(iterCompName.next());
+		}
+	
+		Collection<Integer> values=mapComp.values();
+		Iterator<Integer> iterCompNum=values.iterator();
+		while(iterCompNum.hasNext()){
+			listCompNum.add(iterCompNum.next()+"");
+		}
+		/*
+		 * 获取block top10数据
+		 */
+		Map<String,Integer> mapBlock = blockService.getBlockList(projectname,modelname);
+		List<String> listBlockName=new ArrayList<String>();
+		List<String> listBlockNum=new ArrayList<String>();
+		
+		Set<String> keys2=mapBlock.keySet();
+		Iterator<String> iterBlockName=keys2.iterator();		
+		while(iterBlockName.hasNext()){
+			listBlockName.add(iterBlockName.next());
+		}
+	
+		Collection<Integer> values2=mapBlock.values();
+		Iterator<Integer> iterBlockNum=values2.iterator();
+		while(iterBlockNum.hasNext()){
+			listBlockNum.add(iterBlockNum.next()+"");
+		}
+		
+		
+		
+		requestPut(listTotal,listDaily,listCompName,listCompNum,listBlockName,listBlockNum,request);
+		
 		return "/defectinfoController/defectinfoManager";
 	}
 	
@@ -553,7 +610,7 @@ public class defectinfoController {
 	        e.printStackTrace();  
 	    }  
 	} 
-	@Deprecated
+	 
 	public void requestPut(List<Integer> listTotal,List<String> listDaily,List<String> listCompName,List<String> listCompNum,List<String> listBlockName,List<String> listBlockNum,HttpServletRequest request){
 		/*
 		 * 获取两个饼图数据
@@ -600,9 +657,21 @@ public class defectinfoController {
 		/*
 		 * 获取过去60天数据
 		 */
-		for(int i=1;i<=60;i++){
+		/*for(int i=1;i<=60;i++){
 			request.setAttribute("Day"+i,listDaily.get(i-1) );
 			request.setAttribute("ResolveDay"+i,listDaily.get(60+i-1) );
+		}*/
+		List<String> listDay= new ArrayList<String>();
+		List<String> listResolvedDay= new ArrayList<String>();
+		for(int i=0;i<120;){
+			listDay.add(listDaily.get(i));
+			listResolvedDay.add(listDaily.get(i+1));
+			i=i+2;
+		}
+		
+		for(int i=1;i<=60;i++){
+			request.setAttribute("Day"+i, listDay.get(i-1));
+			request.setAttribute("ResolveDay"+i, listResolvedDay.get(i-1));
 		}
 		
 		/*

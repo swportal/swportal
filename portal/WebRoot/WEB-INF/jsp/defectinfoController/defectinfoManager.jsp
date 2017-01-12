@@ -23,21 +23,22 @@
 		
 		
 		<script type="text/javascript">
-			var projectname="<%=request.getAttribute("projectname")%>";					
-			var codeid= document.getElementById("codeid").value;
-			function load(projectname, codeid){
-				
-				$.getJSON("/portal/defectinfo/getDefectinfo?projectname="+projectname+"&codeid="+codeid,function(datainfo){
+			$(function(){
+				var projectname="<%=request.getAttribute("projectname")%>";					
+				var codeid= <%=request.getAttribute("codeid")%>;
+				document.getElementById("codeid").value=codeid;
+				//alert(codeid);
+				//$.getJSON("/portal/defectinfo/getDefectinfo?projectname="+projectname+"&codeid="+codeid,function(datainfo){
 					//////////////////////////////////Percentage of Resolved(SQA Test) start////////////////////////////////
 					var data = [						
 					         	{
 					         		name : 'Resolved',
-					         		value:[(datainfo[0].listTotal[25])/(datainfo[0].listTotal[23]-datainfo[0].listTotal[26]),(datainfo[0].listTotal[29])/(datainfo[0].listTotal[27]-datainfo[0].listTotal[30])],
+					         		value:[(<%=request.getAttribute("SQAPLMResolvedA")%>)/(<%=request.getAttribute("SQAPLMTotalA")%>-<%=request.getAttribute("SQAPLMClosedA")%>),(<%=request.getAttribute("SQAPLMResolvedBC")%>)/(<%=request.getAttribute("SQAPLMTotalBC")%>-<%=request.getAttribute("SQAPLMClosedBC")%>)],
 					         		color:'#3498DB'
 					         	},
 								{
 									name : 'Not Resolved',
-									value:[(1-(datainfo[0].listTotal[25])/(datainfo[0].listTotal[23]-datainfo[0].listTotal[26])),(1-(datainfo[0].listTotal[29])/(datainfo[0].listTotal[27]-datainfo[0].listTotal[30]))],
+									value:[(1-(<%=request.getAttribute("SQAPLMResolvedA")%>)/(<%=request.getAttribute("SQAPLMTotalA")%>-<%=request.getAttribute("SQAPLMClosedA")%>)),(1-(<%=request.getAttribute("SQAPLMResolvedBC")%>)/(<%=request.getAttribute("SQAPLMTotalBC")%>-<%=request.getAttribute("SQAPLMClosedBC")%>))],
 									color:'#CC0000'
 								}
 					];
@@ -145,12 +146,12 @@
 					
 					////////////////////////////////Defect Status start////////////////////////////////
 					
-					var sum=datainfo[0].listTotal[5]+datainfo[0].listTotal[6]+datainfo[0].listTotal[7];
+					var sum=<%=request.getAttribute("Resolved")%>+<%=request.getAttribute("Opened")%>+<%=request.getAttribute("Closed")%>;
 					document.getElementById("total1").innerHTML="<a href='#' onClick=openwin_searchdefect(\""+projectname+"\","+codeid+","+"\"\""+")>("+sum+")</a>";
 					var datastatus = [
-							        	{name : 'Opened',value : datainfo[0].listTotal[5]/sum, Count: datainfo[0].listTotal[5],color:'#CC0000'},
-							        	{name : 'Closed',value :datainfo[0].listTotal[7]/sum,Count: datainfo[0].listTotal[7],color:'#3498db'},
-							        	{name : 'Resolved',value :datainfo[0].listTotal[6]/sum,Count: datainfo[0].listTotal[6],color:'#FF9224'}
+							        	{name : 'Opened',value : <%=request.getAttribute("Opened")%>/sum, Count: <%=request.getAttribute("Opened")%>,color:'#CC0000'},
+							        	{name : 'Closed',value :<%=request.getAttribute("Closed")%>/sum,Count: <%=request.getAttribute("Closed")%>,color:'#3498db'},
+							        	{name : 'Resolved',value :<%=request.getAttribute("Resolved")%>/sum,Count: <%=request.getAttribute("Resolved")%>,color:'#FF9224'}
 					];
 				
 					var chartstatus = new iChart.Pie2D({
@@ -256,12 +257,12 @@
 					
 					
 					//////////////////////////////////Defect Priority start////////////////////////////////
-					var sum=datainfo[0].listTotal[1]+datainfo[0].listTotal[2]+datainfo[0].listTotal[3];
+					var sum=<%=request.getAttribute("TotalA")%>+<%=request.getAttribute("TotalB")%>+<%=request.getAttribute("TotalC")%>;
 					document.getElementById("total2").innerHTML="<a href='#' onClick=openwin_searchdefect(\""+projectname+"\","+codeid+","+"\"\""+")>("+sum+")</a>";
 					var dataprio = [
-				        	{name : 'A',value : datainfo[0].listTotal[1]/sum, Count: datainfo[0].listTotal[1],color:'#CC0000'},
-				        	{name : 'B',value : datainfo[0].listTotal[2]/sum,Count: datainfo[0].listTotal[2],color:'#3498db'},
-				        	{name : 'C',value :  datainfo[0].listTotal[3]/sum,Count: datainfo[0].listTotal[3],color:'#FF9224'}
+				        	{name : 'A',value : <%=request.getAttribute("TotalA")%>/sum, Count: <%=request.getAttribute("TotalA")%>,color:'#CC0000'},
+				        	{name : 'B',value : <%=request.getAttribute("TotalB")%>/sum,Count: <%=request.getAttribute("TotalB")%>,color:'#3498db'},
+				        	{name : 'C',value :  <%=request.getAttribute("TotalC")%>/sum,Count: <%=request.getAttribute("TotalC")%>,color:'#FF9224'}
 			        ];
 				
 					var chartprio = new iChart.Pie2D({
@@ -366,12 +367,12 @@
 					var dataComp = [
 			        	{
 			         		name : 'Closed',
-			         		value:[datainfo[4].listCompNum,datainfo[8].listCompNum,datainfo[12].listCompNum,datainfo[16].listCompNum,datainfo[20].listCompNum,datainfo[24].listCompNum,datainfo[28].listCompNum,datainfo[32].listCompNum,datainfo[36].listCompNum,datainfo[40].listCompNum],
+			         		value:[<%=request.getAttribute("CompClose1")%>,<%=request.getAttribute("CompClose2")%>,<%=request.getAttribute("CompClose3")%>,<%=request.getAttribute("CompClose4")%>,<%=request.getAttribute("CompClose5")%>,<%=request.getAttribute("CompClose6")%>,<%=request.getAttribute("CompClose7")%>,<%=request.getAttribute("CompClose8")%>,<%=request.getAttribute("CompClose9")%>,<%=request.getAttribute("CompClose10")%>],
 			         		color:'#3498db'
 			         	},
 			         	{
 			         		name : 'Resolved',
-			         		value:[datainfo[7].listCompNum,datainfo[11].listCompNum,datainfo[15].listCompNum,datainfo[19].listCompNum,datainfo[23].listCompNum,datainfo[27].listCompNum,datainfo[31].listCompNum,datainfo[35].listCompNum,datainfo[39].listCompNum,datainfo[43].listCompNum],
+			         		value:[<%=request.getAttribute("CompResolved1")%>,<%=request.getAttribute("CompResolved2")%>,<%=request.getAttribute("CompResolved3")%>,<%=request.getAttribute("CompResolved4")%>,<%=request.getAttribute("CompResolved5")%>,<%=request.getAttribute("CompResolved6")%>,<%=request.getAttribute("CompResolved7")%>,<%=request.getAttribute("CompResolved8")%>,<%=request.getAttribute("CompResolved9")%>,<%=request.getAttribute("CompResolved10")%>],
 			         		color:'#FF9224'
 			         	},
 			         	/*
@@ -383,7 +384,7 @@
 			         	*/
 			         	{
 			         		name : 'Opened',
-			         		value:[datainfo[5].listCompNum,datainfo[9].listCompNum,datainfo[13].listCompNum,datainfo[17].listCompNum,datainfo[21].listCompNum,datainfo[25].listCompNum,datainfo[29].listCompNum,datainfo[33].listCompNum,datainfo[37].listCompNum,datainfo[41].listCompNum],
+			         		value:[<%=request.getAttribute("CompPending1")%>,<%=request.getAttribute("CompPending2")%>,<%=request.getAttribute("CompPending3")%>,<%=request.getAttribute("CompPending4")%>,<%=request.getAttribute("CompPending5")%>,<%=request.getAttribute("CompPending6")%>,<%=request.getAttribute("CompPending7")%>,<%=request.getAttribute("CompPending8")%>,<%=request.getAttribute("CompPending9")%>,<%=request.getAttribute("CompPending10")%>],
 			         		color:'#CC0000'
 			         	}
 			     	 ];
@@ -391,7 +392,7 @@
 					  var chartComp = new iChart.ColumnStacked3D({
 							render : 'componentDiv',
 							data: dataComp,
-							labels:[datainfo[3].listCompName[0],datainfo[3].listCompName[4],datainfo[3].listCompName[8],datainfo[3].listCompName[12],datainfo[3].listCompName[16],datainfo[3].listCompName[20],datainfo[3].listCompName[24],datainfo[3].listCompName[28],datainfo[3].listCompName[32],datainfo[3].listCompName[36]],
+							labels:["<%=request.getAttribute("CompItem1")%>","<%=request.getAttribute("CompItem2")%>","<%=request.getAttribute("CompItem3")%>","<%=request.getAttribute("CompItem4")%>","<%=request.getAttribute("CompItem5")%>","<%=request.getAttribute("CompItem6")%>","<%=request.getAttribute("CompItem7")%>","<%=request.getAttribute("CompItem8")%>","<%=request.getAttribute("CompItem9")%>","<%=request.getAttribute("CompItem10")%>"],
 							title : {
 								//text:'各Component别问题点现况',
 								color:'#000000'
@@ -471,7 +472,7 @@
 								 scale_enable : false,
 								 start_scale:0,
 								 //scale_space:20,
-								 end_scale:datainfo[44]+5,
+								 end_scale:<%=request.getAttribute("CompClose1")%>+<%=request.getAttribute("CompResolved1")%>+<%=request.getAttribute("CompRejected1")%>+<%=request.getAttribute("CompPending1")%>+5,
 								 label:{color:'#ffffff',fontsize:10,fontweight:400}
 							}]
 						}
@@ -501,12 +502,12 @@
 					var dataBlock = [
 			         	{
 			         		name : 'Closed',
-			         		value:[datainfo[46].listBlockNum,datainfo[50].listBlockNum,datainfo[54].listBlockNum,datainfo[58].listBlockNum,datainfo[62].listBlockNum,datainfo[66].listBlockNum,datainfo[70].listBlockNum,datainfo[74].listBlockNum,datainfo[78].listBlockNum,datainfo[82].listBlockNum],
+			         		value:[<%=request.getAttribute("BlockClose1")%>,<%=request.getAttribute("BlockClose2")%>,<%=request.getAttribute("BlockClose3")%>,<%=request.getAttribute("BlockClose4")%>,<%=request.getAttribute("BlockClose5")%>,<%=request.getAttribute("BlockClose6")%>,<%=request.getAttribute("BlockClose7")%>,<%=request.getAttribute("BlockClose8")%>,<%=request.getAttribute("BlockClose9")%>,<%=request.getAttribute("BlockClose10")%>],
 			         		color:'#3498db'
 			         	},
 			         	{
 			         		name : 'Resolved',
-			         		value:[datainfo[49].listBlockNum,datainfo[53].listBlockNum,datainfo[57].listBlockNum,datainfo[61].listBlockNum,datainfo[65].listBlockNum,datainfo[69].listBlockNum,datainfo[73].listBlockNum,datainfo[77].listBlockNum,datainfo[81].listBlockNum,datainfo[85].listBlockNum],
+			         		value:[<%=request.getAttribute("BlockResolved1")%>,<%=request.getAttribute("BlockResolved2")%>,<%=request.getAttribute("BlockResolved3")%>,<%=request.getAttribute("BlockResolved4")%>,<%=request.getAttribute("BlockResolved5")%>,<%=request.getAttribute("BlockResolved6")%>,<%=request.getAttribute("BlockResolved7")%>,<%=request.getAttribute("BlockResolved8")%>,<%=request.getAttribute("BlockResolved9")%>,<%=request.getAttribute("BlockResolved10")%>],
 			         		color:'#FF9224'
 			         	},
 			         	/*
@@ -518,7 +519,7 @@
 			         	*/
 			         	{
 			         		name : 'Opened',
-			         		value:[datainfo[47].listBlockNum,datainfo[51].listBlockNum,datainfo[55].listBlockNum,datainfo[59].listBlockNum,datainfo[63].listBlockNum,datainfo[67].listBlockNum,datainfo[71].listBlockNum,datainfo[75].listBlockNum,datainfo[79].listBlockNum,datainfo[83].listBlockNum],
+			         		value:[<%=request.getAttribute("BlockPending1")%>,<%=request.getAttribute("BlockPending2")%>,<%=request.getAttribute("BlockPending3")%>,<%=request.getAttribute("BlockPending4")%>,<%=request.getAttribute("BlockPending5")%>,<%=request.getAttribute("BlockPending6")%>,<%=request.getAttribute("BlockPending7")%>,<%=request.getAttribute("BlockPending8")%>,<%=request.getAttribute("BlockPending9")%>,<%=request.getAttribute("BlockPending10")%>],
 			         		color:'#CC0000'
 			         	}
 			         ];
@@ -527,7 +528,7 @@
 						//align:'left',
 						render : 'FeatureDiv',
 						data: dataBlock,
-						labels:[datainfo[45].listBlockName[0],datainfo[45].listBlockName[4],datainfo[45].listBlockName[8],datainfo[45].listBlockName[12],datainfo[45].listBlockName[16],datainfo[45].listBlockName[20],datainfo[45].listBlockName[24],datainfo[45].listBlockName[28],datainfo[45].listBlockName[32],datainfo[45].listBlockName[36]],
+						labels:["<%=request.getAttribute("BlockItem1")%>","<%=request.getAttribute("BlockItem2")%>","<%=request.getAttribute("BlockItem3")%>","<%=request.getAttribute("BlockItem4")%>","<%=request.getAttribute("BlockItem5")%>","<%=request.getAttribute("BlockItem6")%>","<%=request.getAttribute("BlockItem7")%>","<%=request.getAttribute("BlockItem8")%>","<%=request.getAttribute("BlockItem9")%>","<%=request.getAttribute("BlockItem10")%>"],
 						//footnote : '数据来源：KONA数据库',
 						width : 850,
 						height : 200,
@@ -603,7 +604,7 @@
 								 scale_enable : false,
 								 start_scale:0,
 								 //scale_space:60,
-								 end_scale:datainfo[86]+5,
+								 end_scale:<%=request.getAttribute("BlockClose1")%>+<%=request.getAttribute("BlockResolved1")%>+<%=request.getAttribute("BlockRejected1")%>+<%=request.getAttribute("BlockPending1")%>+5,
 								 label:{color:'#ffffff',fontsize:10,fontweight:400}
 							}]
 						}
@@ -626,6 +627,7 @@
 					}));
 					
 					chartBlock.draw();
+					
 					///////////////////////////Defects Status of Block (Top10)     end/////////////////////////
 					
 					
@@ -639,13 +641,13 @@
 					document.getElementById("enddate").value= today;
 					var dataSR = [{
 					         		 name : 'Submit',
-					         		 value: datainfo[1].listDay,
+					         		value:[<%=request.getAttribute("Day1")%>,<%=request.getAttribute("Day2")%>,<%=request.getAttribute("Day3")%>,<%=request.getAttribute("Day4")%>,<%=request.getAttribute("Day5")%>,<%=request.getAttribute("Day6")%>,<%=request.getAttribute("Day7")%>,<%=request.getAttribute("Day8")%>,<%=request.getAttribute("Day9")%>,<%=request.getAttribute("Day10")%>,<%=request.getAttribute("Day11")%>,<%=request.getAttribute("Day12")%>,<%=request.getAttribute("Day13")%>,<%=request.getAttribute("Day14")%>,<%=request.getAttribute("Day15")%>,<%=request.getAttribute("Day16")%>,<%=request.getAttribute("Day17")%>,<%=request.getAttribute("Day18")%>,<%=request.getAttribute("Day19")%>,<%=request.getAttribute("Day20")%>,<%=request.getAttribute("Day21")%>,<%=request.getAttribute("Day22")%>,<%=request.getAttribute("Day23")%>,<%=request.getAttribute("Day24")%>,<%=request.getAttribute("Day25")%>,<%=request.getAttribute("Day26")%>,<%=request.getAttribute("Day27")%>,<%=request.getAttribute("Day28")%>,<%=request.getAttribute("Day29")%>,<%=request.getAttribute("Day30")%>,<%=request.getAttribute("Day31")%>,<%=request.getAttribute("Day32")%>,<%=request.getAttribute("Day33")%>,<%=request.getAttribute("Day34")%>,<%=request.getAttribute("Day35")%>,<%=request.getAttribute("Day36")%>,<%=request.getAttribute("Day37")%>,<%=request.getAttribute("Day38")%>,<%=request.getAttribute("Day39")%>,<%=request.getAttribute("Day40")%>,<%=request.getAttribute("Day41")%>,<%=request.getAttribute("Day42")%>,<%=request.getAttribute("Day43")%>,<%=request.getAttribute("Day44")%>,<%=request.getAttribute("Day45")%>,<%=request.getAttribute("Day46")%>,<%=request.getAttribute("Day47")%>,<%=request.getAttribute("Day48")%>,<%=request.getAttribute("Day49")%>,<%=request.getAttribute("Day50")%>,<%=request.getAttribute("Day51")%>,<%=request.getAttribute("Day52")%>,<%=request.getAttribute("Day53")%>,<%=request.getAttribute("Day54")%>,<%=request.getAttribute("Day55")%>,<%=request.getAttribute("Day56")%>,<%=request.getAttribute("Day57")%>,<%=request.getAttribute("Day58")%>,<%=request.getAttribute("Day59")%>,<%=request.getAttribute("Day60")%>],
 					         		 color:'#f68f70',
 					         		 line_width:2
 					         	},
 					         	{
 					         		name : 'Resolve',
-					         		value: datainfo[2].listResolvedDay,
+					         		value:[<%=request.getAttribute("ResolveDay1")%>,<%=request.getAttribute("ResolveDay2")%>,<%=request.getAttribute("ResolveDay3")%>,<%=request.getAttribute("ResolveDay4")%>,<%=request.getAttribute("ResolveDay5")%>,<%=request.getAttribute("ResolveDay6")%>,<%=request.getAttribute("ResolveDay7")%>,<%=request.getAttribute("ResolveDay8")%>,<%=request.getAttribute("ResolveDay9")%>,<%=request.getAttribute("ResolveDay10")%>,<%=request.getAttribute("ResolveDay11")%>,<%=request.getAttribute("ResolveDay12")%>,<%=request.getAttribute("ResolveDay13")%>,<%=request.getAttribute("ResolveDay14")%>,<%=request.getAttribute("ResolveDay15")%>,<%=request.getAttribute("ResolveDay16")%>,<%=request.getAttribute("ResolveDay17")%>,<%=request.getAttribute("ResolveDay18")%>,<%=request.getAttribute("ResolveDay19")%>,<%=request.getAttribute("ResolveDay20")%>,<%=request.getAttribute("ResolveDay21")%>,<%=request.getAttribute("ResolveDay22")%>,<%=request.getAttribute("ResolveDay23")%>,<%=request.getAttribute("ResolveDay24")%>,<%=request.getAttribute("ResolveDay25")%>,<%=request.getAttribute("ResolveDay26")%>,<%=request.getAttribute("ResolveDay27")%>,<%=request.getAttribute("ResolveDay28")%>,<%=request.getAttribute("ResolveDay29")%>,<%=request.getAttribute("ResolveDay30")%>,<%=request.getAttribute("ResolveDay31")%>,<%=request.getAttribute("ResolveDay32")%>,<%=request.getAttribute("ResolveDay33")%>,<%=request.getAttribute("ResolveDay34")%>,<%=request.getAttribute("ResolveDay35")%>,<%=request.getAttribute("ResolveDay36")%>,<%=request.getAttribute("ResolveDay37")%>,<%=request.getAttribute("ResolveDay38")%>,<%=request.getAttribute("ResolveDay39")%>,<%=request.getAttribute("ResolveDay40")%>,<%=request.getAttribute("ResolveDay41")%>,<%=request.getAttribute("ResolveDay42")%>,<%=request.getAttribute("ResolveDay43")%>,<%=request.getAttribute("ResolveDay44")%>,<%=request.getAttribute("ResolveDay45")%>,<%=request.getAttribute("ResolveDay46")%>,<%=request.getAttribute("ResolveDay47")%>,<%=request.getAttribute("ResolveDay48")%>,<%=request.getAttribute("ResolveDay49")%>,<%=request.getAttribute("ResolveDay50")%>,<%=request.getAttribute("ResolveDay51")%>,<%=request.getAttribute("ResolveDay52")%>,<%=request.getAttribute("ResolveDay53")%>,<%=request.getAttribute("ResolveDay54")%>,<%=request.getAttribute("ResolveDay55")%>,<%=request.getAttribute("ResolveDay56")%>,<%=request.getAttribute("ResolveDay57")%>,<%=request.getAttribute("ResolveDay58")%>,<%=request.getAttribute("ResolveDay59")%>,<%=request.getAttribute("ResolveDay60")%>],
 					         		color:'#aad0db',
 					         		line_width:2
 					         	}
@@ -777,12 +779,14 @@
 					///////////////////////////  Submit & Resolve       end/////////////////////////
 					
 					
-				}); //getJSON	
-			}//load
+				//}); //getJSON	
+			});//load
 		</script>
 		<script language="javascript" type="text/javascript">	
 		///////////////////////////  Submit & Resolve   动态查询  start/////////////////////////
 			function go(){
+						var projectname="<%=request.getAttribute("projectname")%>";					
+						var codeid= <%=request.getAttribute("codeid")%>;
 						//alert(getBeforeDate(341));
 						var d=document.getElementById("enddate").value;
 						var year= d.substring(0,4);
@@ -796,7 +800,8 @@
 							alert(info);
 						}
 						else{
-							var url="/portal/defectinfo/getDailyData?currdate="+document.getElementById('enddate').value+"&projectname="+projectname+"&codeid="+document.getElementById("codeid").value;
+							
+							var url="/portal/defectinfo/getDailyData?currdate="+document.getElementById('enddate').value+"&projectname="+projectname+"&codeid="+codeid;
 							//alert(projectname);
 							$.getJSON(url,function(jsondata) {	
 								var dataGo = [{
@@ -1006,21 +1011,21 @@
 	</head>
 
 
-	<body onload="load('<%=request.getAttribute("projectname")%>',0);" style="overflow: hidden;">
+	<body style="overflow: hidden;">
 		<table width="100%" cellpadding="0" cellspacing="0" border="0">	
 			<tr >		
 				<td width="12%"></td>
 				<td width="22%"><br/><a href="/portal/home/index"><img src="<%=request.getContextPath()%>/style/images/logo4.jpg"   /></a><br><br/></td>
 				<td width="20%" align="left" valign="middle"> <img src="<%=request.getContextPath()%>/style/images/logo1.jpg"   /> </td>
 				<td valign="middle" width="40%">
-	<%--			<form name="modelForm" action="/portal/defectinfo/getDefectinfo?projectname=<%=request.getAttribute("projectname")%>" method="post"  theme="simple">	--%>
+				<form name="modelForm" action="/portal/defectinfo/toDefectPage?projectname=<%=request.getAttribute("projectname")%>"  method="post"  theme="simple">	
 					<font color="gray" face="Arial"   style="font-size:14px; font-weight:bold; ">Project:&nbsp;</font><font color="gray" face="Arial"   style="font-size:14px;   "><%=request.getAttribute("projectname")%> <br /><br /><font color="gray" face="Arial"   style="font-size:14px; font-weight:bold; ">Model &nbsp; </font>
-					<select id="codeid" name="codeid"   headerKey="0"  onChange="load('<%=request.getAttribute("projectname")%>',this.value)" style="padding-left:5px; vertical-align:middle; font-size:14px;border-radius:5px; width:160px;height:33px">
+					<select id="codeid" name="codeid"   headerKey="0"  onChange="modelForm.submit()" style="padding-left:5px; vertical-align:middle; font-size:14px;border-radius:5px; width:160px;height:33px">
 						<c:forEach items= "${mapcode}"  var="c">
 							<option value="${c.key}">${c.value}</option>
 						</c:forEach>
 					</select>		
-	<%--			</form>--%>
+				</form>
 				</td>
 			</tr>
 		</table>
@@ -1168,7 +1173,7 @@
 						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
 					</td>
 					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.3.0</font>
+						<font color="#9d9d9d" size=1 face="Arial">V1.3.1</font>
 					</td>
 				</tr>
 			</table>	
