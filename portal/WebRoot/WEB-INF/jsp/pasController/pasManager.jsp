@@ -1,5 +1,3 @@
-<%--<%@ page import="net.nw.vo.*,net.nw.dao.SearchProjectDAO"%>--%>
-<%--<%@ page import="net.nw.dao.DefactAllDAO"%>--%>
 <%@ page import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -143,9 +141,8 @@
 				var state=document.getElementById("state").value;
 				var milestone=document.getElementById("milestone").value;
 				var startdate=document.getElementById("startdate").value;
-				var enddate1=document.getElementById("enddate").value;
-				
-				 var down="";
+				var enddate=document.getElementById("enddate").value;
+				var down="";
 				
 				 down = down + "<a href='/portal/pas/DownProject?keyword="+encodeURIComponent(keyword,"utf-8")+"&projectname="+projectname+"&city="+city+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&state="+state+"&orderKey="+orderKey+"&rn="+Math.random()+", title='Data Download'>	<img src='<%=request.getContextPath()%>/style/images/excel6.jpg'   width=20px height=20px   style='padding-top:5px'/> </a>";
 				 document.getElementById("downexcel").innerHTML=down;
@@ -645,10 +642,10 @@
 			String endd;
 	 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 			String today=format.format(new Date());
-			endd=today;
+			endd=today;			
 		 %>
 		
-			 
+		 
 		<center>
 			<table  bgcolor="#ecf0f1" width="100%" height="47px" style="border-radius: 0px;">
 	 			<tr>
@@ -678,7 +675,7 @@
 						
 							
 						<font color="grey" style="font-weight:bold;">From	</font>
-						<input type="text" id="startdate" value="2015-01-01" onClick="return Calendar('startdate');" class="text_time" style=" vertical-align:middle; padding-left:5px;  font-size:14px;  border-radius:5px;align:center;width:128px;height:30px;font-style:Arial" />
+						<input type="text" id="startdate" value="2017-01-01" onClick="return Calendar('startdate');" class="text_time" style=" vertical-align:middle; padding-left:5px;  font-size:14px;  border-radius:5px;align:center;width:128px;height:30px;font-style:Arial" />
 						<font color="grey" style="font-weight:bold;">to</font>
 						<!-- <input id="enddate" type="date" value="2017-01-01"/ style="border-radius:5px;"> -->
 						<input type="text" id="enddate" value="<%=endd %>" onClick="return Calendar('enddate');" class="text_time" style="vertical-align:middle;padding-left:5px; font-size:14px;  border-radius:5px;width:128px;height:30px;font-style:Arial"/>
@@ -686,7 +683,7 @@
 						
 						<%-- <input type="button" value="      "  style="border-radius:5px;height:30px; background:url(images/dustbin.png) no-repeat" onclick="location='mainpage.jsp'"></input>
 						<input type="button" value="              "  style="border-radius:5px;height:30px; background:url(images/Search.JPG) no-repeat" onclick="load(1,null)"></input>--%>
-						<img src='<%=request.getContextPath()%>/style/images/search3.png'  style="vertical-align:middle; height:30px; " onclick="load(1,'','')"/>	
+						<img src='<%=request.getContextPath()%>/style/images/search3.png'  style="vertical-align:middle; height:30px; cursor:pointer" onclick="load(1,'','')"/>	
 					</td>
 					<td width="15%">
 						<table>

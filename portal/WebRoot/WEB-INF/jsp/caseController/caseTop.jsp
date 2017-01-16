@@ -356,6 +356,7 @@
 								 disWord="disabled";
 							 }
 						 } 
+						 //alert(disWord);
 						 //alert(flag);
 						// alert(disWord);
 						 strLeft+="<tr bgcolor='#ffffff'  bordercolor='#DEDEDE'>";
@@ -418,7 +419,7 @@
 						 	strRight+="<td bordercolor='#DEDEDE' width='90px'><input type='text' "+disWord+" class='t'   id='occurType'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurType+"'> </td>";
 						 }
 						 strRight+="<td bordercolor='#DEDEDE' width='160px'><input type='text' "+disWord+" class='t'   id='version'   style=' word-wrap:break-word;word-break:break-all;font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].version.replace('\'','&#39;')+"'> </td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].rootReason+"'><textarea rows='2'  "+disWord+" class='txt'   id='rootReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].rootReason+" </textarea></div></td>";
+						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].rootReason+"'><textarea rows='2'  "+disWord+" class='txt'   id='rootReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].rootReason.replace('\'','&#39;')+" </textarea></div></td>";
 						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].unknownReason+"'><textarea rows='2'  "+disWord+" class='txt'   id='unknownReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].unknownReason+" </textarea></div></td>";
 						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureDev+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureDev'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureDev+" </textarea></div></td>";
 						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureTest+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureTest'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureTest+" </textarea></div></td>";
