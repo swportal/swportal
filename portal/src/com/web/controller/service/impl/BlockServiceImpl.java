@@ -54,18 +54,7 @@ public class BlockServiceImpl  extends BaseDaoImpl<Block>  implements BlockServi
 			System.out.println(sql);
 			rs=stmt.executeQuery(sql);
 			while(rs.next()){
-				/*if(rs.getInt("Total")==0){
-					map.put("", rs.getInt("COUNT"));
-				}
-				else{*/
-					if(rs.getString("Component").contains("NonSmartClosed")){
-						map.put(rs.getString("Component").replace("NonSmartClosed", ""), rs.getInt("COUNT"));
-					}
-					else{
-						map.put(rs.getString("Component").replace("Closed", ""), rs.getInt("COUNT"));
-					}
-				//}
-				
+				map.put(rs.getString("Component"), rs.getInt("COUNT"));
 			}
 		}
 		catch(Exception ex)

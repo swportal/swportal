@@ -55,19 +55,8 @@ public class CompServiceImpl extends BaseDaoImpl<Comp> implements CompService {
 			String sql="select Component, sum(Total) as Total, sum(COUNT) as COUNT from "+tablename+" where "+pjthql+" group by Component order by Total  desc, Component  limit 40";
 			System.out.println(sql);
 			rs=stmt.executeQuery(sql);
-			while(rs.next()){
-				/*if(rs.getInt("Total")==0){
-					map.put("", rs.getInt("COUNT"));
-				}
-				else{*/
-					if(rs.getString("Component").contains("NonSmartClosed")){
-						map.put(rs.getString("Component").replace("NonSmartClosed", ""), rs.getInt("COUNT"));
-					}
-					else{
-						map.put(rs.getString("Component").replace("Closed", ""), rs.getInt("COUNT"));
-					}
-				//}
-				
+			while(rs.next()){				
+				map.put(rs.getString("Component"), rs.getInt("COUNT"));
 			}
 		}
 		catch(Exception ex)

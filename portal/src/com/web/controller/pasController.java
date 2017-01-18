@@ -51,9 +51,9 @@ public class pasController {
 	
 	@RequestMapping(value="/findPasList",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public void findPasList(Integer curPage,String keyword,String projectname,String city,String state,String milestone, String startdate,String enddate, String orderKey,HttpServletRequest request,HttpServletResponse response){
+	public void findPasList(Integer curPage,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate, String orderItem,String orderKey,HttpServletRequest request,HttpServletResponse response){
 		try {
-			URLDecoder.decode(keyword,"utf-8");
+			URLDecoder.decode(orderItem,"utf-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -61,9 +61,9 @@ public class pasController {
 		List<Pas> pasList2 = new ArrayList<Pas>(); //有关键字的情况
 		Integer pageSize=20;
 		Integer totalpage=(pasService.findAll().size()%pageSize==0)?(pasService.findAll().size()/pageSize):(pasService.findAll().size()/pageSize+1);
-		pasList = pasService.findPasList(curPage,pageSize,keyword,projectname,city,state,milestone,startdate,enddate,orderKey);	
-		if(projectname.length()!=0||milestone.length()!=0){  //有筛选条件， 就要更新list和total page
-			pasList2=pasService.findPasList(1, pasService.findAll().size(), keyword,projectname,city,state,milestone,startdate,enddate,orderKey);
+		pasList = pasService.findPasList(curPage,pageSize,keyword,parentSelect,childSelect,milestone,startdate,enddate,orderItem,orderKey);	
+		if(keyword.length()!=0||milestone.length()!=0){  //有筛选条件， 就要更新list和total page
+			pasList2=pasService.findPasList(1, pasService.findAll().size(),keyword,parentSelect, childSelect,milestone,startdate,enddate,orderItem,orderKey);
 			totalpage=(pasList2.size()%pageSize==0)?(pasList2.size()/pageSize):(pasList2.size()/pageSize+1);
 		}
 		JSONArray members = new JSONArray();
@@ -90,59 +90,59 @@ public class pasController {
 		 
 		    out.flush();
 		    out.close(); 
-		//pasList = pasService.findPasList(keyword);
+		//pasList = pasService.findPasList(orderItem);
 		//return pasList; 
 	}
 	
 	
 	@RequestMapping(value="/getCity",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public void getCity(String state,HttpServletRequest request,HttpServletResponse response){
+	public void getCity(String parentSelect,HttpServletRequest request,HttpServletResponse response){
 		JSONArray members = new JSONArray();
 		 PrintWriter out= null;
 		 try {
 			 	out= response.getWriter();
 		        
-		        if ("spt".equals(state)){
+		        if ("spt".equals(parentSelect)){
 		        	JSONObject member = new JSONObject();
-		        	member.put("city", "Basic");
+		        	member.put("childSelect", "Basic");
 		        	members.add(member);
-		        	member.put("city", "Deriv");
+		        	member.put("childSelect", "Deriv");
 		        	members.add(member);
 		        } 
-		        else if("pg".equals(state)){
+		        else if("pg".equals(parentSelect)){
 		        	JSONObject member = new JSONObject();
-		        	member.put("city", "HD");
+		        	member.put("childSelect", "HD");
 		        	members.add(member);
-		        	member.put("city", "LM");
+		        	member.put("childSelect", "LM");
 		        	members.add(member);
-		        	member.put("city", "MFM");
+		        	member.put("childSelect", "MFM");
 		        	members.add(member);
-		        	member.put("city", "UT");
+		        	member.put("childSelect", "UT");
 		        	members.add(member);
-		        	member.put("city", "QT");
+		        	member.put("childSelect", "QT");
 		        	members.add(member);
 		        }
-		        else if("ps".equals(state)){
+		        else if("ps".equals(parentSelect)){
 		        	JSONObject member = new JSONObject();
-		        	member.put("city", "Normal In Prog.");
+		        	member.put("childSelect", "Normal In Prog.");
 		        	members.add(member);
-		        	member.put("city", "Delay in Prog.");
+		        	member.put("childSelect", "Delay in Prog.");
 		        	members.add(member);
-		        	member.put("city", "Normal Compl.");
+		        	member.put("childSelect", "Normal Compl.");
 		        	members.add(member);
-		        	member.put("city", "Delay Compl.");
+		        	member.put("childSelect", "Delay Compl.");
 		        	members.add(member);
 		        }
-		        else if("ms".equals(state)){
+		        else if("ms".equals(parentSelect)){
 		        	JSONObject member = new JSONObject();
-		        	member.put("city", "PIA");
+		        	member.put("childSelect", "PIA");
 		        	members.add(member);
-		        	member.put("city", "PVR");
+		        	member.put("childSelect", "PVR");
 		        	members.add(member);
-		        	member.put("city", "PRA");
+		        	member.put("childSelect", "PRA");
 		        	members.add(member);
-		        	member.put("city", "SRA");
+		        	member.put("childSelect", "SRA");
 		        	members.add(member);
 		        }
 		        
@@ -159,14 +159,14 @@ public class pasController {
 	
 	@RequestMapping(value = "DownProject", method = RequestMethod.GET)
 	@ResponseBody
-	public void DownProject(String keyword,String projectname,String city,String state,String milestone, String startdate,String enddate, String orderKey,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+	public void DownProject(String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		try {
-			URLDecoder.decode(keyword,"utf-8");
+			URLDecoder.decode(orderItem,"utf-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		List<Pas> pasList = null;
-		pasList=pasService.findPasList(1, pasService.findAll().size(), keyword,projectname,city,state,milestone,startdate,enddate,orderKey);
+		pasList=pasService.findPasList(1, pasService.findAll().size(),keyword,parentSelect,childSelect,milestone,startdate,enddate, orderItem,orderKey);
 		
 		String fname = "Project List";
 		response.reset();// 清空输出流

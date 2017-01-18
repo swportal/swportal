@@ -15,14 +15,14 @@ import com.web.controller.service.PasService;
 public class PasServiceImpl extends BaseDaoImpl<Pas> implements PasService {
 
 	@Override
-	public List<Pas> findPasList(Integer curPage, Integer pageSize,String keyword,String projectname,String city,String state,String milestone, String startdate,String enddate, String orderKey) {
+	public List<Pas> findPasList(Integer curPage, Integer pageSize,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey) {
 		Integer start=(curPage-1)*pageSize;
 		String where = "";
 		/*
-		 * keyword search
+		 * orderItem search
 		 */
-		if(!projectname.equals("")){
-			where=where+"where (p.pjtName like'%"+projectname+"%' or p.devModelName like'%"+projectname+"%' or p.sWEM like'%"+projectname+"%' ) ";
+		if(!keyword.equals("")){
+			where=where+"where (p.pjtName like'%"+keyword+"%' or p.devModelName like'%"+keyword+"%' or p.sWEM like'%"+keyword+"%' ) ";
 		}
 		else{
 			where=where+"where p.pjtName like'%%'";
@@ -46,42 +46,42 @@ public class PasServiceImpl extends BaseDaoImpl<Pas> implements PasService {
 			}
 		}
 		/*
-		 * state, city search
+		 * parentSelect, childSelect search
 		 */
-		if(!state.equals("null")){
-			if(state.equals("pl")){
-				if(!city.equals("null"))
-				where+="and p.sWEM like '%"+city+"%'";
+		if(!parentSelect.equals("null")){
+			if(parentSelect.equals("pl")){
+				if(!childSelect.equals("null"))
+				where+="and p.sWEM like '%"+childSelect+"%'";
 				//System.out.println(where);
 			}
-			else if(state.equals("ps")){
-				if(!city.equals("null"))
-				where+="and p.pjtStatus like '%"+city+"%'";
+			else if(parentSelect.equals("ps")){
+				if(!childSelect.equals("null"))
+				where+="and p.pjtStatus like '%"+childSelect+"%'";
 			}
-			else if(state.equals("spt")){
-				if(!city.equals("null"))
-				where+="and p.projType like '%"+city+"%'";
+			else if(parentSelect.equals("spt")){
+				if(!childSelect.equals("null"))
+				where+="and p.projType like '%"+childSelect+"%'";
 			}
-			else if(state.equals("ms")){
-				if(!city.equals("null"))
-				where+="and p.milestone like '%"+city+"%'";
+			else if(parentSelect.equals("ms")){
+				if(!childSelect.equals("null"))
+				where+="and p.milestone like '%"+childSelect+"%'";
 			}
-			else if(state.equals("pg")){
-				if(!city.equals("null"))
-				where+="and p.product like '%"+city+"%'";
+			else if(parentSelect.equals("pg")){
+				if(!childSelect.equals("null"))
+				where+="and p.product like '%"+childSelect+"%'";
 			}
-			else if(state.equals("choose")){
+			else if(parentSelect.equals("choose")){
 				//where+="aPRAPlanDate between '"+startdate+"' and '"+enddate+"'";
 			}
 		}
-		if(orderKey.equals("")&&keyword.equals("")){
+		if(orderKey.equals("")&&orderItem.equals("")){
 			return getSession().createQuery("FROM Pas p "+where+"  ORDER BY  p.pIAPlanDate DESC, p.pRAPlanDate DESC, p.pLMTotal DESC, p.pLMOpened DESC")
 					.setFirstResult(start)
 					.setMaxResults(pageSize)
 					.list();
 		}
 		else{
-			return getSession().createQuery("FROM Pas p "+where+" ORDER BY "+ keyword + " "+orderKey)
+			return getSession().createQuery("FROM Pas p "+where+" ORDER BY "+ orderItem + " "+orderKey)
 					.setFirstResult(start)
 					.setMaxResults(pageSize)
 					.list();

@@ -132,24 +132,23 @@
 		</style> 
  
 		<script type="text/javascript">		
-			var keywd="";
+			var ordItem="";
 			var ordKey="";			
-			function load(currpage,keyword,orderKey) {	
-				
-				var projectname=document.getElementById("selectitem").value;			
-				var city=document.getElementById("city").value;
-				var state=document.getElementById("state").value;
+			function load(currpage,orderItem,orderKey) {	
+				var keyword=document.getElementById("selectitem").value;	
+				var parentSelect=document.getElementById("parentSelect").value;
+				var childSelect=document.getElementById("childSelect").value;
 				var milestone=document.getElementById("milestone").value;
 				var startdate=document.getElementById("startdate").value;
 				var enddate=document.getElementById("enddate").value;
 				var down="";
 				
-				 down = down + "<a href='/portal/pas/DownProject?keyword="+encodeURIComponent(keyword,"utf-8")+"&projectname="+projectname+"&city="+city+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&state="+state+"&orderKey="+orderKey+"&rn="+Math.random()+", title='Data Download'>	<img src='<%=request.getContextPath()%>/style/images/excel6.jpg'   width=20px height=20px   style='padding-top:5px'/> </a>";
+				 down = down + "<a href='/portal/pas/DownProject?keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random()+", title='Data Download'>	<img src='<%=request.getContextPath()%>/style/images/excel6.jpg'   width=20px height=20px   style='padding-top:5px'/> </a>";
 				 document.getElementById("downexcel").innerHTML=down;
-				 //alert(city);
+				 //alert(childSelect);
 				 
-				 $.getJSON("/portal/pas/findPasList?keyword="+encodeURIComponent(keyword,"utf-8")+"&curPage="+currpage+"&projectname="+projectname+"&city="+city+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&state="+state+"&orderKey="+orderKey+"&rn="+Math.random(),function(data){		
-					 //alert(city);
+				 $.getJSON("/portal/pas/findPasList?curPage="+currpage+"&keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random(),function(data){		
+					 //alert(childSelect);
 					    document.getElementById("updatetime").innerHTML=data[2].updatetime;
 					 	var curpage=data[1].curpage;
 						var pagecount = data[1].totalpage;   
@@ -407,12 +406,12 @@
 							firstpagehtml= "<a><<</a>&nbsp;&nbsp;&nbsp;";
 							prevpagehtml = "<a><</a>";
 						}else{
-							firstpagehtml="<a onclick='load(1,"+"keywd,ordKey);' href='javascript:void(0);'><font color='#3498db'><<&nbsp;&nbsp;&nbsp;</font></a>";
-							prevpagehtml = "<a onclick='load("+(currpage-1)+",keywd,ordKey);' href='javascript:void(0);'><</a>";
+							firstpagehtml="<a onclick='load(1,"+"ordItem,ordKey);' href='javascript:void(0);'><font color='#3498db'><<&nbsp;&nbsp;&nbsp;</font></a>";
+							prevpagehtml = "<a onclick='load("+(currpage-1)+",ordItem,ordKey);' href='javascript:void(0);'><</a>";
 						}
 						if((currpage-0)<(pagecount-0)){
-							nextpagehtml = "<a onclick='load("+(currpage-0+1)+",keywd,ordKey);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
-							lastpagehtml = " <a onclick='load("+pagecount+",keywd,ordKey);' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
+							nextpagehtml = "<a onclick='load("+(currpage-0+1)+",ordItem,ordKey);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+							lastpagehtml = " <a onclick='load("+pagecount+",ordItem,ordKey);' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
 						}else{
 							nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
 							lastpagehtml = "<a>>></a>";
@@ -573,10 +572,10 @@
 	          
 	         
 		  }
-			function sort1(keyword,orderKey){
+			function sort1(orderItem,orderKey){
 				//alert(orderKey);
-				load(1,keyword,orderKey);
-				keywd=keyword;
+				load(1,orderItem,orderKey);
+				ordItem=orderItem;
 				ordKey=orderKey;
 			}
 			function go(){
@@ -599,12 +598,12 @@
 		</script>
 
 		<script type="text/javascript">
-			function getResult(stateVal) {
-				 $.getJSON("/portal/pas/getCity?state="+stateVal+"&rn="+Math.random(),function(data){
-					 document.getElementById("city").options.length=0;		
+			function getResult(parentSelectVal) {
+				 $.getJSON("/portal/pas/getCity?parentSelect="+parentSelectVal+"&rn="+Math.random(),function(data){
+					 document.getElementById("childSelect").options.length=0;		
 					 for(var i = 0;i<data.length;i++){
-						var leng = 	 document.getElementById("city").options.length;
-						 document.getElementById("city").options[leng]=new Option(data[i].city,data[i].city);
+						var leng = 	 document.getElementById("childSelect").options.length;
+						 document.getElementById("childSelect").options[leng]=new Option(data[i].childSelect,data[i].childSelect);
 					 }
 					 load(1,'','');
 				 });		
@@ -653,7 +652,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="text" placeholder="Search"  name="selectitem" id="selectitem"  onKeyUp="load(1,'','')" type="text" title="Input Pjt Name; Model Name; SW PL" style="color:#95a5a6;padding-left:-20px;padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
 						&nbsp; 
-						<select id="state" name="state" onChange="getResult(this.value);" style="font-size:14px; vertical-align:middle;  border-radius:5px; width:128px;height:33px; " >
+						<select id="parentSelect" name="parentSelect" onChange="getResult(this.value);" style="font-size:14px; vertical-align:middle;  border-radius:5px; width:128px;height:33px; " >
 		         		<option value="choose" >- Select -</option>
 		         		<option value="ms" >Milestone</option>
 		         		<option value="spt">Project Type</option>
@@ -661,7 +660,7 @@
 		         		<option value="ps">Pjt. Status</option>
 						<%-- <option value="pl">PL</option>--%>
 		 				</select>
-						<select id="city"  onChange="load(1,'','')" style="font-size:14px; border-radius:5px;width:128px; vertical-align:middle;height:33px; " >
+						<select id="childSelect"  onChange="load(1,'','')" style="font-size:14px; border-radius:5px;width:128px; vertical-align:middle;height:33px; " >
 							     <option value=""><font face="Arial" style="font-size:14px;">- Select -</font></option>
 						</select>	
 						
