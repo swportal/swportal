@@ -153,7 +153,7 @@
 								mileflag=first+rest;
 								mileflag=eval("data[0].modelList["+i+"]."+mileflag);
 							}
-							
+							//alert(mile);
 							html=html+"<tr bordercolor='#DEDEDE' bgcolor='#ffffff'>";
 			  				if(mile!="SRA"){  //齿轮判断
 				  				if(mile!="-"){   //2016-12-20 wuliying change from "null" to "-" to apply PLM change point
@@ -177,9 +177,8 @@
 		  					}
 		  					
 				  			html = html+ "<td align='center'><font>" + data[0].modelList[i].devModelName+"</font></td>";
-		  							 
 						  // if(mile!="-"){  //milestone
-						   		html=html+"<td align='center'><font size=2>"+data[0].modelList[i].milestone+"</font></td>";
+						   		html=html+"<td align='center'><font size=2>"+data[0].modelList[i].milestone+"</font></td>";						   		
 						   //}
 						   //else{
 						   		//html=html+"<td align='center'><font size=2>-</font></td>";
@@ -188,50 +187,54 @@
 						   		html=html+"<td align='center'><font size=2>Deriv.</font></td>";
 						   }
 						   else
-						   		html=html+"<td align='center'>"+data[0].modelList[i].devType+"</td>";  							   
-						   if(mile=="PIA"){								   
-							   	if(data[0].modelList[i].pIA=="R"){  //日期红色
+						   		html=html+"<td align='center'>"+data[0].modelList[i].devType+"</td>";  
+						   if(mile=="PIA"){
+							   	if(data[0].modelList[i].pIA=="R"){
 									html=html+"<td align='center' ><font color='red' size='2' style='font-weight:bold;'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td>";
 									if(data[0].modelList[i].pIAActualDate.length==0){
 							   			html=html+"<td align='center' ></td>";
-							   		}else{
+							   		}
+									else{
 							   			html=html+"<td align='center' ><font color='red' size='2' style='font-weight:bold;'>"+data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
 							   		}
 								}
-								else if(data[0].modelList[i].pIA=="Y"){  //日期蓝色
-									html=html+"<td align='center' ><font color='blue'  size='2'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td>";
-							   		if(data[0].modelList[i].pIAActualDate.length==0){
-							   			html=html+"<td align='center' ></td>";
-							   		}
-							   		else{
-							   			html=html+"<td align='center' ><font color='blue'  size='2'>"+data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
-							   		}
+								else if(data[0].modelList[i].pIA=="Y"){
+									html=html+"<td align='center' ><font color='blue' size='2'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td>";
+						   			if(data[0].modelList[i].pIAActualDate.length==0){
+						   				html=html+"<td align='center' ></td>";
+						   			}
+						   			else{
+						   				html=html+"<td align='center' ><font color='blue' size='2'>"+data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
+						   			}
 								}
-								else if(data[0].modelList[i].pIA=="N"){  //日期空
-									html=html+"<td align='center'></td>"
-							   		+"<td align='center'></td>";
+								else if(data[0].modelList[i].pIA=="N"){
+									html=html+"<td align='center'></td>"+"<td align='center'></td>";
 								}
-								else{	
-									//alert(1);
-									html=html+"<td align='center'> <font size='2'>"  //正常黑色
-									+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td><td align='center'><font size='2'>";
+								else{
+									html=html+"<td align='center'> <font size='2'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td><td align='center'> <font size='2'>";
 						   			if(data[0].modelList[i].pIAActualDate.length==0){
 						   				html=html+"</font></td>";
 						   			}
 						   			else{
-						   				//alert(1);
-						   				html=data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
+						   				html=html+data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
 						   			}
 								}
-						    }//PIA END
-						    else{
-						    	//alert(1);
-						   		html=html+"<td align='center'> <font size='2'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)
-						   		+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)
-						   		+"</font></td><td align='center'> <font size='2'>"
-						   		+data[0].modelList[i].pIAActualDate.substring(5,7)
-						   		+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
-						    }
+						   }//PIA end
+						   else{				   
+							   if(data[0].modelList[i].pIAPlanDate.length==0){
+							   		html=html+"<td align='center'> <font size='2'>-</font></td>";
+							   		html=html+"<td align='center'> <font size='2'>-</font></td>";
+							   	}
+							   else{
+							   		html=html+"<td align='center'> <font size='2'>"+data[0].modelList[i].pIAPlanDate.substring(5,7)+"/"+data[0].modelList[i].pIAPlanDate.substring(8,10)+"</font></td>";
+							   		if(data[0].modelList[i].pIAActualDate.length==0){
+							   			html=html+"<td align='center'></td>";
+							   		}
+							   		else{
+							   			html=html+"<td align='center'> <font size='2'>"+data[0].modelList[i].pIAActualDate.substring(5,7)+"/"+data[0].modelList[i].pIAActualDate.substring(8,10)+"</font></td>";
+							   		}
+						   		}
+						   }
 						   	   
 						   if(mile=="PVR"){
 							   	if(data[0].modelList[i].pVR=="R"){
