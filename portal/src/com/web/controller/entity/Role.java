@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class Role  implements java.io.Serializable,Comparable<Role>{
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String name;
 	private String description;

@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.web.controller.Base.BaseDao;
 import com.web.controller.entity.Education;
-import com.web.controller.entity.Role;
-import com.web.controller.entity.User;
 
 
 public interface EduService extends BaseDao<Education>{

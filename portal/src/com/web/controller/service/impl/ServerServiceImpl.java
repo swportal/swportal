@@ -5,12 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Server;
-import com.web.controller.entity.Trip;
 import com.web.controller.service.ServerService;
 
 @Service
 public class ServerServiceImpl  extends BaseDaoImpl<Server> implements ServerService{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Deprecated
 	public List<Server> findServerList(String keyword) {
@@ -19,6 +19,7 @@ public class ServerServiceImpl  extends BaseDaoImpl<Server> implements ServerSer
 				.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Server> findServerList(Integer curPage, Integer pageSize,String keyword) {
 		Integer start=(curPage-1)*pageSize;

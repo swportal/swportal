@@ -1,6 +1,7 @@
 package com.web.controller.entity;
 
 public class Case implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String prodType;
 	private String chipset;

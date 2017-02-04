@@ -1,18 +1,13 @@
 package com.web.controller.entity;
 // default package
 
-import java.sql.Timestamp;
-import java.util.Date;
-
-
 /**
  * Defectdaily entity. @author MyEclipse Persistence Tools
  */
 
 public class Defectdaily  implements java.io.Serializable {
-
-
-    // Fields    
+	private static final long serialVersionUID = 1L;
+	// Fields    
 
      private String projectName;
      private String modelCode;

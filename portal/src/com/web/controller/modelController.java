@@ -1,13 +1,7 @@
 package com.web.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +27,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.controller.entity.Model;
-import com.web.controller.entity.Server;
-import com.web.controller.entity.Trip;
-import com.web.controller.service.ModelService;
-import com.web.controller.service.ModelService;
 import com.web.controller.service.ModelService;
 
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/model")
 public class modelController {
@@ -54,7 +45,6 @@ public class modelController {
 	@RequestMapping(value="/findModelList",produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public void findModelList(Integer curPage,String projectname,HttpServletRequest request,HttpServletResponse response){
-		int total=0;
 		String where="where m.pjtName like'%"+projectname+"%'";
 		
 		
@@ -143,7 +133,6 @@ public class modelController {
         HSSFCell c7 = row.createCell(10);   
         c7.setCellValue(new HSSFRichTextString("Defects"));   
         c7.setCellStyle(style); 
-        HSSFCell c8 = row.createCell(14);   
         
         HSSFRow row1 = sheet.createRow(1);   
         HSSFCell c10 = row1.createCell(4);   

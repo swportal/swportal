@@ -1,6 +1,7 @@
 package com.web.controller.entity;
 
 public class Visitor implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String ip;
 	private String name;

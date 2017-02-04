@@ -1,22 +1,10 @@
 package com.web.controller.service.impl;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
-import com.web.controller.dao.RoleDao;
-import com.web.controller.dao.UserDao;
-import com.web.controller.entity.Page;
 import com.web.controller.entity.Role;
-import com.web.controller.entity.User;
 import com.web.controller.service.RoleService;
-import com.web.controller.service.UserService;
 
 @Service
 public class RoleServiceImpl extends BaseDaoImpl<Role> implements RoleService{	

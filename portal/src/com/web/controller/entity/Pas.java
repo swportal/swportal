@@ -1,6 +1,7 @@
 package com.web.controller.entity;
 
 public class Pas implements java.io.Serializable{	
+	private static final long serialVersionUID = 1L;
 	private Long projectid;
 	private Long modelNum;
 	private String product;

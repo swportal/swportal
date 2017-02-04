@@ -1,12 +1,7 @@
 package com.web.controller.entity;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 //@GeneratedValue
 //@Column(length=32)
 public class User  implements java.io.Serializable,Comparable<User>{
+	private static final long serialVersionUID = 1L;
 	@Autowired
-	private HttpServletRequest request;
 	private Long id;	
 	private String name;	
 	private String loginName;
@@ -28,7 +23,6 @@ public class User  implements java.io.Serializable,Comparable<User>{
 	private String email;
 	private String description;
 	private Set<Role> roles = new TreeSet<Role>();
-	private ServletContext servletContext;
 	/**
 	 * 判断本用户是否有指定名称的权限
 	 * @param name

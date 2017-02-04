@@ -1137,7 +1137,7 @@
 		 				<a href="http://vdswportal.sec.samsung.net/SWPortal/static_analysis.aspx" target="_blank" title="SW Static Test tool"><font size=1 face="Arial">SVACE</font></a>
 					</td>
 					<td width="100px" align="center">
-		 				<a href="http://168.219.244.106:8091/dexter-wiki" target="_blank" title="SW Code Quality Improvement System"><font size=1 face="Arial">Dexter</font></a>
+		 				<a href="http://109.110.100.50:4982/defect" target="_blank" title="SW Code Quality Improvement System"><font size=1 face="Arial">Dexter</font></a>
 					</td>
 		 			<td width="100px" align="center">
 		 				<a href="http://platz.sec.samsung.net/tapi/" target="_blank" title="Platform API of Tizen"><font size=1 face="Arial">PLATZ</font></a>
@@ -1173,7 +1173,7 @@
 						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
 					</td>
 					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.3.4</font>
+						<font color="#9d9d9d" size=1 face="Arial">V1.3.5</font>
 					</td>
 				</tr>
 			</table>	

@@ -1,13 +1,7 @@
 package com.web.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,7 +18,6 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.hssf.util.CellRangeAddress;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,13 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.controller.entity.Defect;
-import com.web.controller.entity.Pas;
-import com.web.controller.entity.Server;
-import com.web.controller.entity.Trip;
 import com.web.controller.service.DefectService;
 import com.web.controller.service.DefectinfoService;
-import com.web.controller.service.PasService;
-import com.web.controller.service.PasService;
 
 @Controller
 @RequestMapping("/defect")
@@ -166,8 +154,6 @@ public class defectController {
 		}
 		
 		Integer pageSize=13;
-		Integer start=(curpage-1)*pageSize;
-		//int t=defectService.findAll().size();
 		total=defectService.findDefectCount(where);
 		Integer totalpage=(total%pageSize==0)?(total/pageSize):(total/pageSize+1);
 		
@@ -198,6 +184,7 @@ public class defectController {
 		
 	
 
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "DownDefect", method = RequestMethod.GET)
 	@ResponseBody
 	public void DownDefect(String projectname,String modelname,String item,String orderItem, String orderKey,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {

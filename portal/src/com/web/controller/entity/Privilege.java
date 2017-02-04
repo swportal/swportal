@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Privilege implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String name;  //权限名称
 	private String url;

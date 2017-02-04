@@ -19,6 +19,7 @@ public class DefectServiceImpl extends BaseDaoImpl<Defect> implements DefectServ
 		return getSession().createQuery("FROM Defect k "+where+"").list().size();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Defect> findDefectList(Integer curPage, Integer pageSize,String where) {
 		Integer start=(curPage-1)*pageSize;

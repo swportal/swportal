@@ -41,6 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.web.controller.entity.Case;
 import com.web.controller.service.CaseService;
 
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/case")
 public class caseController {
@@ -890,7 +891,8 @@ public class caseController {
         sheet.addMergedRegion(new CellRangeAddress(0, 0,(short)16,  (short)22));
         sheet.addMergedRegion(new CellRangeAddress(0, 1,(short)23,  (short)23));
        
-        List<Case> caseList =  caseService.findAll();
+        // List<Case> caseList =  caseService.findAll();   wuliying modify the data list order
+        List<Case> caseList = caseService.findCaseList(1,caseService.findAll().size(),"", "", "");
         for(int i=0;i<caseList.size();i++){
         	row=sheet.createRow((int)i+2);
         	Case c = (Case)caseList.get(i);

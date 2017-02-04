@@ -7,12 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Case;
-import com.web.controller.entity.Education;
 import com.web.controller.service.CaseService;
 @Service
 @Transactional
 public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Case> findCaseList(Integer curPage,Integer pageSize,String keyword, String orderItem, String orderKey) {
 		Integer start=(curPage-1)*pageSize;
@@ -40,21 +40,25 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Case> findDistinctModel() {
 		return getSession().createQuery("FROM Case c GROUP BY c.model").list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Case> findDistinctType() {
 		return getSession().createQuery("FROM Case c GROUP BY c.prodType").list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Case> findDistinctChip() {
 		return getSession().createQuery("FROM Case c GROUP BY c.chipset").list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Case> findModelList(String keyword,String item) {
 		if("".equals(keyword))
@@ -64,14 +68,16 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 	
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getDTVCount() {
+		
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.prodType like '%DTV%'").list();
 		Long dtvTotal = Long.valueOf(list.size());
 		return dtvTotal;
 	}
 
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getMFMCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.prodType like '%MFM%'").list();
@@ -79,6 +85,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return mfmTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getHotelCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.prodType like '%HTV%'").list();
@@ -86,6 +93,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return hotelTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getMonitorCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.prodType like '%Monitor%'").list();
@@ -94,7 +102,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 	}
 
 	
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getAPPCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.prodType like '%APP%'").list();
@@ -102,7 +110,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return appTotal;
 	}
 	
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getNonCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.chipset like '%XL%'").list();
@@ -110,6 +118,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return nonTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getOrsayCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.chipset like '%NT%' OR c.chipset like '%X1%' OR c.chipset like '%x1%'").list();
@@ -117,6 +126,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return orsayTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getTizenCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.chipset like '%JAZZ%' OR c.chipset like '%jazz%' OR c.chipset like '%Hawk%' OR c.chipset like '%HAWK%'  OR c.chipset like '%hawk%' OR c.chipset like '%Hawk%'  OR c.chipset like '%GOLF%'  OR c.chipset like '%Golf%'  OR c.chipset like '%golf%'").list();
@@ -124,6 +134,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return tizenTotal;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getMarketCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.occurPhase like '%市场%'").list();
@@ -131,6 +142,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return marketTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getMPCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.occurPhase like '%MP%'").list();
@@ -138,6 +150,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return mpTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getTechCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.improvedType like '%Tech%'").list();
@@ -145,6 +158,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return techTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getTestCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.improvedType like '%Test%'").list();
@@ -152,6 +166,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return testTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getProcCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.improvedType like '%Process%'").list();
@@ -159,6 +174,7 @@ public class CaseServiceImpl extends BaseDaoImpl<Case>  implements CaseService{
 		return procTotal;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getToolCount() {
 		List<Case> list = getSession().createQuery("FROM Case c WHERE  c.improvedType like '%Tool%'").list();

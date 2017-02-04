@@ -1,6 +1,7 @@
 package com.web.controller.entity;
 
 public class Model implements java.io.Serializable{	
+	private static final long serialVersionUID = 1L;
 	private Long modelid;
 	private String product;
 	private String pjtName;

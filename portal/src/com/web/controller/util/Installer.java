@@ -31,7 +31,7 @@ public class Installer {
 		session.save(user);
 		// --------------------------------------------------------------
 		//保存权限数据
-		Privilege menu, menu1,menu2,menu3, menu4, menu5;
+		Privilege menu, menu1,menu2,menu3;
 		
 		//各種展示系統
 		menu  =  new Privilege("DashBoard", null,null);

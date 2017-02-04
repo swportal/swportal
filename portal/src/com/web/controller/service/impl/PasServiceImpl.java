@@ -7,13 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Pas;
-import com.web.controller.entity.Server;
 import com.web.controller.service.PasService;
 
 @Service
 @Transactional
 public class PasServiceImpl extends BaseDaoImpl<Pas> implements PasService {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pas> findPasList(Integer curPage, Integer pageSize,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey) {
 		Integer start=(curPage-1)*pageSize;

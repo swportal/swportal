@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.web.controller.entity.User;
 
 public class CommonInterceptor implements HandlerInterceptor {
 	private Log log = LogFactory.getLog(this.getClass());

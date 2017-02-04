@@ -1,11 +1,8 @@
-import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.web.controller.entity.User;
 
 
 public class SpringTest {

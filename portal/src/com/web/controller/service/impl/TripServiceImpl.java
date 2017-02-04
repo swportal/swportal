@@ -25,6 +25,7 @@ public class TripServiceImpl extends BaseDaoImpl<Trip> implements TripService {
 		}
 	}
 	*/
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Trip> findTripList(Integer curPage,Integer pageSize, String keyword, String orderItem,String orderKey){
 			Integer start=(curPage-1)*pageSize;

@@ -7,8 +7,6 @@ import java.util.Map;
 import com.web.controller.Base.BaseDao;
 import com.web.controller.entity.Defect;
 import com.web.controller.entity.Defectinfo;
-import com.web.controller.entity.Pas;
-import com.web.controller.entity.Server;
 
 
 public interface DefectinfoService extends BaseDao<Defectinfo>{

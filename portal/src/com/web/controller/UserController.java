@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.TreeSet;
 
 import javax.annotation.Resource;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,10 +13,6 @@ import javax.servlet.http.HttpSession;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -29,7 +24,7 @@ import com.web.controller.service.UserService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private Log log = LogFactory.getLog(this.getClass());
+	//private Log log = LogFactory.getLog(this.getClass());
 	@Resource
 	private UserService userService;
 	@Resource 

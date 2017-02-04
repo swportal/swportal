@@ -4,13 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
-import com.web.controller.entity.Case;
-import com.web.controller.entity.Education;
 import com.web.controller.entity.Trip;
 import com.web.controller.entity.Visitor;
 import com.web.controller.service.VisitorService;
@@ -18,6 +15,7 @@ import com.web.controller.service.VisitorService;
 @Transactional
 public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorService {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Trip> findVisitorList(Integer curpage, Integer pageSize,String keyword, String orderItem, String orderKey){
 		Integer start=(curpage-1)*pageSize;
@@ -36,6 +34,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getSW1Count(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.part like '%System S/W R&D 1Part%' AND v.visitDate like '%"+curdate+"%'").list();
@@ -43,6 +42,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return sw1Count;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getSW2Count(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.part like '%System S/W R&D 2Part%' AND v.visitDate like '%"+curdate+"%'").list();
@@ -50,6 +50,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return sw2Count;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getSWCount(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.part like '%SW Group%' AND v.visitDate like '%"+curdate+"%'").list();
@@ -57,6 +58,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return swCount;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getSECount(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.part like '%SE%' AND v.visitDate like '%"+curdate+"%'").list();
@@ -64,6 +66,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return seCount;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getMONCount(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.part like '%Mon%' AND v.visitDate like '%"+curdate+"%'").list();
@@ -71,6 +74,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return monCount;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long getSQACount(String curdate) {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.visitDate like '%"+curdate+"%' and (v.part not like '%Mon%' and v.part not like '%SE%' and v.part not like '%SW Group%' and v.part not like '%System S/W R&D 2Part%' and v.part not like '%System S/W R&D 1Part%')").list();
@@ -78,6 +82,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return sqaCount;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public List<Visitor> findVisitorList(String keyword,String orderItem,String orderKey) {
 		if("".equals(orderItem)){	
@@ -100,6 +105,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long todayVisitor() {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
@@ -109,6 +115,7 @@ public class VisitorServiceImpl extends BaseDaoImpl<Visitor> implements VisitorS
 		return count;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Long totalVisitor() {
 		List<Visitor> list = getSession().createQuery("FROM Visitor v WHERE  v.visitTime !=''").list();

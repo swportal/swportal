@@ -37,11 +37,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.web.controller.entity.Education;
 import com.web.controller.service.EduService;
 
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/edu")
 public class eduController {
@@ -521,8 +521,6 @@ public class eduController {
 	public void getUrl(HttpServletRequest request,HttpServletResponse response){
 		/*List<Education> edu = eduService.findAll();
 		request.setAttribute("url",edu.get(0).getMaterials());*/
-		List<Education> edu = eduService.findAll();
-		String url=edu.get(0).getMaterials();
 		String result = "{\"url\":url}";
 		
 		PrintWriter out = null;

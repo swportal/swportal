@@ -34,6 +34,7 @@ public class UserServiceImpl extends BaseDaoImpl<User> implements UserService{
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findUserList(Integer curpage,Integer pageSize) {
 		// TODO Auto-generated method stub

@@ -1,16 +1,13 @@
 package com.web.controller.entity;
 // default package
 
-import java.util.Date;
-
-
 /**
  * Defectinfo entity. @author MyEclipse Persistence Tools
  */
 
 public class Defectinfo  implements java.io.Serializable {
-
-     private Integer codeid;
+	private static final long serialVersionUID = 1L;
+	private Integer codeid;
      private String projectName;
      private String modelCode;
      private String selectDate;

@@ -183,6 +183,7 @@ public class visitorController {
 		 
 	}
 	
+	@SuppressWarnings("static-access")
 	@RequestMapping("/getVisitorCount")
 	@ResponseBody
 	public void getVisitorCount(HttpServletRequest request,HttpServletResponse response){

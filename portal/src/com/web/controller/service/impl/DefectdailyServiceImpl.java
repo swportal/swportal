@@ -6,24 +6,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
-import com.web.controller.entity.Defect;
 import com.web.controller.entity.Defectdaily;
-import com.web.controller.entity.Defectinfo;
-import com.web.controller.service.DefectService;
 import com.web.controller.service.DefectdailyService;
-import com.web.controller.service.DefectinfoService;
 
 @Service
 @Transactional
 public class DefectdailyServiceImpl extends BaseDaoImpl<Defectdaily> implements DefectdailyService {
+	@SuppressWarnings("unchecked")
 	@Deprecated
 	public List<String> getDailyData(String projectname,String modelname) {
 		List<String> listDaily=new ArrayList<String>();
@@ -313,6 +308,7 @@ public class DefectdailyServiceImpl extends BaseDaoImpl<Defectdaily> implements 
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Defectdaily> findDailyData(String where) {
 		return getSession().createQuery("FROM Defectdaily "+ where)

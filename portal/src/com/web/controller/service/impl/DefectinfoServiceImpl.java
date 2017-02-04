@@ -1,19 +1,15 @@
 package com.web.controller.service.impl;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONArray;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,15 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Defect;
 import com.web.controller.entity.Defectinfo;
-import com.web.controller.service.DefectService;
 import com.web.controller.service.DefectinfoService;
 
 @Service
 @Transactional
 public class DefectinfoServiceImpl extends BaseDaoImpl<Defectinfo> implements DefectinfoService {
 
-
-
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Defect> findDefectinfoList(Integer curPage, Integer pageSize,String where) {
 		Integer start=(curPage-1)*pageSize;
@@ -39,6 +33,7 @@ public class DefectinfoServiceImpl extends BaseDaoImpl<Defectinfo> implements De
 				.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<Integer, String> getCodes(String projectname) {
 		String pjthql = "";
@@ -67,6 +62,7 @@ public class DefectinfoServiceImpl extends BaseDaoImpl<Defectinfo> implements De
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Integer> getDefectData(String projectname,String modelname) {
 		List<Integer> listData=new ArrayList<Integer>();
@@ -191,10 +187,7 @@ public class DefectinfoServiceImpl extends BaseDaoImpl<Defectinfo> implements De
 		int[] ResolveDay = new int[400];
 		int[] Day = new int[400];
 		String where = "where";
-		String and = null;
-		Long daysBetween = 0L;
 		//String currdate= request.getParameter("currdate");
-		Date date = new Date();
 		
 		String a[] = projectname.split(",");
 		for(int i=0;i<(a.length);i++){

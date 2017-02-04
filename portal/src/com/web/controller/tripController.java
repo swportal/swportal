@@ -37,12 +37,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.web.controller.entity.Education;
 import com.web.controller.entity.Trip;
 import com.web.controller.service.TripService;
 
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/trip")
 public class tripController {

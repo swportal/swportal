@@ -2,12 +2,10 @@ package com.web.controller.service.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -16,16 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Comp;
-import com.web.controller.entity.Defect;
-import com.web.controller.entity.Defectdaily;
-import com.web.controller.entity.Defectinfo;
 import com.web.controller.service.CompService;
+
 @Service
 @Transactional
 public class CompServiceImpl extends BaseDaoImpl<Comp> implements CompService {
 	public Map<String, Integer> getCompList(String projectname,String modelname) {
 		LinkedHashMap <String,Integer> map=new LinkedHashMap<String,Integer>();		
-		@SuppressWarnings("unchecked")
 		String pjthql = "";
 		String tablename="";
 		Connection conn=null;

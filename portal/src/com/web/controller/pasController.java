@@ -1,13 +1,8 @@
 package com.web.controller;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,11 +28,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.controller.entity.Pas;
-import com.web.controller.entity.Server;
-import com.web.controller.entity.Trip;
-import com.web.controller.service.PasService;
 import com.web.controller.service.PasService;
 
+@SuppressWarnings("deprecation")
 @Controller
 @RequestMapping("/pas")
 public class pasController {

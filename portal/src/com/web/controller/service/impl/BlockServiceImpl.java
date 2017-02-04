@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -15,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.web.controller.Base.impl.BaseDaoImpl;
 import com.web.controller.entity.Block;
-import com.web.controller.entity.Defect;
 import com.web.controller.service.BlockService;
 
 @Service

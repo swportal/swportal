@@ -1,6 +1,7 @@
 package com.web.controller.entity;
 
 public class Defect implements java.io.Serializable{	
+	private static final long serialVersionUID = 1L;
 	private String iD;
 	private String cOMPONENTNAME;
 	private String dEFECTIVEBLOCKNAME;
