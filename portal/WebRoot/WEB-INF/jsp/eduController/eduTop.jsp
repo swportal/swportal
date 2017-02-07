@@ -404,17 +404,26 @@
 						  	    else
 						  	   		str+="<td bordercolor='#DEDEDE' width='100px'><input type='text' "+disWord+" class='t'   id='traineeObject'  style='width:100px; font-size:12px;  color:black;  text-align:center;'  onChange='updateEdu(this,"+data[0].eduList[i].id+")'  value='"+data[0].eduList[i].traineeObject+"'> </td>";
 							   str+="<td bordercolor='#DEDEDE'><input type='text' "+disWord+" class='t'   id='traineeTotal'  style='width:50px; font-size:12px;  color:black;  text-align:center;'  onChange='updateEdu(this,"+data[0].eduList[i].id+")'  value='"+data[0].eduList[i].traineeTotal.replace('\'','&#39;')+"'> </td>";
-							   if(flag)
-							  	   str+="<td align='center' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].eduList[i].id+")'  title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png' width=18px height=18px/></a></td>";
+							   //2017-02-07 wuliying, 区分是否已经存在上传文件
+							   if(flag){ //有编辑权限， 可以上传附件
+								   if(data[0].eduList[i].filename.length==0){ //没有上传文件存在， 直接上传图标
+									   str+="<td align='center' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].eduList[i].id+")'  title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png' width=18px height=18px/></a></td>";
+								   }
+								   else{ //已存在上传文件， 显示黄色图标
+									   str+="<td align='center' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].eduList[i].id+")'  title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+								   }								   
+							   }
 							   else{
 									 if(data[0].eduList[i].filename.length==0){
 										 str+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
 									 }
-									 else if(data[0].eduList[i].filename.length!=0&&data[0].eduList[i].filename.indexOf(",")==-1){
-										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/edu/download/"+data[0].eduList[i].filename+"' title='Training Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-									 }
-									 else if(data[0].eduList[i].filename.length!=0&&data[0].eduList[i].filename.indexOf(",")!=-1){
-										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].eduList[i].id+")' title='Training Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+									 else{
+										 if(data[0].eduList[i].filename.indexOf(",")==-1){
+											 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/edu/download/"+data[0].eduList[i].filename+"' title='Training Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+										 }
+										 else{
+											 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].eduList[i].id+")' title='Training Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+										 }
 									 }
 							   }
 							  str+="</tr>";						  	  

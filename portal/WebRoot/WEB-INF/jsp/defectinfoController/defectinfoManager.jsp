@@ -1173,7 +1173,7 @@
 						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
 					</td>
 					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.3.5</font>
+						<font color="#9d9d9d" size=1 face="Arial">V1.3.6</font>
 					</td>
 				</tr>
 			</table>	

@@ -16,10 +16,10 @@
 	    	<table>
 	    		<tr>
 	    			<td width="450px">
-	    				&nbsp;&nbsp;<a href="/portal/edu/download/${file}">${file}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+	    				<font size="2" face="Arial" color="#004779">&nbsp;&nbsp;<a href="/portal/edu/download/${file}">${file}</a> &nbsp;&nbsp;&nbsp;&nbsp;</font>
 	    			</td>
 	    			<td width="200px">
-	    				${times[var.index]}
+	    				<font size="2" face="Arial" color="#004779">${times[var.index]}</font>
 	    			</td>
 	    		</tr>
 	    	</table>

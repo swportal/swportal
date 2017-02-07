@@ -386,8 +386,8 @@
 			        	 }
 			        	 strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='prodType'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].prodType.replace('\'','&#39;')+"'> </td>";
 			        	 strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='chipset'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].chipset.replace('\'','&#39;')+"'> </td>";
-			        	 strLeft+="<td  bordercolor='#DEDEDE' width='110px'  title='"+data[0].caseList[i].model+"'><input type='text' "+disWord+" class='t'   id='model'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:110px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].model.replace('\'','&#39;')+"'> </td>";
-			        	 strLeft+="<td bordercolor='#DEDEDE' width='400px'  height='50px'><div title='"+data[0].caseList[i].description+"'><textarea rows='2'  "+disWord+" class='txt'   id='description'   style='font-size:12px; color:"+fontColor+";  text-align:left; width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].description+" </textarea></div></td>";
+			        	 strLeft+="<td  bordercolor='#DEDEDE' width='110px'  title='"+data[0].caseList[i].model.replace('\'','&#39;')+"'><input type='text' "+disWord+" class='t'   id='model'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:110px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].model.replace('\'','&#39;')+"'> </td>";
+			        	 strLeft+="<td bordercolor='#DEDEDE' width='400px'  height='50px'><div title='"+data[0].caseList[i].description.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='description'   style='font-size:12px; color:"+fontColor+";  text-align:left; width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].description+" </textarea></div></td>";
 			        	 strLeft+="</tr>"; 
 		        		
 						 strRight+="<tr bgcolor='#FFFFFF' bordercolor='#DEDEDE'>";
@@ -419,10 +419,10 @@
 						 	strRight+="<td bordercolor='#DEDEDE' width='90px'><input type='text' "+disWord+" class='t'   id='occurType'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurType+"'> </td>";
 						 }
 						 strRight+="<td bordercolor='#DEDEDE' width='160px'><input type='text' "+disWord+" class='t'   id='version'   style=' word-wrap:break-word;word-break:break-all;font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].version.replace('\'','&#39;')+"'> </td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].rootReason+"'><textarea rows='2'  "+disWord+" class='txt'   id='rootReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].rootReason.replace('\'','&#39;')+" </textarea></div></td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].unknownReason+"'><textarea rows='2'  "+disWord+" class='txt'   id='unknownReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].unknownReason+" </textarea></div></td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureDev+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureDev'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureDev+" </textarea></div></td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureTest+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureTest'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureTest+" </textarea></div></td>";
+						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].rootReason.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='rootReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].rootReason.replace('\'','&#39;')+" </textarea></div></td>";
+						 strRight+="<td bordercolor='#DEDEDE' width='400px'  ><div title='"+data[0].caseList[i].unknownReason.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='unknownReason'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].unknownReason+" </textarea></div></td>";
+						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureDev.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureDev'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100%  '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureDev+" </textarea></div></td>";
+						 strRight+="<td bordercolor='#DEDEDE' width='300px'  ><div title='"+data[0].caseList[i].measureTest.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='measureTest'   style='font-size:12px; color:"+fontColor+";  text-align:left;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].measureTest+" </textarea></div></td>";
 						 if(flag){
 							  	if(data[0].caseList[i].measureType=="SW->SW")
 						  			strRight+="<td bordercolor='#DEDEDE' width='100px'><select id='measureType'  class='t'"+disWord+" style='font-size:12px; color:"+fontColor+"; padding-left:5px; text-align:center;width:100%;border-width: 0px;border-top-style: none;border-right-style: none;border-left-style: none; border-bottom-style: none;height: 15px;overflow:hidden'  onChange='updateCase(this,"+data[0].caseList[i].id+")'><option selected>SW->SW</option><option>HW->SW</option><option>工厂->SW</option><option>Others</option></select></td>";
@@ -459,31 +459,41 @@
 						 strRight+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='checklistUpdate'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].checklistUpdate.replace('\'','&#39;')+"'> </td>";
 						 strRight+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='tcUpdate'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].tcUpdate.replace('\'','&#39;')+"'> </td>";
 						 strRight+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='plmRegister'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].plmRegister.replace('\'','&#39;')+"'> </td>";
-						 if(flag){
-							 if(data[0].caseList[i].confirmy=="Y"){
+						//2017-02-07 wuliying, 区分是否已经存在上传文件
+						 if(flag){ //有编辑权限用户对于已经close的case， 只能查看上传文件， 对于还没close的case， 可以上传文件, 对于已经存在上传文件的case， 图标区分
+							 if(data[0].caseList[i].confirmy=="Y"){   //已经close的case
 								 if(data[0].caseList[i].filename.length==0){
 									 strRight+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
 								 }
-								 else if(data[0].caseList[i].filename.length!=0&&data[0].caseList[i].filename.indexOf(",")==-1){
-								 	 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/case/download/"+data[0].caseList[i].filename+"' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-								 }
-								 else if(data[0].caseList[i].filename.length!=0&&data[0].caseList[i].filename.indexOf(",")!=-1){
-									 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].caseList[i].id+")' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+								 else{  //有上传文件
+									 if(data[0].caseList[i].filename.indexOf(",")==-1){ //只有一个上传文件，可以直接下载
+										 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/case/download/"+data[0].caseList[i].filename+"' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+									 }
+									 else{  //有多个上传文件，打开文件列表
+										 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].caseList[i].id+")' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+									 }
 								 }
 							 }
-							 else{
-							 	strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].caseList[i].id+")'  title='Upload Report'><img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png' width=18px height=18px style='cursor:pointer'/></a></td>";
+							 else{//还没close的case, 可以上传附件
+								 if(data[0].caseList[i].filename.length==0){
+									 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].caseList[i].id+")'  title='Upload Report'><img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png' width=18px height=18px style='cursor:pointer'/></a></td>";
+								 }
+								 else{
+									 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:upload("+data[0].caseList[i].id+")'  title='Upload Report'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px style='cursor:pointer'/></a></td>";
+								 }							 	
 							 }
 						 }
-						 else{
+						 else{ //没有编辑权限的用户， 不能上传文件。 没有文件： 显示空， 有1个文件：直接下载，有 多个文件：打开文件列表
 							 if(data[0].caseList[i].filename.length==0){
 								 strRight+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
 							 }
-							 else if(data[0].caseList[i].filename.length!=0&&data[0].caseList[i].filename.indexOf(",")==-1){
-							 	 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/case/download/"+data[0].caseList[i].filename+"' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-							 }
-							 else if(data[0].caseList[i].filename.length!=0&&data[0].caseList[i].filename.indexOf(",")!=-1){
-								 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].caseList[i].id+")' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+							 else{
+								 if(data[0].caseList[i].filename.indexOf(",")==-1){
+									 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/case/download/"+data[0].caseList[i].filename+"' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+								 }
+								 else{
+									 strRight+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].caseList[i].id+")' title='Failed Case Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+								 }
 							 }
 						 }
 						 strRight+="</tr>";

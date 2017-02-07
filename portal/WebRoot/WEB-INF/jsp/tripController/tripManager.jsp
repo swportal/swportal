@@ -311,17 +311,24 @@
 						  	   str+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='region'   style='font-size:12px;  color:black;  text-align:center;width:80px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].region.replace('\'','&#39;')+"'> </td>";
 						  	   str+="<td bordercolor='#DEDEDE' width='100px'><input type='text' "+disWord+" class='t'   id='department'   style='font-size:12px; color:black;   text-align:center;width:100px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].department.replace('\'','&#39;')+"'> </td>";
 						  	 if(tripFlag){
-						  		 str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png'   width=18px height=18px/></a></td>";
-						  	   }
+						  		if(data[0].tripList[i].filename.length==0){ //2017-02-07 wuliying, 区分是否已经存在上传文件
+						  			str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png'   width=18px height=18px/></a></td>";
+						  		}
+						  		else{
+						  			str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/link.png'   width=15px height=15px/></a></td>";
+						  		}
+  					  	     }
 						  	 else{
 								 if(data[0].tripList[i].filename.length==0){
 									 str+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
 								 }
-								 else if(data[0].tripList[i].filename.length!=0&&data[0].tripList[i].filename.indexOf(",")==-1){
-									 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/trip/download/"+data[0].tripList[i].filename+"' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-								 }
-								 else if(data[0].tripList[i].filename.length!=0&&data[0].tripList[i].filename.indexOf(",")!=-1){
-									 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].tripList[i].id+")' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+								 else{
+									 if(data[0].tripList[i].filename.indexOf(",")==-1){
+										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/trip/download/"+data[0].tripList[i].filename+"' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+									 }
+									 else{
+										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].tripList[i].id+")' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
+									 }
 								 }
 						   }
 						  	   str+="</tr>";
