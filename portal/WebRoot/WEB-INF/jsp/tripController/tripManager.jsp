@@ -10,7 +10,7 @@
    		<title>Business Trip Management</title>
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
      	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
-	    <style> 
+	    <style type="text/css"> 
 		    hr{
 		    	position:relative;
 				bottom: -500px;
@@ -19,10 +19,9 @@
 				TEXT-DECORATION:none
 			}
 	    	#footer{
-	    		  position:absolute;
-	    		 bottom: 0px;
-	    		  margin-left :750px;
-				<%--margin-left :750px;--%>
+	    		 position:absolute;
+	    		 bottom: 40px;
+	    		 margin-left :750px;
 	    	}
 	    	.current-page  {
 	    		font-size:12px;
@@ -79,9 +78,6 @@
 			
 			
 			.textPlace{ position:relative; top:-5px; /*left:5px; right:5px;bottom:5px*/} 
-		</style>
-			
-		<style type="text/css">
 			ul,li{
 				margin:0;
 				padding:0;
@@ -120,7 +116,7 @@
 		<script type="text/javascript">	
 		 var f=0;
 		 var pn=1;
-		 var flag1;
+		 var flag1,flag2;
 		 var orderitm;
 		 var orderk;
 		 function addTrip(){			 	
@@ -141,7 +137,6 @@
 				var obj=document.getElementsByName('isSelect'); 
 				var s1="Select:"; 
 				var ids='';
-				//alert(obj.length);
 				for(var i=0; i<obj.length; i++){ 
 					if(obj[i].checked) ids=ids+obj[i].value+","; //如果选中，将value添加到变量s中 
 				} 	
@@ -153,9 +148,7 @@
 					if(confirm("Are you sure to delete this item?")){
 						$.get("/portal/trip/delTripList?ids="+ids,function(data){
 							   if("success"==data.result){
-								  // alert("Delete Done!");
 								   window.location.reload();
-								   //load(pn,tripFlag);
 							   }
 							   else{
 								   alert("Error!");
@@ -172,9 +165,7 @@
 			 	if(confirm("Are you sure to delete this item?")){
 				   $.get("/portal/trip/delTrip?id="+id,function(data){
 					   if("success"==data.result){
-						  // alert("Delete Done!");
 						   window.location.reload();
-						   //load(pn,tripFlag);
 					   }
 					   else{
 						   alert("Error!");
@@ -188,12 +179,9 @@
 			  function updateTrip(element,id){			
 				 $.getJSON("/portal/trip/updateTrip?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.value,"utf-8"),function(data){
 						   if("success"==data.result){
-							   //alert("aa");
-							  // window.location.reload();
-							  load(pn,flag1,orderitm,orderk);
+							  load(pn,flag1,flag2,orderitm,orderk);
 						   }
 						   else{ 
-							  // alert(data.resultup);
 							   alert("Update Error!");
 						   }
 				 });
@@ -201,32 +189,25 @@
 			  
 			  function sel(obj){
 				  var a = document.getElementsByName('isSelect');
-				  //alert(document.getElementsByName('isSelect').length);
 				  for(var i = 0;i<a.length;i++){
 					  a[i].checked = obj.checked;
 				  }
 			  }
 			  
 			  function changeUrl(element,id){
-				  //alert(element.alt);
-				  //window.open("/trip/changeUrl?id="+id);
 				 var winObj = window.open ("/portal/trip/changeUrl?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.alt), "newwindow", "height=100, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
 				 var loop = setInterval(function() {       
 				        if(winObj.closed) {      
 				            clearInterval(loop);      
-				            //alert('closed');      
 				            window.location.reload();
 				        }  				       
 				    }, 1); 
-				// window.location.reload();
 			  }
 			  function sort(flag,iRow, iCol){
 				  var table=document.getElementById("tableTrip");
-				  //alert(tid);
 				  var ascChar = "▲";
 		          var descChar = "▼";
 		          var rows=table.tHead.rows;		         
-		          //alert(iCol);
 		          for (var i = 0; i < rows.length; i++) {
 						 for(var j=0;j<rows[i].cells.length;j++){//取得第几行下面的td个数，再次循环遍历该行下面的td元素
 							 var th = rows[i].cells[j];					 
@@ -241,14 +222,11 @@
 		          }
 		          var th = rows[iRow].cells[iCol];
 		          if(++f%2==0){
-		        	  //gotoASC(${usersession.hasPrivilegeByName("Business Trip Info.")});
-		        	  //load();
-		        	  load(1,flag,"scheduleStart","DESC");
+		        	  load(1,flag1,flag2,"scheduleStart","DESC");
 		        	  th.innerHTML=th.innerHTML.replace(ascChar, descChar);
 		          }
 		          else{
-		        	  //gotoDESC(${usersession.hasPrivilegeByName("Business Trip Info.")});
-		        	   load(1,flag,"scheduleStart","ASC");
+		        	   load(1,flag1,flag2,"scheduleStart","ASC");
 		        	  th.innerHTML=th.innerHTML.replace(descChar, ascChar);
 		          }
 			  }
@@ -263,7 +241,6 @@
 				 var loop = setInterval(function() {       
 				        if(winObj.closed) {      
 				            clearInterval(loop);      
-				            //alert('closed');      
 				            //window.location.reload(); 2016-11-24 wuliying delete
 				        }      
 				    }, 1); 				 
@@ -274,96 +251,106 @@
 		</script>
 
 		<script type="text/javascript">
-		   function load(cur,tripFlag,orderItem,orderKey){	
-			  pn=cur;
-			  orderitm=orderItem;
-			  orderk=orderKey;
-			  flag1=tripFlag;
-			  var disWord="";
-		   	  if(!tripFlag)
-		   		  disWord="disabled";
-			   var keyword =document.getElementById("selectitem").value;
-			   var curpage="";
-	    	   var totalpage="";
-			  // alert(keyword);
+			function load(cur,tripFlag,delflag,orderItem,orderKey){	
+				pn=cur;
+			  	orderitm=orderItem;
+			  	orderk=orderKey;
+			  	flag1=tripFlag;
+			  	flag2=delflag;
+			  	var disWord="";
+			  	if(tripFlag.toString()=="true")
+					tripFlag=1;
+		   	  	else
+		   			tripFlag=0;
+			  	if(delflag.toString()=="true")
+					delflag=1;
+		   	  	else
+		   			delflag=0;
+		   	  	if(!tripFlag)
+		   			disWord="disabled";
+			   	var keyword =document.getElementById("selectitem").value;
+			   	var curpage="";
+	    	   	var totalpage="";
 			    $.getJSON("/portal/trip/findTripList?keyword="+encodeURIComponent(keyword,"utf-8")+"&orderItem="+orderItem+"&orderKey="+orderKey+"&curpage="+cur+"&rn="+Math.random(),function(data){
-			    	   if(data[0].tripList.length!=0)
-			    	   		document.getElementById("urllink").href = data[0].tripList[0].report;
-			    	   curpage=data[1].curpage;
-	    			   totalpage=data[1].totalpage;
-					   var str="";
-		        	   $.each(data[0].tripList,function(i){
-							   str+="<tr bordercolor='#DEDEDE' bgcolor='#ffffff'>";
-							   str+="<input type='hidden' name='id' value=id>";
-					  		   if(tripFlag)
-						  		   str+="<td align='center' bordercolor='#DEDEDE'><input type='checkbox' name='isSelect' value='"+data[0].tripList[i].id+"' ></input></td>";
-						  	   else
-						  		   str+="<td align='center' bordercolor='#DEDEDE'  style='font-size:12px; color:#004779; '>"+(i+1+(pn-1)*18)+"</td>"; 
+			    	if(data[0].tripList.length!=0)
+			    		document.getElementById("urllink").href = data[0].tripList[0].report;
+		    	   	curpage=data[1].curpage;
+    			   	totalpage=data[1].totalpage;
+				   	var str="";
+        	   		$.each(data[0].tripList,function(i){
+						str+="<tr bordercolor='#DEDEDE' bgcolor='#ffffff'>";
+					   	str+="<input type='hidden' name='id' value=id>";
+			  		   	if(delflag)
+				  			str+="<td align='center' bordercolor='#DEDEDE'><input type='checkbox' name='isSelect' value='"+data[0].tripList[i].id+"' ></input></td>";
+				  	   	else
+				  			str+="<td align='center' bordercolor='#DEDEDE'  style='font-size:12px; color:#004779; '>"+(i+1+(pn-1)*18)+"</td>"; 
 
-						  	   str+="<td bordercolor='#DEDEDE' width='120px'><input type='text' "+disWord+" class='t'   id='name'   style='font-size:12px; color:black; text-align:center;width:120px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].name.replace('\'','&#39;')+"'> </td>";	
-						  	   str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='part'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].part.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='subPart'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].subPart.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='400px'><input type='text' "+disWord+" class='t'   id='purpose'   style='font-size:12px;  color:black;  text-align:center;width:400px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].purpose.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='scheduleStart'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].scheduleStart.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='scheduleEnd'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].scheduleEnd.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='50px'><input type='text' "+disWord+" class='t'   id='duration'   style='font-size:12px;  color:black;  text-align:center;width:50px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].duration.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='destination'   style='font-size:12px; color:black;   text-align:center;width:80px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].destination.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='region'   style='font-size:12px;  color:black;  text-align:center;width:80px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].region.replace('\'','&#39;')+"'> </td>";
-						  	   str+="<td bordercolor='#DEDEDE' width='100px'><input type='text' "+disWord+" class='t'   id='department'   style='font-size:12px; color:black;   text-align:center;width:100px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].department.replace('\'','&#39;')+"'> </td>";
-						  	 if(tripFlag){
-						  		if(data[0].tripList[i].filename.length==0){ //2017-02-07 wuliying, 区分是否已经存在上传文件
-						  			str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png'   width=18px height=18px/></a></td>";
-						  		}
-						  		else{
-						  			str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/link.png'   width=15px height=15px/></a></td>";
-						  		}
-  					  	     }
-						  	 else{
-								 if(data[0].tripList[i].filename.length==0){
-									 str+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='120px'><input type='text' "+disWord+" class='t'   id='name'   style='font-size:12px; color:black; text-align:center;width:120px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].name.replace('\'','&#39;')+"'> </td>";	
+				  	   	str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='part'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].part.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='subPart'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].subPart.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='400px'><input type='text' "+disWord+" class='t'   id='purpose'   style='font-size:12px;  color:black;  text-align:center;width:400px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].purpose.replace('\'','&#39;')+"'> </td>";
+				  	  	str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='scheduleStart'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].scheduleStart.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='110px'><input type='text' "+disWord+" class='t'   id='scheduleEnd'   style='font-size:12px;  color:black;  text-align:center;width:110px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].scheduleEnd.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='50px'><input type='text' "+disWord+" class='t'   id='duration'   style='font-size:12px;  color:black;  text-align:center;width:50px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].duration.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='destination'   style='font-size:12px; color:black;   text-align:center;width:80px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].destination.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='80px'><input type='text' "+disWord+" class='t'   id='region'   style='font-size:12px;  color:black;  text-align:center;width:80px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].region.replace('\'','&#39;')+"'> </td>";
+				  	   	str+="<td bordercolor='#DEDEDE' width='100px'><input type='text' "+disWord+" class='t'   id='department'   style='font-size:12px; color:black;   text-align:center;width:100px'  onChange='updateTrip(this,"+data[0].tripList[i].id+")'  value='"+data[0].tripList[i].department.replace('\'','&#39;')+"'> </td>";
+				  	 	if(tripFlag){
+				  			if(data[0].tripList[i].filename.length==0){ //2017-02-07 wuliying, 区分是否已经存在上传文件
+				  				str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/edit2.png'   width=18px height=18px/></a></td>";
+				  			}
+					  		else{
+					  			str+="<td align='center' bordercolor='#DEDEDE' width='60px'><a href='javascript:upload("+data[0].tripList[i].id+")' title='Upload Report'> <img src='${pageContext.request.contextPath}/FlatUI/img/link.png'   width=15px height=15px/></a></td>";
+					  		}
+					  	   	}
+				  	 	else{
+						 	if(data[0].tripList[i].filename.length==0){
+								 str+="<td align='center' bordercolor='#DEDEDE' width='60px'></td>";
+							 }
+						 	else{
+							 	if(data[0].tripList[i].filename.indexOf(",")==-1){
+									 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/trip/download/"+data[0].tripList[i].filename+"' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
 								 }
-								 else{
-									 if(data[0].tripList[i].filename.indexOf(",")==-1){
-										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='/portal/trip/download/"+data[0].tripList[i].filename+"' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-									 }
-									 else{
-										 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].tripList[i].id+")' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
-									 }
+							 	else{
+									 str+="<td align='center' width='60px' bordercolor='#DEDEDE'><a href='javascript:getFileList("+data[0].tripList[i].id+")' title='Business Trip Materials Download'><img src='${pageContext.request.contextPath}/FlatUI/img/link.png' width=15px height=15px/></a></td>";
 								 }
-						   }
-						  	   str+="</tr>";
-						   });
+							}
+				   		}					
+				  		str+="</tr>";
+					});  //$.each
 						
-					 $("#tableTrip tbody").html("");
-					 $("#tableTrip tbody").html(str);
-					 var firstpagehtml; 
-					 var prevpagehtml; 
-					 var nextpagehtml;
-					 var lastpagehtml;
-					 if((curpage-0)<=1){
-						 firstpagehtml="<a><<</a>&nbsp;&nbsp;&nbsp;";
-					 prevpagehtml = "<a><</a>";
-					 }else{
-					 	firstpagehtml="<a onclick='load(1"+",\""+tripFlag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
-					 	prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+tripFlag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><</a>";
-					 }
-					 if(curpage < totalpage){
-					 	nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+tripFlag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
-					 	lastpagehtml="<a onclick='load("+(totalpage)+",\""+tripFlag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
-					 }else{
-					 	nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
+				 	$("#tableTrip tbody").html("");
+				 	$("#tableTrip tbody").html(str);
+					var firstpagehtml; 
+					var prevpagehtml; 
+					var nextpagehtml;
+					var lastpagehtml;
+					if((curpage-0)<=1){
+						firstpagehtml="<a><<</a>&nbsp;&nbsp;&nbsp;";
+					 	prevpagehtml = "<a><</a>";
+					}
+					else{
+					 	firstpagehtml="<a onclick='load(1"+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
+					 	prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><</a>";
+					}
+					if(curpage < totalpage){
+						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+					 	lastpagehtml="<a onclick='load("+(totalpage)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
+					}
+					else{
+						nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
 					 	lastpagehtml = "<a>>></a>";
-					 }
-					 var html2="";		
-					 html2 = html2 + "<table><tr  bgcolor='white' bordercolor='white'><td height='60px'>"+firstpagehtml+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+curpage+"&nbsp;/&nbsp;"+totalpage+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+lastpagehtml+"</td></tr>";
-					 html2 = html2+"</table>";
-				     document.getElementById("footer").innerHTML=html2;
-		 		});
-		   }
+					}
+					var html2="";		
+					html2 = html2 + "<table><tr  bgcolor='white' bordercolor='white'><td height='60px'>"+firstpagehtml+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+curpage+"&nbsp;/&nbsp;"+totalpage+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+lastpagehtml+"</td></tr>";
+					html2 = html2+"</table>";
+				    document.getElementById("footer").innerHTML=html2;
+		 		}); //$.getJSON
+			}
 		</script>
 		<script type="text/javascript">
 	  		function ExportToExcel() {
-	  	        var elTable = document.getElementById("tableServer"); //table1改成你的tableID
+	  	        var elTable = document.getElementById("tableServer"); 
 	  	        var oRangeRef = document.body.createTextRange();
 	  	        oRangeRef.moveToElementText(elTable);
 	  	        oRangeRef.execCommand("Copy");
@@ -378,20 +365,15 @@
 	  	        appExcel = null;
 	  	    }
 		</script>  			
-
   	</head> 
 	
-  	<body onload="load(1,'${usersession.hasPrivilegeByName('Trip Update')}','id','DESC')">
+  	<body onload="load(1,'${usersession.hasPrivilegeByName('Trip Update')}','${usersession.hasPrivilegeByName('Trip Delete')}','id','DESC')">
  
-  
-  
   	<div id="navtop">
 		<ul class="navtop-skin">
 			<li style="padding-left:20">
-					 
 					<font color="#2c3e50"><strong><a target="_blank" href="#" id="urllink" title="GO TO MOSAIC">| Business Trip Info. |</a></strong></font>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" placeholder="Search" name="selectitem" id="selectitem" title="Input Name; Part;Destination"  oninput="javascript:load(1,'${usersession.hasPrivilegeByName('Trip Update')}','id','DESC')"  style="color:#95a5a6; padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
-					
+					<input type="text" placeholder="Search" name="selectitem" id="selectitem" title="Input Name; Part;Destination"  oninput="javascript:load(1,'${usersession.hasPrivilegeByName('Trip Update')}','${usersession.hasPrivilegeByName('Trip Delete')}','id','DESC')"  style="color:#95a5a6; padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
 	        </li>
 	        <li style="padding-left:850">
 					<c:if test="${usersession.hasPrivilegeByName('Trip Add')}">
@@ -404,8 +386,6 @@
 		</ul>
 		<ul class="navtop-right">
 			<li >
-				<%--<input id="export" type="button" value="Export" onclick="javascript:ExportToExcel()" style="color:#2c3e50;font-size:12px; font-weight:bold; border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  --%>
-				<%--<img src="${pageContext.request.contextPath}/style/images/excel3.png"  onclick="javascript:ExportToExcel()"  width=18px height=18px style="padding-top:10px"/>--%>
 				<a href="/portal/trip/importExec" title="Data Download">
 					<img src="${pageContext.request.contextPath}/style/images/excel6.jpg"   width=20px height=20px style="padding-top:15px"/>
 				</a>
@@ -413,47 +393,29 @@
 	    </ul>
 	</div>
 	<br/>
-	<!--
-	<div id="footer"></div>
-	
-	<div>
-		<a href="javascript:gotoASC(${usersession.hasPrivilegeByName("Business Trip Info.")})"><font size="1" color="#2c3e50" style="z-index:1;position:relative; top:47px; left:1010px"/>▲</font></a>
-		<a href="javascript:gotoDESC(${usersession.hasPrivilegeByName("Business Trip Info.")})"><font size="1" color="#2c3e50" style="z-index:1;position:relative; top:58px; left:995px"/>▼</font></a>
-	</div>
-	<div id="footer">
-	
-				<a id="firstPage"   href="javascript:void(0);" style="text-decoration:none;"> << </a>&nbsp;
-				<a id="prev" href="javascript:void(0);" style="text-decoration:none;"> < </a>&nbsp;
-					<span class="current-page"></span>&nbsp;/&nbsp;<span class="page-num"   ></span>&nbsp;&nbsp;
-				 
-				<a id="next" href="javascript:void(0);" style="text-decoration:none;"> > </a>&nbsp;
-				<a id="lastPage" href="javascript:void(0);" style="text-decoration:none;"> >> </a>		
-	</div>-->
-<%--	<hr style="height:2px;border:none;border-top:4px ridge gray;" /> --%>
 	<center>
-<%--		<div style="position:relative; bottom:60px">--%>
 	  	<form action="">
 	    		<table id = "tableTrip"  bgColor='#FFFAF0' cellspacing='0px' border='2px'  cellpadding='0px'   style=' border-collapse:collapse'>
-	    			<thead><tr bgcolor='#d2e9ff' bordercolor='#DEDEDE'>
-	    				<c:choose>  
-							<c:when test="${usersession.hasPrivilegeByName('Trip Update')}">   
-								<td align="center" width="50px" rowspan="2"><input type="checkbox" name="allSelect" onclick="sel(this)"></input></td>
-							</c:when>  
-							<c:otherwise>   
-								<td align="center" width="50px"  rowspan="2"><font  size=2 style="font-weight:bold;">No</font></td>
-							</c:otherwise> 
-						</c:choose> 
+	    			<thead>
+	    				<tr bgcolor='#d2e9ff' bordercolor='#DEDEDE'>
+	    					<c:choose>  
+								<c:when test="${usersession.hasPrivilegeByName('Trip Update')}">   
+									<td align="center" width="50px" rowspan="2"><input type="checkbox" name="allSelect" onclick="sel(this)"></input></td>
+								</c:when>  
+								<c:otherwise>   
+									<td align="center" width="50px"  rowspan="2"><font  size=2 style="font-weight:bold;">No</font></td>
+								</c:otherwise> 
+							</c:choose> 
 						  
-			        	 <td align="center" width="140px"  rowspan="2"><font size=2  style="font-weight:bold;">Name</font></td>
-			        	   <td align="center" width="250px"  rowspan="2" colspan="2"><font  size=2 style="font-weight:bold;">Part</font></td>
-			        	   <td align="center" width="420px"  rowspan="2"><font  size=2 style="font-weight:bold;">Purpose</font></td>
+			        	 	<td align="center" width="140px"  rowspan="2"><font size=2  style="font-weight:bold;">Name</font></td>
+			        	   	<td align="center" width="250px"  rowspan="2" colspan="2"><font  size=2 style="font-weight:bold;">Part</font></td>
+			        	   	<td align="center" width="420px"  rowspan="2"><font  size=2 style="font-weight:bold;">Purpose</font></td>
 			        	  
-			        	   <td align="center" width="300px"  height="25px" colspan="3"><font size=2  style="font-weight:bold;">Schedule</font></td>
-			        	   <td align="center" width="300px" height="25px"  colspan="3"><font  size=2 style="font-weight:bold;">Destination</font></td>
-			        	   <td align="center" width="60px"   rowspan="2"><font  size=2 style="font-weight:bold;">Report</font></td>
-<%--			        	   <td align="center" width="60px"   rowspan="2"><font  size=2 style="font-weight:bold;">Ref.</font></td>--%>
-			        	   </tr>
-			        	   <tr bgcolor="#d2e9ff" bordercolor="#DEDEDE" align="CENTER" valign="MIDDLE" >
+			        	   	<td align="center" width="300px"  height="25px" colspan="3"><font size=2  style="font-weight:bold;">Schedule</font></td>
+			        	  	<td align="center" width="300px" height="25px"  colspan="3"><font  size=2 style="font-weight:bold;">Destination</font></td>
+			        	  	<td align="center" width="60px"   rowspan="2"><font  size=2 style="font-weight:bold;">Report</font></td>
+			        	</tr>
+			        	<tr bgcolor="#d2e9ff" bordercolor="#DEDEDE" align="CENTER" valign="MIDDLE" >
 			        	   <td align="center" width="110px"  height="25px" onClick="javascript:sort('${usersession.hasPrivilegeByName('Trip Update')}',1,0)"><font  size=2 style="font-weight:bold;">Start&nbsp; <font size='1' color='#2c3e50'>▼</font></font></td>
 			        	   <td align="center" width="110px" height="25px"><font  size=2 style="font-weight:bold;">End</font></td>
 			        	   <td align="center" width="54px" height="25px"><font  size=2 style="font-weight:bold;">Days</font></td>
@@ -462,8 +424,8 @@
 			        	   <td align="center" width="80px" height="25px" ><font  size=2 style="font-weight:bold;">Region</font></td>
 			        	   <td align="center" width="100px" height="25px" ><font  size=2 style="font-weight:bold;">Dept.</font></td>
 			        	</tr> 
-			        	</thead>
-			        	<tbody></tbody>
+			        </thead>
+			        <tbody></tbody>
 	    		</table>
 		</form>
 		<div id="footer"></div>

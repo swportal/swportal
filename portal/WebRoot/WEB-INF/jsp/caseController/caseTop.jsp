@@ -43,9 +43,6 @@
 	 			padding-left:5px; 
 	 			height:30px; 
 	 			line-height:30px;
-	 			/*font-size:16px;*/
-	 			/*font-color: #004779;*/
-	 			
 	 		} 
 			input.s {
 				border:1px solid #369;
@@ -63,10 +60,7 @@
 	 			display:-webkit-box; 
 	 			-webkit-box-orient:vertical; 
 	 			-webkit-line-clamp:2;
-	 			scrollbar-arrow-color:#ffffff;
-<%--	 			overflow-y:hidden;--%>
-	 			
-	 			
+	 			scrollbar-arrow-color:#ffffff;	 			
 	 		} 
 	 		#MainArea form{
 				padding-left: 0px;
@@ -90,10 +84,7 @@
 			}
 			
 			
-			.textPlace{ position:relative; top:-5px; /*left:5px; right:5px;bottom:5px*/} 
-		</style>
-			
-		<style type="text/css">
+			.textPlace{ position:relative; top:-5px;} 
 			ul,li{
 				margin:0;
 				padding:0;
@@ -128,49 +119,45 @@
 			select option {font-size:12px; font-family:Arial}
 		</style>
 		<script type="text/javascript">	
-		var f=0;
-		var c=0;
-		var pn=1;
-		var flag1;
-		var flag2;
-		var orderitm;
-		var orderk;
-		//var chicolor;
-		 function sort(caseFlag,conFlag, iRow, iCol){
-			  var table=document.getElementById("topRight");
-			  //alert(tid);
-			  var ascChar = "▲";
-	          var descChar = "▼";
-	          var rows=table.tHead.rows;	
-	          
-	          //alert(iCol);
-	          for (var i = 0; i < rows.length; i++) {
-					 for(var j=0;j<rows[i].cells.length;j++){//取得第几行下面的td个数，再次循环遍历该行下面的td元素
-						 var th = rows[i].cells[j];					 
-						 var thText= th.innerHTML.replace(ascChar, "").replace(descChar, "");
-						 if(i==iRow&&j==iCol){	
-							
-						 }
-						 else{
-							  th.innerHTML=thText;
-						 }					
+			var f=0;
+			var c=0;
+			var pn=1;
+			var flag1;
+			var flag2;
+			var orderitm;
+			var orderk;
+			//var chicolor;
+			function sort(caseFlag,conFlag, iRow, iCol){
+				var table=document.getElementById("topRight");
+			  	//alert(tid);
+			  	var ascChar = "▲";
+	          	var descChar = "▼";
+	          	var rows=table.tHead.rows;	
+	          	for (var i = 0; i < rows.length; i++) {
+					for(var j=0;j<rows[i].cells.length;j++){//取得第几行下面的td个数，再次循环遍历该行下面的td元素
+						var th = rows[i].cells[j];					 
+						var thText= th.innerHTML.replace(ascChar, "").replace(descChar, "");
+						if(i==iRow&&j==iCol){	
+						}
+						else{
+							th.innerHTML=thText;
+						}					
 					}
-	          }
-	          var th = rows[iRow].cells[iCol];
-	          if(++f%2==0){
-	        	  //gotoASC(${usersession.hasPrivilegeByName("Business Trip Info.")});
-	        	  //load();
-	        	   load(1,flag1,flag2,"occurTime","DESC");
-	        	  th.innerHTML=th.innerHTML.replace(ascChar, descChar);
-	        	 
-	          }
-	          else{
-	        	  //gotoDESC(${usersession.hasPrivilegeByName("Business Trip Info.")});
-	        	  load(1,flag1,flag2,"occurTime","ASC");
-	        	  th.innerHTML=th.innerHTML.replace(descChar, ascChar);
-	          }
-		  }
-		 function addCase(){			 	
+	          	}
+	          	var th = rows[iRow].cells[iCol];
+	         	if(++f%2==0){
+	        		//gotoASC(${usersession.hasPrivilegeByName("Business Trip Info.")});
+	        	  	//load();
+	        	   	load(1,flag1,flag2,flag3,"occurTime","DESC");
+	        	  	th.innerHTML=th.innerHTML.replace(ascChar, descChar);
+	          	}
+	         	else{
+	        		//gotoDESC(${usersession.hasPrivilegeByName("Business Trip Info.")});
+	        	  	load(1,flag1,flag2,flag3,"occurTime","ASC");
+	        	  	th.innerHTML=th.innerHTML.replace(descChar, ascChar);
+	          	}
+		  	}
+		 	function addCase(){			 	
 			   $.getJSON("/portal/case/addCase?adr="+Math.random(),function(data){
 				   if("success"==data.result){					  
 					   window.location.reload();
@@ -182,9 +169,8 @@
 					   window.location.reload();
 				   }
 			   });	 
-		   
-		  }
-		  function delCase(){			
+			}
+		  	function delCase(){			
 				var obj=document.getElementsByName('isSelect'); 
 				var s1="Select:"; 
 				var ids='';
@@ -195,7 +181,6 @@
 				if(ids==''){
 					alert("Please choose one!");
 				}
-					
 				else{	
 					if(confirm("Are you sure to delete this item?")){
 						$.get("/portal/case/delCaseList?ids="+ids,function(data){
@@ -216,120 +201,88 @@
 			} 
 		
 			
-			  function updateCase(element,id){			
-				 $.getJSON("/portal/case/updateCase?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.value,"utf-8"),function(data){
-						   if("success"==data.result){
-							   //alert("aa");
-							  // window.location.reload();
-							  //alert(pn);
-							  load(pn,flag1,flag2,orderitm,orderk);
-						   }
-						   else{ 
-							  // alert(data.resultup);
-							   alert("Update Error!");
-						   }
-				 });
-			   }
-			  
-			  function confirmCase(element,id){			
-					 $.getJSON("/portal/case/confirmCase?id="+id+"&item="+element.id,function(data){
-							   if("success"==data.result){
-								   //alert("aa");
-								  // alert(pn);
-								 load(pn,flag1,flag2,orderitm,orderk);
-								  //if(element.name=="gray"){
-									 // element.src="<%=request.getContextPath()%>/style/images/chilun.png";
-									 // element.name="green";
-									 //alert("gray");
-								  //}
-								 // if(element.name=="green"){
-									 // element.src="<%=request.getContextPath()%>/style/images/chilun_grey.png";
-									  //element.name="gray";
-								  	 // alert("green");
-								 // }
-								  //load(pn,flag);
-							   }
-							   else{ 
-								   alert("Update Error!");
-							   }
-					 });
-			  }
-			  
-			  function sel(obj){
-				  var a = document.getElementsByName('isSelect');
-				  //alert(document.getElementsByName('isSelect').length);
-				  for(var i = 0;i<a.length;i++){
-					  a[i].checked = obj.checked;
-				  }
-			  }
-			  
-			  function changeUrl(item,value,id){
-				  /*url=encodeURI(encodeURI(value));//转码两次，很关键
-				  url = url.replace(/\+/g,"+");
-				  url = url.replace(/\&/g,"&");
-				  url = url.replace(/\#/g,"#");*/
-				  //alert(item);
-				 var winObj = window.open ("/portal/case/changeUrl?id="+id+"&item="+item+"&value="+encodeURIComponent(value), "newwindow", "height=100, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
-				 var loop = setInterval(function() {       
-				        if(winObj.closed) {      
-				            clearInterval(loop);      
-				            //alert('closed');      
-				            window.location.reload();
-				        }      
-				    }, 1); 				 
-			  }
-			  
-			  function upload(id){
-				  /*url=encodeURI(encodeURI(value));//转码两次，很关键
-				  url = url.replace(/\+/g,"+");
-				  url = url.replace(/\&/g,"&");
-				  url = url.replace(/\#/g,"#");*/
-				  //alert(item);
-				 var winObj = window.open ("/portal/case/toUpload?id="+id, "newwindow", "height=500, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
-				 var loop = setInterval(function() {       
-				        if(winObj.closed) {      
-				            clearInterval(loop);      
-				            //alert('closed');      
-				            //window.location.reload(); 2016-11-23 wuliying delete
-				        }      
-				    }, 1); 				 
-			  }
-			  
-			  function getFileList(id){
-				  var winObj = window.open ("/portal/case/getFileList?id="+id, "newwindow", "height=500, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
-			  }
-			  
-		</script>
-		<script>  
-			function syncscroll(obj)  
-			{  
-			 //y.innerHTML = obj.scrollTop;  
-			 //x.innerHTML = obj.scrollLeft;  
-			 scroll1.children[0].style.position = "relative";  
-			 scroll2.children[0].style.position = "relative";  
-			 scroll1.children[0].style.left = "-"+obj.scrollLeft;  
-			 scroll2.children[0].style.top =  "-"+obj.scrollTop;    
-			}  
-			function click(){
-				alert(1);
+			function updateCase(element,id){			
+				$.getJSON("/portal/case/updateCase?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.value,"utf-8"),function(data){
+					if("success"==data.result){
+						//alert("aa");
+						// window.location.reload();
+						//alert(pn);
+						load(pn,flag1,flag2,flag3,orderitm,orderk);
+					}
+					else{ 
+						 alert("Update Error!");
+				   	}
+				});
 			}
+			  
+			function confirmCase(element,id){			
+				$.getJSON("/portal/case/confirmCase?id="+id+"&item="+element.id,function(data){
+					if("success"==data.result){
+				 		load(pn,flag1,flag2,flag3,orderitm,orderk);
+					}
+					else{ 
+						alert("Update Error!");
+					}
+				});
+			}
+			  
+			function sel(obj){
+				var a = document.getElementsByName('isSelect');
+				for(var i = 0;i<a.length;i++){
+					a[i].checked = obj.checked;
+				 }
+			}
+			  
+			function changeUrl(item,value,id){
+				var winObj = window.open ("/portal/case/changeUrl?id="+id+"&item="+item+"&value="+encodeURIComponent(value), "newwindow", "height=100, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
+				var loop = setInterval(function() {       
+					if(winObj.closed) {      
+						clearInterval(loop);      
+			            window.location.reload();
+			        }      
+			    }, 1); 				 
+			}
+			  
+			function upload(id){
+				var winObj = window.open ("/portal/case/toUpload?id="+id, "newwindow", "height=500, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
+				var loop = setInterval(function() {       
+					if(winObj.closed) {      
+						clearInterval(loop);      
+			        }      
+			    }, 1); 				 
+			}
+			  
+			function getFileList(id){
+				var winObj = window.open ("/portal/case/getFileList?id="+id, "newwindow", "height=500, width=800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=1100");
+			}
+			  
+			function syncscroll(obj){  
+				 //y.innerHTML = obj.scrollTop;  
+				 //x.innerHTML = obj.scrollLeft;  
+				 scroll1.children[0].style.position = "relative";  
+				 scroll2.children[0].style.position = "relative";  
+				 scroll1.children[0].style.left = "-"+obj.scrollLeft;  
+				 scroll2.children[0].style.top =  "-"+obj.scrollTop;    
+			}  
 		</script> 
 		
 		<script>
-			function load(cur,flag,conflag,orderItem,orderKey){	
-				//alert(conflag);
-				//alert("a");
+			function load(cur,flag,conflag,delflag,orderItem,orderKey){	
 				pn=cur;
 				orderitm=orderItem;
 				orderk=orderKey;
 				flag1=flag;  //Edit priority
 				flag2=conflag;  //Confirm priority
-				//alert(pn);
+				flag3=delflag; //delete priority wuliying add ---2017/02/10
 				var now = new Date();
 				var curDate=now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate();
-				//alert(curDate);
 				var keyword =document.getElementById("selectitem").value;
 				var disWord="";
+				//wuliying add delete flag ---2017/02/10
+				if(delflag.toString()=="true")
+					delflag=1;
+			   	else
+			   		delflag=0;
 				var fontColor="";
 				var curpage="";
 		    	var totalpage="";
@@ -341,64 +294,57 @@
 	        		strLeft="";
 	        		strRight="";
 	        		
-					 $.each(data[0].caseList,function(i){	
-						// alert(flag);
-						 if(data[0].caseList[i].confirmy=="Y") {
-							 disWord="disabled";
-							 fontColor="gray";
-						 }
-						 else{
-							 fontColor="black";
-							 if(flag){
-						   		  disWord="";
-							 }
-							 else{
-								 disWord="disabled";
-							 }
-						 } 
-						 //alert(disWord);
-						 //alert(flag);
-						// alert(disWord);
-						 strLeft+="<tr bgcolor='#ffffff'  bordercolor='#DEDEDE'>";
-						 if(flag){
-							 if(data[0].caseList[i].confirmy=="Y")
-								 strLeft+="<td align='center' width='50px' height='50px' bordercolor='#DEDEDE'><input type='checkbox' disabled='disabled' name='isSelect' value='"+data[0].caseList[i].id+"' ></input></td>";
-							 else
-								 strLeft+="<td align='center' width='50px' height='50px' bordercolor='#DEDEDE'><input type='checkbox' name='isSelect' value='"+data[0].caseList[i].id+"' ></input></td>";
-						 }
+					$.each(data[0].caseList,function(i){	
+						if(data[0].caseList[i].confirmy=="Y") {
+							disWord="disabled";
+							fontColor="gray";
+						}
+						else{
+							fontColor="black";
+							if(flag){
+						   		disWord="";
+							}
+							else{
+								disWord="disabled";
+							}
+						} 
+						strLeft+="<tr bgcolor='#ffffff'  bordercolor='#DEDEDE'>";
+						if(delflag){
+							if(data[0].caseList[i].confirmy=="Y")
+								strLeft+="<td align='center' width='50px' height='50px' bordercolor='#DEDEDE'><input type='checkbox' disabled='disabled' name='isSelect' value='"+data[0].caseList[i].id+"' ></input></td>";
+							else
+								strLeft+="<td align='center' width='50px' height='50px' bordercolor='#DEDEDE'><input type='checkbox' name='isSelect' value='"+data[0].caseList[i].id+"' ></input></td>";
+						}
 						else
 			        		strLeft+="<td align='center'  width='50px' height='50px'><font style='font-size:12px; color:#004779;'>"+(i+1+(pn-1)*7)+"</font></td>";
-			        	 var con=conflag.toString();
-			        		//alert(con);
-			        	 if(con=="true"){
-			        		 //alert(conflag);
-				        	 if(data[0].caseList[i].confirmy=="Y")
-				        	 	strLeft+="<td align='center' width='50px' ><img name='gray' title='Complete' src='<%=request.getContextPath()%>/style/images/chilun_grey.png' width='18' height='18' id='confirmy' onClick='confirmCase(this,"+data[0].caseList[i].id+")'/></td>";	
-				        	 else
-				        		 strLeft+="<td align='center'  width='50px' ><img  name='green' title='Ongoing' src='<%=request.getContextPath()%>/style/images/chilun.png' width='18' height='18' id='confirmy' onClick='confirmCase(this,"+data[0].caseList[i].id+")'/></td>";
-				         }
-				         else{
-				        	 
-				        	 if(data[0].caseList[i].confirmy=="Y")
-						    	 strLeft+="<td align='center'  width='50px' > <img  src='<%=request.getContextPath()%>/style/images/chilun_grey.png' width='18' height='18'/></td>";	
-						     else
-						       	 strLeft+="<td align='center'  width='50px' > <img  src='<%=request.getContextPath()%>/style/images/chilun.png' width='18' height='18'/></td>";
-			        	 }
-			        	 strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='prodType'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].prodType.replace('\'','&#39;')+"'> </td>";
-			        	 strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='chipset'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].chipset.replace('\'','&#39;')+"'> </td>";
-			        	 strLeft+="<td  bordercolor='#DEDEDE' width='110px'  title='"+data[0].caseList[i].model.replace('\'','&#39;')+"'><input type='text' "+disWord+" class='t'   id='model'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:110px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].model.replace('\'','&#39;')+"'> </td>";
-			        	 strLeft+="<td bordercolor='#DEDEDE' width='400px'  height='50px'><div title='"+data[0].caseList[i].description.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='description'   style='font-size:12px; color:"+fontColor+";  text-align:left; width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].description+" </textarea></div></td>";
-			        	 strLeft+="</tr>"; 
+			        	var con=conflag.toString();
+			        	if(con=="true"){
+				        	if(data[0].caseList[i].confirmy=="Y")
+				        		strLeft+="<td align='center' width='50px' ><img name='gray' title='Complete' src='<%=request.getContextPath()%>/style/images/chilun_grey.png' width='18' height='18' id='confirmy' onClick='confirmCase(this,"+data[0].caseList[i].id+")'/></td>";	
+				        	else
+				        		strLeft+="<td align='center'  width='50px' ><img  name='green' title='Ongoing' src='<%=request.getContextPath()%>/style/images/chilun.png' width='18' height='18' id='confirmy' onClick='confirmCase(this,"+data[0].caseList[i].id+")'/></td>";
+				       	}
+				        else{
+		        	 		if(data[0].caseList[i].confirmy=="Y")
+						    	strLeft+="<td align='center'  width='50px' > <img  src='<%=request.getContextPath()%>/style/images/chilun_grey.png' width='18' height='18'/></td>";	
+						    else
+						     	strLeft+="<td align='center'  width='50px' > <img  src='<%=request.getContextPath()%>/style/images/chilun.png' width='18' height='18'/></td>";
+			        	}
+			        	strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='prodType'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].prodType.replace('\'','&#39;')+"'> </td>";
+			        	strLeft+="<td bordercolor='#DEDEDE' width='70px' ><input type='text' "+disWord+" class='t'   id='chipset'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:70px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].chipset.replace('\'','&#39;')+"'> </td>";
+			        	strLeft+="<td  bordercolor='#DEDEDE' width='110px'  title='"+data[0].caseList[i].model.replace('\'','&#39;')+"'><input type='text' "+disWord+" class='t'   id='model'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:110px'  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].model.replace('\'','&#39;')+"'> </td>";
+			        	strLeft+="<td bordercolor='#DEDEDE' width='400px'  height='50px'><div title='"+data[0].caseList[i].description.replace('\'','&#39;')+"'><textarea rows='2'  "+disWord+" class='txt'   id='description'   style='font-size:12px; color:"+fontColor+";  text-align:left; width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")' >"+data[0].caseList[i].description+" </textarea></div></td>";
+			        	strLeft+="</tr>"; 
 		        		
-						 strRight+="<tr bgcolor='#FFFFFF' bordercolor='#DEDEDE'>";
-						 strRight+="<td bordercolor='#DEDEDE' width='90px'  height='50px'><input type='text' "+disWord+" class='t'   id='occurTime'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurTime.replace('\'','&#39;')+"'> </td>";
-						 strRight+="<td bordercolor='#DEDEDE' width='90px'><input type='text' "+disWord+" class='t'   id='occurSite'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurSite.replace('\'','&#39;')+"'> </td>";
-						 if(flag){
+						strRight+="<tr bgcolor='#FFFFFF' bordercolor='#DEDEDE'>";
+						strRight+="<td bordercolor='#DEDEDE' width='90px'  height='50px'><input type='text' "+disWord+" class='t'   id='occurTime'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurTime.replace('\'','&#39;')+"'> </td>";
+						strRight+="<td bordercolor='#DEDEDE' width='90px'><input type='text' "+disWord+" class='t'   id='occurSite'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurSite.replace('\'','&#39;')+"'> </td>";
+						if(flag){
 					  		if(data[0].caseList[i].occurPhase=="MP")
 					  			strRight+="<td bordercolor='#DEDEDE' width='90px'><select id='occurPhase'  class='t'"+disWord+" style='font-size:12px; color:"+fontColor+"; padding-left:5px; text-align:center;width:100%;border-width: 0px;border-top-style: none;border-right-style: none;border-left-style: none; border-bottom-style: none;height: 15px;overflow:hidden'  onChange='updateCase(this,"+data[0].caseList[i].id+")'><option selected>MP</option><option>市场</option></select></td>";
-					  		 if(data[0].caseList[i].occurPhase=="市场")
+					  		if(data[0].caseList[i].occurPhase=="市场")
 					  			strRight+="<td bordercolor='#DEDEDE'width='90px'><select id='occurPhase'  class='t'"+disWord+" style='font-size:12px; color:"+fontColor+"; padding-left:5px; text-align:center;width:100%;border-width: 0px;border-top-style: none;border-right-style: none;border-left-style: none; border-bottom-style: none;height: 15px;overflow:hidden'  onChange='updateCase(this,"+data[0].caseList[i].id+")'><option selected>市场</option><option>MP</option></select></td>";
-						  	 if(data[0].caseList[i].occurPhase=="")
+						  	if(data[0].caseList[i].occurPhase=="")
 						  		strRight+="<td bordercolor='#DEDEDE'width='90px'><select id='occurPhase'  class='t'"+disWord+"  style='font-size:12px; color:"+fontColor+"; padding-left:5px; text-align:center;width:100%;border-width: 0px;border-top-style: none;border-right-style: none;border-left-style: none; border-bottom-style: none;height: 15px;overflow:hidden'  onChange='updateCase(this,"+data[0].caseList[i].id+")'><option selected>MP</option><option>市场</option></select></td>";
 						  		
 						  	if(data[0].caseList[i].occurType=="SW")
@@ -412,7 +358,6 @@
 							  	  
 					  		if(data[0].caseList[i].occurType=="")
 						  		strRight+="<td bordercolor='#DEDEDE'width='90px'><select id='occurType'  class='t'"+disWord+"  style='font-size:12px; color:"+fontColor+"; padding-left:5px; text-align:center;width:100%;border-width: 0px;border-top-style: none;border-right-style: none;border-left-style: none; border-bottom-style: none;height: 15px;overflow:hidden'  onChange='updateCase(this,"+data[0].caseList[i].id+")'><option selected>SW</option><option>HW</option><option>工厂</option><option>Others</option></select></td>";
-						 
 						 }  
 						 else{
 						 	strRight+="<td bordercolor='#DEDEDE' width='90px'><input type='text' "+disWord+" class='t'   id='occurPhase'   style='font-size:12px; color:"+fontColor+";  text-align:center;width:100% '  onChange='updateCase(this,"+data[0].caseList[i].id+")'  value='"+data[0].caseList[i].occurPhase+"'> </td>";
@@ -497,8 +442,7 @@
 							 }
 						 }
 						 strRight+="</tr>";
-						
-					 });
+					});
 					$("#bottomLeft tbody").html("");
 					$("#bottomLeft tbody").html(strLeft);
 					//$("#bottomLeft").empty();
@@ -513,12 +457,12 @@
 						firstpagehtml="<a><<</a>&nbsp;&nbsp;&nbsp;";
 						prevpagehtml = "<a><</a>";
 					}else{
-						firstpagehtml="<a onclick='load(1"+",\""+flag+"\",\""+conflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
-						prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+flag+"\",\""+conflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><</a>";
+						firstpagehtml="<a onclick='load(1"+",\""+flag+"\",\""+conflag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
+						prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+flag+"\",\""+conflag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><</a>";
 					}
 					if(curpage < totalpage){
-						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+flag+"\",\""+conflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
-						lastpagehtml="<a onclick='load("+(totalpage)+",\""+flag+"\",\""+conflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
+						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+flag+"\",\""+conflag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+						lastpagehtml="<a onclick='load("+(totalpage)+",\""+flag+"\",\""+conflag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
 					}else{
 						nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
 						lastpagehtml = "<a>>></a>";
@@ -538,38 +482,15 @@
 				//alert(conflag);
 				load(flag,"id","DESC",conflag);
 	  		}
-
-		</script>
-		<script type="text/javascript">
-	  		function ExportToExcel() {
-	  	        var elTable = document.getElementById("tableServer"); //table1改成你的tableID
-	  	        var oRangeRef = document.body.createTextRange();
-	  	        oRangeRef.moveToElementText(elTable);
-	  	        oRangeRef.execCommand("Copy");
-	  	        try {
-	  	            var appExcel = new ActiveXObject("Excel.Application");
-	  	        } catch (e) {
-	  	            alert("Did you install Excel and put this site into your trusted sites list?");
-	  	            return;
-	  	        }
-	  	        appExcel.Visible = true;
-	  	        appExcel.Workbooks.Add().Worksheets.Item(1).Paste();
-	  	        appExcel = null;
-	  	    }
-		</script>
-		 <script type="text/javascript">	  		
-	  		function gotoSort(flag){
-				sort(flag,1,1);
-	  		}
 		</script>
 	</head>  
  
-	<body onload="load(1, '${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','','')">  
+	<body onload="load(1, '${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','${usersession.hasPrivilegeByName('Case Delete')}','','')">  
 		<div id="navtop">
 			<ul class="navtop-skin">
 				<li style="padding-left:20">
 					<font color="#2c3e50"><strong><a target="_blank" href="#" id="urllink" title="GO TO MOSAIC">| Failed Case Mgmt. |</a></strong></font>&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" placeholder="Search" name="selectitem" id="selectitem" title="Input ProdType;Chipset;Model;Description;OccurTime;OccurSite"  oninput="javascript:load(1,'${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','','')"  style="color:#95a5a6; padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
+					<input type="text" placeholder="Search" name="selectitem" id="selectitem" title="Input ProdType;Chipset;Model;Description;OccurTime;OccurSite"  oninput="javascript:load(1,'${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','${usersession.hasPrivilegeByName('Case Delete')}','','')"  style="color:#95a5a6; padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
 					<li style="padding-left:10">
 						<c:if test="${usersession.hasPrivilegeByName('Case Add')}">
 							<input type="button"  onclick="addCase()" value="Add" style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
@@ -580,21 +501,17 @@
 					</li>
 		        </li>
 		    </ul>
-		     <ul class="navtop-right">
+		    <ul class="navtop-right">
 				 <li >
-						<%--<input id="export" type="button" value="Export" onclick="javascript:ExportToExcel()" style="color:#2c3e50;font-size:12px; font-weight:bold; border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  --%>
-						<%--<img src="${pageContext.request.contextPath}/style/images/excel3.png"  onclick="javascript:ExportToExcel()"  width=18px height=18px style="padding-top:10px"/>--%>
-						<a href="/portal/case/importExec" title="Data Download">
-							<img src="${pageContext.request.contextPath}/style/images/excel6.jpg"   width=20px height=20px style="padding-top:15px"/>
-						</a>
+				 	<a href="/portal/case/importExec" title="Data Download">
+						<img src="${pageContext.request.contextPath}/style/images/excel6.jpg"   width=20px height=20px style="padding-top:15px"/>
+					</a>
 		        </li> 
-		  </ul>
+		  	</ul>
 		</div>
 		<br>
-<%--		<hr style="height:2px;border:none;border-top:4px ridge gray;" /> --%>
 		
 		<center>
-<%--			<div style="position:relative; bottom:40px">--%>
 			<table border="0" cellpadding="0" cellspacing="0">  
 	  			<tr>  
 	   				 <td>  
@@ -614,31 +531,6 @@
 									 <td align="center" width="70px" height="70px" rowspan="2"><font  size="2px" style="font-weight:bold;">Chipset</font></td>
 									 <td align="center" width="110px" height="70px" rowspan="2"><font  size="2px" style="font-weight:bold;">Model</font></td>
 									 <td align="center" width="400px" height="70px" rowspan="2"><font  size="2px" style="font-weight:bold;">Defect Description</font></td>
-								 <!-- 
-								   <td align="center"  width="70px"  rowspan="2">
-								 	<select id="prodType" onChange="typeSelect(${usersession.hasPrivilegeByName("Case Update")})" style="font-size:14px; border:0; background:#d2e9ff ;border-radius:5px;width:70px; vertical-align:middle; " >
-								 		<option style="color:#000000; ">Prod. Type</option>
-								 		<c:forEach items="${types}" var="t">
-								 		<option style="color:#FFFFFF; ">${t.prodType}</option>
-								 		</c:forEach>
-								 	</select>
-								 </td>
-								  <td align="center"  width="70px"  rowspan="2">
-								 	<select id="chipset" onChange="chipSelect(${usersession.hasPrivilegeByName("Case Update")})" style="font-size:14px;  border-radius:5px;width:70px; height:33px;vertical-align:middle; " >
-								 		<option  >Chipset</option>
-								 		<c:forEach items="${chips}" var="c">
-								 		<option>${c.chipset}</option>
-								 		</c:forEach>
-								 	</select>
-								 </td>
-								  <td align="center"  width="110px"  rowspan="2">
-								 	<select id="model" onChange="modelSelect(${usersession.hasPrivilegeByName("Case Update")})" style="font-size:14px;  border-radius:5px;width:110px; height:33px;vertical-align:middle; " >
-								 		<option  >Model</option>
-								 		<c:forEach items="${models}" var="m">
-								 		<option>${m.model}</option>
-								 		</c:forEach>
-								 	</select>
-								 </td>-->
 								 </tr>
 		 					 </table>
 		 					  

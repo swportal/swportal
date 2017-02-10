@@ -11,7 +11,7 @@
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
   		<script src="<%=request.getContextPath()%>/js/jquery.table2excel.js"></script>
      	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
-	    <style> 
+	    <style type="text/css"> 
 		    hr{
 		    	position:relative;
 				top: 500px;
@@ -21,7 +21,7 @@
 			}
 	    	#footer{
 	    		 position:absolute;
-	    		 bottom: 20px;
+	    		 bottom: 40px;
 	    		 margin-left :800px;
 	    	}
 	    	.current-page  {
@@ -78,10 +78,7 @@
 			}
 			
 			
-			.textPlace{ position:relative; top:-5px; /*left:5px; right:5px;bottom:5px*/} 
-		</style>
-			
-		<style type="text/css">
+			.textPlace{ position:relative; top:-5px; } 
 			ul,li{
 				margin:0;
 				padding:0;
@@ -119,70 +116,71 @@
 		</style>			
 			
 		<script type="text/javascript">
-		function load(pn,serverFlag){
-			var disWord="";
-			if(!serverFlag)
-				disWord="disabled";
-			var keyword =document.getElementById("selectitem").value;
-			var curpage="";
-		    var totalpage="";	
+			function load(pn,serverFlag){
+				var disWord="";
+				if(!serverFlag)
+					disWord="disabled";
+				var keyword =document.getElementById("selectitem").value;
+				var curpage="";
+			    var totalpage="";	
 			   
-			$.getJSON("/portal/server/findServerList?keyword="+encodeURIComponent(keyword,"utf-8")+"&curPage="+pn+"&rn="+Math.random(),function(data){		
-				curpage=data[1].curpage;
-    			totalpage=data[1].totalpage;   
-				var str="";
-				$.each(data[0].serverList,function(i){					 
-					   //for(var i = 0;i<data.length;i++){							  
-					   str+="<tr bordercolor='#DEDEDE' bgcolor='#ffffff' >";
-					   str+="<input type='hidden' name='id' value=id>";
-					   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px; color:#004779; '>"+(i+1)+"</td>"; 
-				  	   str+="<td align='center' bordercolor='#DEDEDE' height='29px' style='font-size:12px;'>"+"&nbsp;&nbsp;"+data[0].serverList[i].ip+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].name+"</td>";	
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].useFor+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].cpuCount+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].cpuNumber+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].memCount+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].memSize+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddCount+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddType+"</td>"; 
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddSize+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].osVersion+"</td>";
-				  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].manager+"</td>";						 
-				  	   str+="</tr>";
-				});
-				 //$("#tableServer").empty();
-				 //$("#tableServer").append(str);
-				 $("#tableServer tbody").html("");
-				 $("#tableServer tbody").html(str);
-				 var firstpagehtml; 
-				 var prevpagehtml; 
-				 var nextpagehtml;
-				 var lastpagehtml;
-				 if((curpage-0)<=1){
-					 firstpagehtml="<a><<</a>&nbsp;&nbsp;&nbsp;";
-				 prevpagehtml = "<a><</a>";
-				 }else{
-				 	firstpagehtml="<a onclick='load(1"+",\""+serverFlag+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
-				 	prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+serverFlag+"\");' href='javascript:void(0);'><</a>";
-				 }
-				 if(curpage < totalpage){
-				 	nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+serverFlag+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
-				 	lastpagehtml="<a onclick='load("+(totalpage)+",\""+serverFlag+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
-				 }else{
-				 	nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
-				 	lastpagehtml = "<a>>></a>";
-				 }
-				 var html2="";		
-				 html2 = html2 + "<table><tr  bgcolor='white' bordercolor='white'><td height='60px'>"+firstpagehtml+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+curpage+"&nbsp;/&nbsp;"+totalpage+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+lastpagehtml+"</td></tr>";
-				 html2 = html2+"</table>";
-			     document.getElementById("footer").innerHTML=html2;
-		 	});
-		   }
+				$.getJSON("/portal/server/findServerList?keyword="+encodeURIComponent(keyword,"utf-8")+"&curPage="+pn+"&rn="+Math.random(),function(data){		
+					curpage=data[1].curpage;
+	    			totalpage=data[1].totalpage;   
+					var str="";
+					$.each(data[0].serverList,function(i){					 
+						   //for(var i = 0;i<data.length;i++){							  
+						   str+="<tr bordercolor='#DEDEDE' bgcolor='#ffffff' >";
+						   str+="<input type='hidden' name='id' value=id>";
+						   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px; color:#004779; '>"+(i+1)+"</td>"; 
+					  	   str+="<td align='center' bordercolor='#DEDEDE' height='29px' style='font-size:12px;'>"+"&nbsp;&nbsp;"+data[0].serverList[i].ip+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].name+"</td>";	
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].useFor+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].cpuCount+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].cpuNumber+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].memCount+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].memSize+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddCount+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddType+"</td>"; 
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].hddSize+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].osVersion+"</td>";
+					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].manager+"</td>";						 
+					  	   str+="</tr>";
+					});
+				 	//$("#tableServer").empty();
+				 	//$("#tableServer").append(str);
+					$("#tableServer tbody").html("");
+					$("#tableServer tbody").html(str);
+					var firstpagehtml; 
+					var prevpagehtml; 
+					var nextpagehtml;
+					var lastpagehtml;
+					if((curpage-0)<=1){
+						firstpagehtml="<a><<</a>&nbsp;&nbsp;&nbsp;";
+						prevpagehtml = "<a><</a>";
+					}
+					else{
+					 	firstpagehtml="<a onclick='load(1"+",\""+serverFlag+"\");' href='javascript:void(0);'><font color='#3498db'><<</font></a>&nbsp;&nbsp;&nbsp;";
+					 	prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+serverFlag+"\");' href='javascript:void(0);'><</a>";
+					}
+					if(curpage < totalpage){
+						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+serverFlag+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+						lastpagehtml="<a onclick='load("+(totalpage)+",\""+serverFlag+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
+					}
+					else{
+					 	nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";
+					 	lastpagehtml = "<a>>></a>";
+					}
+					var html2="";		
+					html2 = html2 + "<table><tr  bgcolor='white' bordercolor='white'><td height='60px'>"+firstpagehtml+prevpagehtml+"&nbsp;&nbsp;&nbsp;"+curpage+"&nbsp;/&nbsp;"+totalpage+"&nbsp;"+"&nbsp;&nbsp;"+nextpagehtml+lastpagehtml+"</td></tr>";
+					html2 = html2+"</table>";
+				    document.getElementById("footer").innerHTML=html2;
+		 		});
+			}
 	  	</script>
   	</head> 
 	
   	<body onload="load(1,'${usersession.hasPrivilegeByName('Server Info.')}')">  
-  
 	  	<div id="navtop">
 			<ul class="navtop-skin">
 				<li>						 
@@ -191,12 +189,10 @@
 		        </li> 
 		    </ul>
 		    <ul class="navtop-right">
-		         <li >
-						<%--<input id="export" type="button" value="Export" onclick="javascript:ExportToExcel()" style="color:#2c3e50;font-size:12px; font-weight:bold; border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  --%>
-						<%--<img src="${pageContext.request.contextPath}/style/images/excel3.png"  onclick="javascript:ExportToExcel()"  width=18px height=18px style="padding-top:10px"/>--%>
-						<a href="/portal/server/importExec" title="Data Download">
-							<img src="${pageContext.request.contextPath}/style/images/excel6.jpg"   width=20px height=20px style="padding-top:15px"/>
-						</a>
+		    	<li >
+					<a href="/portal/server/importExec" title="Data Download">
+						<img src="${pageContext.request.contextPath}/style/images/excel6.jpg"   width=20px height=20px style="padding-top:15px"/>
+					</a>
 		        </li> 
 		    </ul>
 		</div>
@@ -233,17 +229,8 @@
 		    			</thead>
 		    			<tbody></tbody>
 		    		</table>
-			</form>
-			
-			<div id="footer">
-				<%-- <a id="firstPage"   href="javascript:void(0);" style="text-decoration:none;"> << </a>&nbsp;--%>
-				<%-- <a id="prev" href="javascript:void(0);" style="text-decoration:none;"> < </a>&nbsp;--%>
-				<%-- <span class="current-page"></span>&nbsp;/&nbsp;<span class="page-num"   ></span>&nbsp;&nbsp;--%>
-				<%-- --%>
-				<%-- <a id="next" href="javascript:void(0);" style="text-decoration:none;"> > </a>&nbsp;--%>
-				<%-- <a id="lastPage" href="javascript:void(0);" style="text-decoration:none;"> >> </a>--%>
-			</div>
-			<br/><br/><br/> 
+			</form>			
+			<div id="footer"></div>
 		</center> 
-  </body>
+	</body>
 </html>
