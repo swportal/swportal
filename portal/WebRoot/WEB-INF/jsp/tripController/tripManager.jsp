@@ -258,11 +258,14 @@
 			  	flag1=tripFlag;
 			  	flag2=delflag;
 			  	var disWord="";
-			  	if(tripFlag.toString()=="true")
+			  	
+			  	if(tripFlag.toString()=="true"||tripFlag==1)
 					tripFlag=1;
 		   	  	else
 		   			tripFlag=0;
-			  	if(delflag.toString()=="true")
+			    //wuliying add delete flag ---2017/02/10
+				//wuliying add delflag==1  ---2017/02/15
+			  	if(delflag.toString()=="true"||delflag==1)
 					delflag=1;
 		   	  	else
 		   			delflag=0;

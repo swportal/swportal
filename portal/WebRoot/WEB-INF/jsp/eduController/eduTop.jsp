@@ -261,11 +261,13 @@
 			  	flag1=flag;
 			  	flag2=delflag;
 		   	  	var disWord="";
-		   	  	if(flag.toString()=="true")
+		   	  	if(flag.toString()=="true"||flag==1)
 		   			flag=1;
 		   	  	else
 		   			flag=0;
-		   		if(delflag.toString()=="true")
+		   		//wuliying add delete flag ---2017/02/10
+				//wuliying add delflag==1  ---2017/02/15
+		   		if(delflag.toString()=="true"||delflag==1)
 		   			delflag=1;
 		   	  	else
 		   			delflag=0;

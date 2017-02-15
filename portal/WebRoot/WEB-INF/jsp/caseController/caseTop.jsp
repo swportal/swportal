@@ -279,10 +279,11 @@
 				var keyword =document.getElementById("selectitem").value;
 				var disWord="";
 				//wuliying add delete flag ---2017/02/10
-				if(delflag.toString()=="true")
-					delflag=1;
-			   	else
-			   		delflag=0;
+				//wuliying delete ---2017/02/15
+				//if(delflag.toString()=="true")
+					//delflag=1;
+			   	//else
+			   		//delflag=0;
 				var fontColor="";
 				var curpage="";
 		    	var totalpage="";

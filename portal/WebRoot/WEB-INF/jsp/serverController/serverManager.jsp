@@ -132,7 +132,7 @@
 						   //for(var i = 0;i<data.length;i++){							  
 						   str+="<tr bordercolor='#DEDEDE' bgcolor='#ffffff' >";
 						   str+="<input type='hidden' name='id' value=id>";
-						   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px; color:#004779; '>"+(i+1)+"</td>"; 
+						   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px; color:#004779; '>"+(i+1+(pn-1)*20)+"</td>"; 
 					  	   str+="<td align='center' bordercolor='#DEDEDE' height='29px' style='font-size:12px;'>"+"&nbsp;&nbsp;"+data[0].serverList[i].ip+"</td>";
 					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].name+"</td>";	
 					  	   str+="<td align='center' bordercolor='#DEDEDE' style='font-size:12px;'>"+data[0].serverList[i].useFor+"</td>";
