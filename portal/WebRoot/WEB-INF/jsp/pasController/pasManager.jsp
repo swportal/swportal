@@ -133,8 +133,33 @@
  
 		<script type="text/javascript">		
 			var ordItem="";
-			var ordKey="";			
-			function load(currpage,orderItem,orderKey) {	
+			var ordKey="";		
+			var favor=0;
+			var cur=1;
+			//var userid=${usersession}.length==0?"":${usersession.id};
+			function updateFavor(id){
+				//var aa=${usersession.id}+" "+id;
+				//alert(aa);				
+				var pasid=id;
+				$.getJSON("/portal/user/updateFavor?pasid="+pasid,function(data){
+					if("yes"==data.result){
+						 //alert("Add Success!");
+						 load(cur,'','');
+					}
+					else{ 
+						// alert("Delete Success!");
+						 load(cur,'','');
+				   	}
+				});
+			}
+			function getFavorList(){
+				$("#tableId tbody").html("");
+				favor=favor==0?1:0;
+				load(1,'','');
+			}
+			function load(currpage,orderItem,orderKey) {
+				cur=currpage;
+				//alert(favor);
 				var keyword=document.getElementById("selectitem").value;	
 				var parentSelect=document.getElementById("parentSelect").value;
 				var childSelect=document.getElementById("childSelect").value;
@@ -143,19 +168,26 @@
 				var enddate=document.getElementById("enddate").value;
 				var down="";
 				
-				 down = down + "<a href='/portal/pas/DownProject?keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random()+", title='Data Download'>	<img src='<%=request.getContextPath()%>/style/images/excel6.jpg'   width=20px height=20px   style='padding-top:5px'/> </a>";
+				 down = down + "<a href='/portal/pas/DownProject?favor="+favor+"&keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random()+", title='Data Download'>	<img src='<%=request.getContextPath()%>/style/images/excel6.jpg'   width=20px height=20px   style='padding-top:5px'/> </a>";
 				 document.getElementById("downexcel").innerHTML=down;
 				 //alert(childSelect);
-				 
-				 $.getJSON("/portal/pas/findPasList?curPage="+currpage+"&keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random(),function(data){		
+				
+				 $.getJSON("/portal/pas/findPasList?curPage="+currpage+"&favor="+favor+"&keyword="+keyword+"&parentSelect="+parentSelect+"&childSelect="+childSelect+"&milestone="+milestone+"&startdate="+startdate+"&enddate="+enddate+"&orderItem="+encodeURIComponent(orderItem,"utf-8")+"&orderKey="+orderKey+"&rn="+Math.random(),function(data){		
 					 //alert(childSelect);
 					    document.getElementById("updatetime").innerHTML=data[2].updatetime;
+					    if(data[3].userid!=0){  //有登录用户
+					    	if(favor==0)
+					    		document.getElementById("favor").innerHTML="<img id='star' title='Favorites List'  onClick='getFavorList()();' src='<%=request.getContextPath()%>/style/images/starye.png'  width='15' height='15' style='cursor:pointer'/>";
+					    	else
+					    		document.getElementById("favor").innerHTML="<img id='star' title='All Data'  onClick='getFavorList()();' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='15' height='15' style='cursor:pointer'/>";
+					    }
+					    
 					 	var curpage=data[1].curpage;
 						var pagecount = data[1].totalpage;   
 						var html="";
-						
+						//alert(data[4].pasid[1]);
 						$.each(data[0].pasList,function(i){	
-							    
+							 
 								var mile=data[0].pasList[i].milestone;
 								var mileflag="";
 								if(mile!="-"){
@@ -194,15 +226,48 @@
 			  						html=html+"<td align='center' width='50px' height='29px' ><img src='<%=request.getContextPath()%>/style/images/chilun_grey.png'  width='18' height='18'/></td>";
 			  					}
 			  					
-			  					if(data[0].pasList[i].pLMTotal!=0){  //pjt name
+				  				if(data[3].userid!=0){  //有登录用户
+				  					var flag=0;
+				  					for(var j=0;j<data[4].pasid.length;j++){
+				  						//alert(data[4].pasid[j]);
+				  						if(data[0].pasList[i].projectid==data[4].pasid[j]){
+				  							flag=1;
+				  						}
+				  					}
+				  					if(flag==1){
+					  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
+							  					html = html+ "<td>&nbsp;<img id='star' title='Delete from Favorites'  onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+							  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
+							  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
+							  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
+										    }
+										    else{
+										   		html = html+ "<td>&nbsp;<img id='star' title='Delete from Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+										    }
+				  					}
+				  					else{
+				  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
+						  					html = html+ "<td>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+						  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
+						  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
+						  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
+									    }
+									    else{
+									   		html = html+ "<td>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+									    }
+				  					}			  					
+				  				}
+				  				else{  //无登录用户
+				  					if(data[0].pasList[i].pLMTotal!=0){  //pjt name
 					  					html = html+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" 
 					  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 					  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 					  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
-							   }
-							   else{
-							   		html = html+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
-							   }
+							   		}
+							    	else{
+							   			html = html+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+							    	}
+				  				}
 			  							 
 							  // if(mile!="-"){  //milestone
 							   		html=html+"<td align='center'><font size=2>"+data[0].pasList[i].milestone+"</font></td>";
@@ -421,8 +486,9 @@
 			  			html2 = html2+"</table><br>";
 						document.getElementById("paging").innerHTML=html2;
 						
+						//document.getElementById("star").src="<%=request.getContextPath()%>/style/images/favor.jpg";
 				 });
-				 
+				
 			}
   		</script>
 
@@ -595,6 +661,7 @@
 						window.open("/portal/defectinfo/toDefectPage?projectname="+s);			
 					}	
 			} 
+			
 		</script>
 
 		<script type="text/javascript">
@@ -633,18 +700,13 @@
 
 	</head> 
 
-	<body onload="load(1,'','');" >   
-		
-		 
-		
+	<body onload="load(1,'','');" >   		
 		 <%
 			String endd;
 	 		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 			String today=format.format(new Date());
 			endd=today;			
-		 %>
-		
-		 
+		 %>		 
 		<center>
 			<table  bgcolor="#ecf0f1" width="100%" height="47px" style="border-radius: 0px;">
 	 			<tr>
@@ -707,9 +769,9 @@
 				<table id="tableId"  bgColor="#FFFAF0" cellspacing="0px" border="2px"  cellpadding="0px"   style=" border-collapse:collapse" >
 	  				<thead>
 	  					<tr bgcolor="#d2e9ff" bordercolor="#DEDEDE">
-			  				<td align="center" width="40px" rowspan="2"></td>
-			  				<td align="center" width="40px" rowspan="2"></td>  			
-				  			<td align="center" width="320px" rowspan="2"><font size="2" style="font-weight:bold;">Pjt. Name</font></td>
+			  				<td align="center" width="50px" rowspan="2"></td>
+			  				<td align="center" width="50px" rowspan="2"></td>  			
+				  			<td align="center" width="320px" rowspan="2"><font size="2" style="font-weight:bold;"><div style="position:relative;">Pjt. Name</font>&nbsp;&nbsp;<div id='favor' style="position:absolute; z-index:2; left:200px; top:2px"></div></td>
 				  			<td align="center" width="80px" rowspan="2"><font size="2" style="font-weight:bold;">Milestone</font></td>  			
 				  			<td align="center" width="80px" rowspan="2"><font size="2" style="font-weight:bold;">Pjt. Type</font></td>  			
 				  			<td align="center" height="25px" width="160px" colspan="2"><font size="2" style="font-weight:bold;">PIA</font></td>  			

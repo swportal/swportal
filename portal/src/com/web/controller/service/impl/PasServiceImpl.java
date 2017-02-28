@@ -15,17 +15,30 @@ public class PasServiceImpl extends BaseDaoImpl<Pas> implements PasService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Pas> findPasList(Integer curPage, Integer pageSize,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey) {
+	public List<Pas> findPasList(Integer curPage,Integer favor,Long[] ids,Integer pageSize,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey) {
 		Integer start=(curPage-1)*pageSize;
 		String where = "";
-		/*
-		 * orderItem search
-		 */
-		if(!keyword.equals("")){
-			where=where+"where (p.pjtName like'%"+keyword+"%' or p.devModelName like'%"+keyword+"%' or p.sWEM like'%"+keyword+"%' ) ";
+		if(favor==0){
+			where+="where 1=1 ";
 		}
 		else{
-			where=where+"where p.pjtName like'%%'";
+			if(ids.length==0)
+				where+="where id=0";
+			else
+				where+="where id in (:ids)";
+		}
+		String order="";
+		/*if(pasids.length!=0){
+			where+="where id IN (:pasids)"
+		}*/
+		/*
+		 * text search
+		 */
+		if(!keyword.equals("")){
+			where=where+"and (p.pjtName like'%"+keyword+"%' or p.devModelName like'%"+keyword+"%' or p.sWEM like'%"+keyword+"%' ) ";
+		}
+		else{
+			where=where+"and p.pjtName like'%%'";
 		}
 		
 		/*
@@ -74,18 +87,30 @@ public class PasServiceImpl extends BaseDaoImpl<Pas> implements PasService {
 				//where+="aPRAPlanDate between '"+startdate+"' and '"+enddate+"'";
 			}
 		}
+		/*
+		 * order keyword
+		 */
 		if(orderKey.equals("")&&orderItem.equals("")){
-			return getSession().createQuery("FROM Pas p "+where+"  ORDER BY  p.pIAPlanDate DESC, p.pRAPlanDate DESC, p.pLMTotal DESC, p.pLMOpened DESC")
+			order="  ORDER BY  p.pIAPlanDate DESC, p.pRAPlanDate DESC, p.pLMTotal DESC, p.pLMOpened DESC";
+		}
+		else{
+			order=" ORDER BY "+ orderItem + " "+orderKey;
+		}
+		
+		if(favor==0||ids.length==0){
+			return getSession().createQuery("FROM Pas p "+where+order)
 					.setFirstResult(start)
 					.setMaxResults(pageSize)
 					.list();
 		}
 		else{
-			return getSession().createQuery("FROM Pas p "+where+" ORDER BY "+ orderItem + " "+orderKey)
+			return getSession().createQuery("FROM Pas p "+where+order)
 					.setFirstResult(start)
 					.setMaxResults(pageSize)
+					.setParameterList("ids", ids)
 					.list();
 		}
+		
 		
 	}
 

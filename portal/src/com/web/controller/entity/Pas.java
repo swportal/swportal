@@ -1,5 +1,9 @@
 package com.web.controller.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
 public class Pas implements java.io.Serializable{	
 	private static final long serialVersionUID = 1L;
 	private Long projectid;
@@ -49,6 +53,17 @@ public class Pas implements java.io.Serializable{
 	private Long doing;
 	private Long requested;
 	private Long reviewed;
+	
+	/*
+	 *  Wuliying add 2017-02-23
+	 */
+	private Set<User> users =new HashSet<User>();
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
+	}
 	public Long getProjectid() {
 		return projectid;
 	}
@@ -314,6 +329,17 @@ public class Pas implements java.io.Serializable{
 		this.reviewed = reviewed;
 	}
 	
-	
+	public boolean equals(Object obj) {  
+		boolean f=this.projectid.intValue() == ((Pas) obj).projectid.intValue();
+		if (!(obj instanceof Pas))  
+			return false;     
+	    if (obj == this)  
+	        return true;  
+	    return f;  
+	}  
+	   
+	public int hashCode(){  
+		return projectid.intValue();  
+	}  
 	
 }

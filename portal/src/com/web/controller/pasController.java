@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.web.controller.entity.Pas;
+import com.web.controller.entity.User;
 import com.web.controller.service.PasService;
 
 @SuppressWarnings("deprecation")
@@ -44,21 +45,65 @@ public class pasController {
 	
 	@RequestMapping(value="/findPasList",produces="application/json;charset=UTF-8")
 	@ResponseBody
-	public void findPasList(Integer curPage,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate, String orderItem,String orderKey,HttpServletRequest request,HttpServletResponse response){
+	public void findPasList(Integer curPage,Integer favor,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate, String orderItem,String orderKey,HttpServletRequest request,HttpServletResponse response){
 		try {
 			URLDecoder.decode(orderItem,"utf-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<Pas> pasList = new ArrayList<Pas>();
-		List<Pas> pasList2 = new ArrayList<Pas>(); //有关键字的情况
-		Integer pageSize=20;
-		Integer totalpage=(pasService.findAll().size()%pageSize==0)?(pasService.findAll().size()/pageSize):(pasService.findAll().size()/pageSize+1);
-		pasList = pasService.findPasList(curPage,pageSize,keyword,parentSelect,childSelect,milestone,startdate,enddate,orderItem,orderKey);	
-		if(keyword.length()!=0||milestone.length()!=0){  //有筛选条件， 就要更新list和total page
-			pasList2=pasService.findPasList(1, pasService.findAll().size(),keyword,parentSelect, childSelect,milestone,startdate,enddate,orderItem,orderKey);
-			totalpage=(pasList2.size()%pageSize==0)?(pasList2.size()/pageSize):(pasList2.size()/pageSize+1);
+		//2017-02-27 wuliying add
+		Long userid=0L;
+		User usersession=(User) request.getSession().getAttribute("usersession");
+		if(usersession==null){
+			
 		}
+		else{
+			userid=usersession.getId();
+		}
+		List<Long> pasId =  new ArrayList<Long>();//提取所有favor的id
+		List<Pas> pasList = new ArrayList<Pas>(); //返回前台的json
+		List<Pas> pasFavorList = new ArrayList<Pas>(); //获取favor的pas list
+		List<Pas> pasListAll = new ArrayList<Pas>(); //用于计算总页数
+		Long[] pasids={};
+		Integer pageSize=20;
+		Integer totalpage=1;
+		
+		for(Pas pas:pasService.findAll()){
+			for(User user:pas.getUsers()){
+				if(user.getId().toString().equals(userid.toString())){
+					pasFavorList.add(pas);  //获取favor list
+					pasId.add(pas.getProjectid());   //获取id放入json
+				}
+			}
+			pas.setUsers(null);  //避免There is a cycle in the hierarchy 问题
+		}
+		pasids  = new Long[pasFavorList.size()];
+		int index = 0;
+		for(Pas pas:pasFavorList){
+			pasids[index++]=pas.getProjectid();  //获取传递参数long[]
+		}
+		
+		
+		pasList = pasService.findPasList(curPage,favor,pasids,pageSize,keyword,parentSelect,childSelect,milestone,startdate,enddate,orderItem,orderKey);
+		pasListAll=pasService.findPasList(1,favor,pasids,pasService.findAll().size(),keyword,parentSelect, childSelect,milestone,startdate,enddate,orderItem,orderKey); //带搜索条件算page
+		totalpage=(pasListAll.size()%pageSize==0)?(pasListAll.size()/pageSize):(pasListAll.size()/pageSize+1);
+		
+		
+		//2007-02-27 wuliying add for avoiding the hibernate call cycle
+		/*for(Pas pas:pasList){			
+			for(User user:pas.getUsers()){
+				if(user.getId().toString().equals(userid.toString())){
+					pasId.add(pas.getProjectid());  
+				}
+			}	
+			pas.setUsers(null);
+		}*/
+		//JsonConfig jsonConfig = new JsonConfig();
+		//jsonConfig.setExcludes(new String[]{"users"});
+		/*if(keyword.length()!=0||milestone.length()!=0){  //有筛选条件， 就要更新list和total page
+			pasListAll=pasService.findPasList(1,pasService.findAll().size(),keyword,parentSelect, childSelect,milestone,startdate,enddate,orderItem,orderKey);
+			totalpage=(pasListAll.size()%pageSize==0)?(pasListAll.size()/pageSize):(pasListAll.size()/pageSize+1);
+		}*/
 		JSONArray members = new JSONArray();
 		 PrintWriter out= null;
 		 
@@ -66,14 +111,22 @@ public class pasController {
 			 	out= response.getWriter();
 		        JSONObject member = new JSONObject();
 		        member.put("pasList", pasList);
+			 	//JSONArray member = JSONArray.fromObject(pasList, jsonConfig); 		      
 		        JSONObject memberpage = new JSONObject();
 		        memberpage.put("curpage", curPage);
 		        memberpage.put("totalpage", totalpage);
 		        JSONObject memberupdatetime = new JSONObject();
 		        memberupdatetime.put("updatetime",pasService.findAll().get(1).getUpdateTime().substring(0,19));
+		        JSONObject userJson = new JSONObject();
+		        userJson.put("userid", userid);
+		        JSONObject pasJson = new JSONObject();
+		        pasJson.put("pasid", pasId);
 		        members.add(member);     
+		       // members.add(pasUser);     
 		        members.add(memberpage);  
 		        members.add(memberupdatetime);
+		        members.add(userJson);
+		        members.add(pasJson);
 		        out.write(members.toString());
 		    } catch (Exception e) {
 		        System.out.println(e.getMessage());
@@ -152,14 +205,37 @@ public class pasController {
 	
 	@RequestMapping(value = "DownProject", method = RequestMethod.GET)
 	@ResponseBody
-	public void DownProject(String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+	public void DownProject(Integer favor,String keyword,String parentSelect,String childSelect,String milestone, String startdate,String enddate,String orderItem, String orderKey,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
 		try {
 			URLDecoder.decode(orderItem,"utf-8");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		List<Pas> pasList = null;
-		pasList=pasService.findPasList(1, pasService.findAll().size(),keyword,parentSelect,childSelect,milestone,startdate,enddate, orderItem,orderKey);
+		Long userid=0L;
+		User usersession=(User) request.getSession().getAttribute("usersession");
+		if(usersession==null){
+			
+		}
+		else{
+			userid=usersession.getId();
+		}
+		List<Pas> pasList = new ArrayList<Pas>();
+		List<Pas> pasFavorList = new ArrayList<Pas>();
+		Long[] pasids={};
+		for(Pas pas:pasService.findAll()){
+			for(User user:pas.getUsers()){
+				if(user.getId().toString().equals(userid.toString())){
+					pasFavorList.add(pas);  //获取pas list
+				}
+			}
+			pas.setUsers(null);  //避免There is a cycle in the hierarchy 问题
+		}
+		pasids  = new Long[pasFavorList.size()];
+		int index = 0;
+		for(Pas pas:pasFavorList){
+			pasids[index++]=pas.getProjectid();  //获取传递参数long[]
+		}
+		pasList=pasService.findPasList(1,favor,pasids,pasService.findAll().size(),keyword,parentSelect,childSelect,milestone,startdate,enddate, orderItem,orderKey);
 		
 		String fname = "Project List";
 		response.reset();// 清空输出流

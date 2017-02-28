@@ -1,5 +1,6 @@
 package com.web.controller.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -23,6 +24,16 @@ public class User  implements java.io.Serializable,Comparable<User>{
 	private String email;
 	private String description;
 	private Set<Role> roles = new TreeSet<Role>();
+	
+	private Set<Pas> projects=new  HashSet<Pas>();
+	public Set<Pas> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(Set<Pas> projects) {
+		this.projects = projects;
+	}
+
 	/**
 	 * 判断本用户是否有指定名称的权限
 	 * @param name
@@ -156,4 +167,16 @@ public class User  implements java.io.Serializable,Comparable<User>{
 			return this.name.compareTo(user.name);
 		}
 	}
+	
+	public boolean equals(Object obj) {  
+		if (!(obj instanceof User))  
+			return false;     
+	    if (obj == this)  
+	        return true;  
+	    return this.projects == ((User) obj).projects;  
+	}  
+	   
+	public int hashCode(){  
+		return id.intValue();  
+	}  
 }

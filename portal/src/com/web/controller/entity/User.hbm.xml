@@ -22,7 +22,11 @@
 			<key column="userId"></key>
 			<many-to-many class="Role" column="roleId"></many-to-many>
 		</set> 
-		
+		<!-- projects属性, 本类与pas的 多对多 --><!-- Wuliying add 2017-02-23 -->
+ 		<set name="projects" table="tsdr_user_project" lazy="false"> 
+ 			<key column="userId"></key> 
+ 			<many-to-many class="Pas" column="projectId"></many-to-many> 
+ 		</set> 
 		<!-- department属性, 本类与Department的  多对一 -->
 		<!--<many-to-one name="department" class="Department" column="departmentId"></many-to-one> -->
 	</class>

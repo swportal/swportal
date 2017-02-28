@@ -2,7 +2,9 @@ package com.web.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 
 import javax.annotation.Resource;
@@ -16,8 +18,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.web.controller.entity.Pas;
 import com.web.controller.entity.Role;
 import com.web.controller.entity.User;
+import com.web.controller.service.PasService;
 import com.web.controller.service.RoleService;
 import com.web.controller.service.UserService;
 
@@ -29,6 +33,8 @@ public class UserController {
 	private UserService userService;
 	@Resource 
 	private RoleService roleService;
+	@Resource 
+	private PasService pasService;
 	
 	@RequestMapping("/toAddUser")
 	public String toAddUser(HttpServletRequest request){
@@ -68,6 +74,61 @@ public class UserController {
 		user.setRoles(new TreeSet<Role>(roleList));
 		userService.update(user);
 		return "redirect:/user/getAllUser";
+	}
+	@RequestMapping("/updateFavor")
+	public void updateFavor(User user,Long pasid,HttpServletRequest request,HttpServletResponse response){
+		//user=userService.getById(userid);
+		user=(User)request.getSession().getAttribute("usersession");
+		String result="yes";  //可以添加
+		Pas pas = (Pas)pasService.getById(pasid);
+		Set<Pas> pasSet=user.getProjects();
+		if(pasSet.contains(pas)){
+			result="no";
+			pasSet.remove(pas);
+		}
+		/*if(pasSet.size()!=0){
+			for(Pas p:pasSet){
+				if(p.getProjectid().longValue()==pasid){
+					//p.setProjectid((long) 0);					
+					result="no";  //说明已经存在
+				}					
+			}
+		}		
+		if("no".equals(result)){
+			pasSet.remove(pas);
+		}*/
+		if("yes".equals(result)){
+			pasSet.add(pas);
+		}
+		
+		user.setProjects(pasSet);
+		
+		
+		userService.update(user);
+		
+		JSONObject data = new JSONObject();
+		try {
+			data.put("result", result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		PrintWriter out = null;
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8"); 
+	    try {
+	    	out=response.getWriter();
+	        out.write(data.toString());
+	        out.flush();
+			out.close();	
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }	   
+		//List<Pas> pasList = pas.getProjectid();
+		
+		//user.setRoles(new TreeSet<Role>(roleList));
+		//userService.update(user);
 	}
 	
 	@RequestMapping("/getUser")

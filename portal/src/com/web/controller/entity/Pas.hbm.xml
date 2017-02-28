@@ -143,5 +143,10 @@
 			<column name="Reviewed" />
 		</property>
 			
+		<!-- users属性, 本类与User的 多对多 --><!-- Wuliying add 2017-02-23 -->
+ 		<set name="users" table="tsdr_user_project" > 
+ 			<key column="projectId"></key> 
+ 			<many-to-many class="User" column="userId"></many-to-many> 
+ 		</set> 
 	</class>
 </hibernate-mapping>
