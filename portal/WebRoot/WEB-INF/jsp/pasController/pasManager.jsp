@@ -139,9 +139,9 @@
 			//var userid=${usersession}.length==0?"":${usersession.id};
 			function updateFavor(id){
 				//var aa=${usersession.id}+" "+id;
-				//alert(aa);				
 				var pasid=id;
-				$.getJSON("/portal/user/updateFavor?pasid="+pasid,function(data){
+				//alert(1);
+				$.getJSON("/portal/user/updateFavor?pasid="+pasid+"&rn="+Math.random(),function(data){
 					if("yes"==data.result){
 						 //alert("Add Success!");
 						 load(cur,'','');
@@ -177,9 +177,9 @@
 					    document.getElementById("updatetime").innerHTML=data[2].updatetime;
 					    if(data[3].userid!=0){  //有登录用户
 					    	if(favor==0)
-					    		document.getElementById("favor").innerHTML="<img id='star' title='Favorites List'  onClick='getFavorList()();' src='<%=request.getContextPath()%>/style/images/starye.png'  width='15' height='15' style='cursor:pointer'/>";
+					    		document.getElementById("favor").innerHTML="<img id='star' title='All Data'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='15' height='15' style='cursor:pointer'/>";
 					    	else
-					    		document.getElementById("favor").innerHTML="<img id='star' title='All Data'  onClick='getFavorList()();' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='15' height='15' style='cursor:pointer'/>";
+					    		document.getElementById("favor").innerHTML="<img id='star' title='Favorites List'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/starye.png'  width='15' height='15' style='cursor:pointer'/>";
 					    }
 					    
 					 	var curpage=data[1].curpage;

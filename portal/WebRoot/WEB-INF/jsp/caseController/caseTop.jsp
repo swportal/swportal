@@ -202,7 +202,7 @@
 		
 			
 			function updateCase(element,id){			
-				$.getJSON("/portal/case/updateCase?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.value,"utf-8"),function(data){
+				$.getJSON("/portal/case/updateCase?id="+id+"&item="+element.id+"&value="+encodeURIComponent(element.value,"utf-8")+"&rn="+Math.random(),function(data){
 					if("success"==data.result){
 						//alert("aa");
 						// window.location.reload();
@@ -216,7 +216,7 @@
 			}
 			  
 			function confirmCase(element,id){			
-				$.getJSON("/portal/case/confirmCase?id="+id+"&item="+element.id,function(data){
+				$.getJSON("/portal/case/confirmCase?id="+id+"&item="+element.id+"&rn="+Math.random(),function(data){
 					if("success"==data.result){
 				 		load(pn,flag1,flag2,flag3,orderitm,orderk);
 					}
