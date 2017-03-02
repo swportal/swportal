@@ -236,36 +236,36 @@
 				  					}
 				  					if(flag==1){
 					  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
-							  					html = html+ "<td>&nbsp;<img id='star' title='Delete from Favorites'  onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+							  					html = html+ "<td align='left'>&nbsp;<img id='star' title='Delete from Favorites'  onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
 							  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 							  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 							  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
 										    }
 										    else{
-										   		html = html+ "<td>&nbsp;<img id='star' title='Delete from Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+										   		html = html+ "<td align='left'>&nbsp;<img id='star' title='Delete from Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
 										    }
 				  					}
 				  					else{
 				  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
-						  					html = html+ "<td>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+						  					html = html+ "<td align='left'>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
 						  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 						  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 						  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
 									    }
 									    else{
-									   		html = html+ "<td>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+									   		html = html+ "<td align='left'>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
 									    }
 				  					}			  					
 				  				}
 				  				else{  //无登录用户
 				  					if(data[0].pasList[i].pLMTotal!=0){  //pjt name
-					  					html = html+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" 
+					  					html = html+ "<td align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" 
 					  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 					  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 					  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
 							   		}
 							    	else{
-							   			html = html+ "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+							   			html = html+ "<td align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
 							    	}
 				  				}
 			  							 
