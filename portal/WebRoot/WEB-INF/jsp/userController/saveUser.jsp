@@ -14,7 +14,7 @@
     <link href="<%=request.getContextPath()%>/FlatUI/docs/assets/css/demo.css" rel="stylesheet">
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
-    <title>User Information</title>
+	<%--    <title>User Information</title>--%>
     <style type="text/css">
 			ul,li{
 				margin:0;

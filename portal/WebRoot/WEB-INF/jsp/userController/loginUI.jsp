@@ -52,7 +52,7 @@
 				}
 			});			
 		});
-		</script>
+	</script>
 	
 
 </head>
@@ -73,17 +73,18 @@
 
           <div class="login-form">
             <div class="form-group">
-              <input type="text" class="form-control login-field" value="" placeholder="Enter your name" id="loginName" name="loginName"/>
+              <input type="text" class="form-control login-field" value="" placeholder="Your Single ID" id="loginName" name="loginName" title="Your Single ID"/>
               <label class="login-field-icon fui-user" for="loginName"></label>
             </div>
 
             <div class="form-group">
-              <input type="password" class="form-control login-field" value="" placeholder="Password" id="password"  name="password"/>
+              <input type="password" class="form-control login-field" value="" placeholder="Password" id="password"  name="password" title="Contact Admin"/>
               <label class="login-field-icon fui-lock" for="password"></label>
             </div>
-
             <input type="submit" class="btn btn-primary btn-lg btn-block"  value="Log in" />
+            
             <a class="login-link" href="/portal/home/index">Let's get started!</a>
+            <%--<font size=1 color="red"> <%=request.getAttribute("loginError")%></font>--%>
           </div>
         </div>
       </div>

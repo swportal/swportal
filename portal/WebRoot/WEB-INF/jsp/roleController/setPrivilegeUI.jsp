@@ -6,9 +6,9 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-  <title>Set Privilege</title>
-  <!-- Loading Bootstrap -->
-<%--  <link href="<%=request.getContextPath()%>/FlatUI/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
+	<%--  <title>Set Privilege</title>--%>
+  	<!-- Loading Bootstrap -->
+	<%--  <link href="<%=request.getContextPath()%>/FlatUI/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">--%>
 	   
   <script language="javascript" src="<%=request.getContextPath()%>/js/jquery_treeview/jquery.treeview.js"></script>
   <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/style/blue/file.css" />

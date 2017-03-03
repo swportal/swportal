@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-   <title>User Management</title>
+	<%--   <title>User Management</title>--%>
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
    <style type="text/css">

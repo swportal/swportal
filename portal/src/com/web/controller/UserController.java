@@ -216,13 +216,13 @@ public class UserController {
 		    user = userService.findByLoginNameAndPassword(loginName, password);}
 		
 		if(user == null){
-			request.setAttribute("loginError", "用户名或者密码错误");			
+			request.setAttribute("loginError", "Wrong User Name or Password!");			
 			return "/userController/loginUI";
 		}
 		else{
 			session.setAttribute("usersession", user);
+			return "/homeController/index";
 		}
-		return "/homeController/index";
 	}
 	
 	@RequestMapping("/logout")

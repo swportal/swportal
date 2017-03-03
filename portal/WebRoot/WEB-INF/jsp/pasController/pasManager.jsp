@@ -677,7 +677,11 @@
 			}
 			         
 		</script>
-
+		<script language="JavaScript">
+			$(function(){
+				document.getElementById("selectitem").focus();
+			});
+		</script>
 		<script language="JavaScript">
 			function openwin(){
 				window.open ("mainpage_zhexian.jsp", "newwindow1", "height=830, width=1070, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=100,left=300");

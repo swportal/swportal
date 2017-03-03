@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<title>Role Information</title>
+		<%--		<title>Role Information</title>--%>
 		<!-- Loading Bootstrap -->
 	    <link href="<%=request.getContextPath()%>/FlatUI/dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	    <!-- Loading Flat UI -->
