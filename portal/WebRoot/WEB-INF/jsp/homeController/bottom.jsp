@@ -1,14 +1,35 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/jsp/public/commons.jspf"%>
+<%--<%@ include file="/WEB-INF/jsp/public/commons.jspf"%>--%>
 <!DOCTYPE HTML>
 <html>
 	<head>
 	    <title></title>
-		<LINK href="<%=basePath %>/style/blue/top.css" type=text/css rel=stylesheet>
+		<style>
+			A:link {
+				COLOR: #004779; TEXT-DECORATION: none
+			}
+			A:visited {
+				COLOR: #004779; TEXT-DECORATION: none
+			}
+			A:active {
+				COLOR: #004779; TEXT-DECORATION: none
+			}
+			A:hover {
+				COLOR: #0000ff; TEXT-DECORATION: none;   /*underline*/
+			}
+			
+			A.OpenWinLink:hover {
+				COLOR: #004779; TEXT-DECORATION: none;
+			}
+
+			form table td{
+				padding-top: 5px;
+			}
+		</style>
 	</head>
 
-	<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0>
-		<div id="bottom">
+	<body leftmargin=0 topmargin=0 marginwidth=0 marginheight=0 width=100% style="background-color: #F3F9FD;color: #004779;font-size: 12px;font-family: 宋体;margin-left: 0px;margin-right: 1px;margin-top: 0;">
+		<div style="width: 100%;height: 26px;margin-left: auto;margin: 0;border-top: 1px solid #a0c6e1;border-bottom: 1px solid #ffffff;">
 			<table> 		
 	 			<tr bgcolor="#ecf0f1"  height="20px" style="padding-bottom:5px">
 		 			<td  width="285px"><font size=1 face="Arial" color="#9d9d9d">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -72,7 +93,7 @@
 						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
 					</td>
 					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.4.4</font>
+						<font color="#9d9d9d" size=1 face="Arial">V1.4.5</font>
 					</td>
 				</tr>
 			</table>	

@@ -83,7 +83,7 @@
 		<property name="sRAActualDate" >
 			<column name="SRAActualDate" />
 		</property>
-		<property name="bPAPlanDate" >
+		<!-- <property name="bPAPlanDate" >
 			<column name="BPAPlanDate" />
 		</property>
 		<property name="bPAActualDate" >
@@ -100,7 +100,7 @@
 		</property>
 		<property name="bCAActualDate" >
 			<column name="BCAActualDate" />
-		</property>
+		</property> -->
 		
 		<property name="dIA" >
 			<column name="DIA" />

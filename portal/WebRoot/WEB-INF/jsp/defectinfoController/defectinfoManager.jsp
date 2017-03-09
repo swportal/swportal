@@ -1011,13 +1011,13 @@
 	</head>
 
 
-	<body style="overflow: hidden;">
-		<table width="100%" cellpadding="0" cellspacing="0" border="0">	
+	<body style="overflow: hidden;margin-left: 0px;margin-right: 1px;" >
+		<table width="100%" cellpadding="3" cellspacing="0" border="0">	
 			<tr >		
 				<td width="12%"></td>
 				<td width="22%"><br/><a href="/portal/home/index"><img src="<%=request.getContextPath()%>/style/images/logo4.jpg"   /></a><br><br/></td>
 				<td width="20%" align="left" valign="middle"> <img src="<%=request.getContextPath()%>/style/images/logo1.jpg"   /> </td>
-				<td valign="middle" width="40%">
+				<td valign="middle" width="46%">
 				<form name="modelForm" action="/portal/defectinfo/toDefectPage?projectname=<%=request.getAttribute("projectname")%>"  method="post"  theme="simple">	
 					<font color="gray" face="Arial"   style="font-size:14px; font-weight:bold; ">Project:&nbsp;</font><font color="gray" face="Arial"   style="font-size:14px;   "><%=request.getAttribute("projectname")%> <br /><br /><font color="gray" face="Arial"   style="font-size:14px; font-weight:bold; ">Model &nbsp; </font>
 					<select id="codeid" name="codeid"   headerKey="0"  onChange="modelForm.submit()" style="padding-left:5px; vertical-align:middle; font-size:14px;border-radius:5px; width:160px;height:33px">
@@ -1028,13 +1028,11 @@
 				</form>
 				</td>
 			</tr>
+			<tr>
+	 			<td  colspan="4" bgcolor="#d2e9ff" height="33px">			<%--#d2e9ff --%>		
+			</tr>
 		</table>
 
-		<table >
-	 		<tr>
-	 			<td  colspan="3" bgcolor="#d2e9ff" width="2600px" height="33px">			<%--#d2e9ff --%>		
-			</tr>
-		</table>									
 
 
 		<%
@@ -1109,74 +1107,8 @@
 			</tr>	
 			<br/>
 		</table>
-		<div id="bottom" style="width:100%; align-left:0px; position:absolute; bottom:0px">
-			<table> 		
-	 			<tr bgcolor="#ecf0f1"  height="20px" style="padding-bottom:5px">
-		 			<td  width="246px"><font size=1 face="Arial" color="#9d9d9d">&nbsp;&nbsp;&nbsp;&nbsp;
-		 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&copy;.TSDR SW Group</font>
-		 			</td>
-		 			<td width="150px" align="center">
-		 				<a href="http://mosaic.sec.samsung.net/club/club.main.index.screen?p_club_id=31153" target="_blank" title="Community"><font size=1 face="Arial">TSDR SW MOSAIC</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://splm.sec.samsung.net/portal/com/shared/main.do" target="_blank" title="Project Management System"><font size=1 face="Arial">PLM</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://kona.sec.samsung.net/kona_server/main/mainPage.do" target="_blank" title="SW Defect Traking System"><font size=1 face="Arial">KONA</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://vdsmart.sec.samsung.net/home/menu.do" target="_blank" title="SW Standard Asset and Process Information"><font size=1 face="Arial">SMART</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://10.40.68.65:8085/default.jsp" target="_blank" title="Global Management & Adjustment of Product"><font size=1 face="Arial">G-MAP</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://168.219.241.102/VDOSS/#/" target="_blank" title="Opensource License Verification"><font size=1 face="Arial">OpenSource</font></a>
-					</td>
-					<td width="100px" align="center">
-		 				<a href="http://vdswportal.sec.samsung.net/SWPortal/static_analysis.aspx" target="_blank" title="SW Static Test tool"><font size=1 face="Arial">SVACE</font></a>
-					</td>
-					<td width="100px" align="center">
-		 				<a href="http://109.110.100.50:4982/defect" target="_blank" title="SW Code Quality Improvement System"><font size=1 face="Arial">Dexter</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://platz.sec.samsung.net/tapi/" target="_blank" title="Platform API of Tizen"><font size=1 face="Arial">PLATZ</font></a>
-					</td>
-		 			<td width="100px" align="center">
-		 				<a href="http://vdcosmos.sec.samsung.net/signin" target="_blank" title="VD Tizen Build & Test System"><font size=1 face="Arial">COSMOS</font></a>
-					</td>
-		 				<td width="100px" align="center">
-						<a href="http://10.40.68.68/isms/identity/anonymous/ssoLogin.do" target="_blank" title="Integrated SW Security Management System"><font size=1 face="Arial">ISMS</font></a>
-					</td>
-		 			<td width="100px" align="center">
-						<a href="http://vdsw.sec.samsung.net/SitePages/New_Home.aspx" target="_blank" title="Microsoft Office Sharepoint Server"><font size=1 face="Arial">MOSS</font></a>
-					</td>	
-					<td width="100px" align="center">
-						<a href="https://wormhole.sec.samsung.net/cnh/secure/StructureBoard.jspa" target="_blank" title="Microsoft Office Sharepoint Server"><font size=1 face="Arial">Wormhole</font></a>
-					</td>
-					<td width="100px" align="center">
-						<a href="http://109.110.41.139:8000/" target="_blank" title="What's Model"><font size=1 face="Arial">What's Model</font></a>
-					</td>
-					<td width="100px" align="center">
-						<a href="http://109.110.100.57/index.html" target="_blank" title="SW Technical Material Library"><font size=1 face="Arial">STeML</font></a>
-					</td>
-					<td width="500px" align="center">
-					
-					</td>			
-					<td width="100px" align="center">
-						<a href="http://mosaic.sec.samsung.net/club/club.menu.bbs.list.screen?p_club_id=31153&p_menu_id=65&p_group_id=67" target="_blank" title=""><font color="#9d9d9d" size=1 face="Arial">VOC</font></a>
-					</td>
-					<td width="100px" align="center">				
-						<a href="http://mosaic.sec.samsung.net/club/club.menu.bbs.list.screen?p_club_id=31153&p_menu_id=81&p_group_id=67" target="_blank"><font color="#9d9d9d" size=1 face="Arial">Q&A</font></a>
-					</td>
-					<td width="100px" align="center" >
-						<a href="/portal/home/download/SW Portal User Manual.pptx" title='TSDR SW Portal Manual Download'><font color="#9d9d9d" size=1 face="Arial">User Manual</font></a>
-					</td>
-					<td width="100px" align="center">
-						<font color="#9d9d9d" size=1 face="Arial">V1.4.4</font>
-					</td>
-				</tr>
-			</table>	
+		<div style="position:absolute; bottom:-4px">
+			<%@ include file="/WEB-INF/jsp/homeController/bottom.jsp"%>
 		</div>
 	</body>
 </html>

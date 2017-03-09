@@ -2,7 +2,6 @@ package com.web.controller.entity;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Pas implements java.io.Serializable{	
 	private static final long serialVersionUID = 1L;
@@ -32,12 +31,12 @@ public class Pas implements java.io.Serializable{
 	private String pRAActualDate;
 	private String sRAPlanDate;
 	private String sRAActualDate;
-	private String bPAPlanDate;
+	/*private String bPAPlanDate;
 	private String bPAActualDate;
 	private String bIAPlanDate;
 	private String bIAActualDate;
 	private String bCAPlanDate;
-	private String bCAActualDate;
+	private String bCAActualDate;*/
 	
 	private String dIA;
 	private String pIA;
@@ -214,7 +213,7 @@ public class Pas implements java.io.Serializable{
 	public void setsRAActualDate(String sRAActualDate) {
 		this.sRAActualDate = sRAActualDate;
 	}
-	public String getbPAPlanDate() {
+	/*public String getbPAPlanDate() {
 		return bPAPlanDate;
 	}
 	public void setbPAPlanDate(String bPAPlanDate) {
@@ -249,7 +248,7 @@ public class Pas implements java.io.Serializable{
 	}
 	public void setbCAActualDate(String bCAActualDate) {
 		this.bCAActualDate = bCAActualDate;
-	}
+	}*/
 	public String getdIA() {
 		return dIA;
 	}

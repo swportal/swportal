@@ -137,13 +137,31 @@
 			var favor=0;
 			var cur=1;
 			//var userid=${usersession}.length==0?"":${usersession.id};
-			function updateFavor(id){
+			function updateFavor(id,i){
 				//var aa=${usersession.id}+" "+id;
 				var pasid=id;
-				//alert(1);
+				// 2017-03-06 add favor icon dynamic effect
+				/*var s="star"+i;
+				 alert(s);
+				 var img=document.getElementById(s);
+				 var flag=true;
+				 var h=img.height;
+				 var w=img.width;
+				 alert(h); */
 				$.getJSON("/portal/user/updateFavor?pasid="+pasid+"&rn="+Math.random(),function(data){
 					if("yes"==data.result){
 						 //alert("Add Success!");
+						 /*if(flag){
+							flag=false;
+							img.src="<%=request.getContextPath()%>/style/images/starye.png";
+							/*img.height=18;
+							img.width=18;
+						 }
+						 else{
+							 flag=false;
+							 img.height=14;
+							 img.width=14;
+						 }*/
 						 load(cur,'','');
 					}
 					else{ 
@@ -177,9 +195,9 @@
 					    document.getElementById("updatetime").innerHTML=data[2].updatetime;
 					    if(data[3].userid!=0){  //有登录用户
 					    	if(favor==0)
-					    		document.getElementById("favor").innerHTML="<img id='star' title='All Data'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='15' height='15' style='cursor:pointer'/>";
+					    		document.getElementById("favor").innerHTML="<img id='bigstar' title='All Data'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='15' height='15' style='cursor:pointer'/>";
 					    	else
-					    		document.getElementById("favor").innerHTML="<img id='star' title='Favorites List'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/starye.png'  width='15' height='15' style='cursor:pointer'/>";
+					    		document.getElementById("favor").innerHTML="<img id='bigstar' title='Favorites List'  onClick='getFavorList();' src='<%=request.getContextPath()%>/style/images/starye.png'  width='15' height='15' style='cursor:pointer'/>";
 					    }
 					    
 					 	var curpage=data[1].curpage;
@@ -236,24 +254,24 @@
 				  					}
 				  					if(flag==1){
 					  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
-							  					html = html+ "<td align='left'>&nbsp;<img id='star' title='Delete from Favorites'  onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+							  					html = html+ "<td align='left'>&nbsp;<img id='star"+i+"' title='Delete from Favorites'  onClick='updateFavor("+data[0].pasList[i].projectid+","+i+");' src='<%=request.getContextPath()%>/style/images/starye.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
 							  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 							  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 							  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
 										    }
 										    else{
-										   		html = html+ "<td align='left'>&nbsp;<img id='star' title='Delete from Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/starye.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+										   		html = html+ "<td align='left'>&nbsp;<img id='star"+i+"' title='Delete from Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+","+i+");' src='<%=request.getContextPath()%>/style/images/starye.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
 										    }
 				  					}
 				  					else{
 				  						if(data[0].pasList[i].pLMTotal!=0){  //pjt name
-						  					html = html+ "<td align='left'>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
+						  					html = html+ "<td align='left'>&nbsp;<img id='star"+i+"' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+","+i+");' src='<%=request.getContextPath()%>/style/images/stargrey.png'  width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;" 
 						  					+ "<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;"
 						  					+"<a target='_blank' href='/portal/defectinfo/toDefectPage?projectname="+data[0].pasList[i].pjtName
 						  					+"'><font color='#3498db' size=2>" +data[0].pasList[i].pjtName+ "</font></a></td>";
 									    }
 									    else{
-									   		html = html+ "<td align='left'>&nbsp;<img id='star' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+");' src='<%=request.getContextPath()%>/style/images/stargrey.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
+									   		html = html+ "<td align='left'>&nbsp;<img id='star"+i+"' title='Add to Favorites' onClick='updateFavor("+data[0].pasList[i].projectid+","+i+");' src='<%=request.getContextPath()%>/style/images/stargrey.png' width='14' height='14' style='cursor:pointer'/>&nbsp;&nbsp;<a onClick='openwin_searchmodel(\""+data[0].pasList[i].pjtName+"\")'  href='#'>"+"<font color='#3498db' size=2> + </font></a>&nbsp;&nbsp;&nbsp;<font size=2>"+data[0].pasList[i].pjtName+"</font></a></td>";
 									    }
 				  					}			  					
 				  				}

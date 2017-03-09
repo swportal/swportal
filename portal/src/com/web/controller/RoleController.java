@@ -16,6 +16,8 @@ import com.web.controller.entity.Privilege;
 import com.web.controller.entity.Role;
 import com.web.controller.service.PrivilegeService;
 import com.web.controller.service.RoleService;
+import com.web.controller.service.UserService;
+import com.web.controller.entity.User;
 
 @Controller
 @RequestMapping("/role")
@@ -23,6 +25,8 @@ public class RoleController {
 	//private Log log = LogFactory.getLog(this.getClass());
 	@Resource
 	private RoleService roleService;
+	@Resource
+	private UserService userService;
 	@Resource
 	private PrivilegeService privilegeService;
 	
@@ -45,6 +49,7 @@ public class RoleController {
 			 */
 		    Role r = roleService.getById(role.getId());
 		    List<Privilege> privilegeList = null;
+		    List<User> userList = null;
 			if(r.getPrivileges()!=null){
 				Long[] privilegeIds  = new Long[r.getPrivileges().size()];
 				int index = 0;
@@ -55,6 +60,18 @@ public class RoleController {
 				
 			}
 			role.setPrivileges(new HashSet<Privilege>(privilegeList));
+			//2017-03-09 wuliying add for avoiding erasing user info
+			if(r.getUsers()!=null){
+				Long[] userIds  = new Long[r.getUsers().size()];
+				int index = 0;
+				for(User user:r.getUsers()){
+					userIds[index++]=user.getId();
+				}
+				userList = userService.getByIds(userIds);
+				
+			}
+			role.setUsers(new HashSet<User>(userList));
+			
 			roleService.update(role);
 			return "redirect:/role/getAllRole";
 		//}

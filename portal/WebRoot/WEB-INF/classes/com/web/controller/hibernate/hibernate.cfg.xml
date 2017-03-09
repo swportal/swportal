@@ -18,7 +18,7 @@
 		<mapping resource="com/web/controller/entity/Model.hbm.xml" />
 		<mapping resource="com/web/controller/entity/Defectinfo.hbm.xml" />
 		<mapping resource="com/web/controller/entity/Defectdaily.hbm.xml" />
-		<mapping resource="com/web/controller/entity/Comp.hbm.xml" /> 
- 		<mapping resource="com/web/controller/entity/Block.hbm.xml" /> 
+<!-- 		<mapping resource="com/web/controller/entity/Comp.hbm.xml" />  -->
+<!--  		<mapping resource="com/web/controller/entity/Block.hbm.xml" />  -->
 	</session-factory>
 </hibernate-configuration>
