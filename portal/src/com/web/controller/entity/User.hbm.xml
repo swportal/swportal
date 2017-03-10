@@ -22,8 +22,8 @@
 			<key column="userId"></key>
 			<many-to-many class="Role" column="roleId"></many-to-many>
 		</set> 
-		<!-- projects属性, 本类与pas的 多对多 --><!-- Wuliying add 2017-02-23 --><!-- Wuliying delete lazy load 2017-03-09 -->
- 		<set name="projects" table="tsdr_user_project"> 
+		<!-- projects属性, 本类与pas的 多对多 --><!-- Wuliying add 2017-02-23 --><!-- Wuliying delete lazy load 2017-03-09 --><!-- Wuliying add lazy load 2017-03-10 -->
+ 		<set name="projects" table="tsdr_user_project" lazy="false"> 
  			<key column="userId"></key> 
  			<many-to-many class="Pas" column="projectId"></many-to-many> 
  		</set> 

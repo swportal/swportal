@@ -159,6 +159,10 @@ public class UserController {
 			curpage=1;
 		Integer pageSize=15;
 		List<User> users = userService.findUserList(curpage,pageSize);
+		//2017-03-10 wuliying add for user page error
+		for(User user:users){
+			user.setProjects(null);
+		}
 		request.setAttribute("users", users);
 		request.setAttribute("curpage",curpage);
 		request.setAttribute("total", (userService.findAll().size()%pageSize==0)?(userService.findAll().size()/pageSize):(userService.findAll().size()/pageSize+1));
