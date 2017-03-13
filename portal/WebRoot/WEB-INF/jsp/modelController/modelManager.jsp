@@ -131,7 +131,7 @@
 	
 	<script language="JavaScript">
 		function openwin_searchdefect(pn,mod,item){	
-			window.open ("/portal/defect/getDefectFromModel?projectname="+pn+"&modelname="+mod+"&item="+item+"&rn="+Math.random(), "newwindow2", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=100");
+			window.open ("/portal/defect/getDefectFromModel?projectname="+pn+"&modelname="+mod+"&item="+item+"&rn="+Math.random(), "newwindow2", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=yes, location=no, status=no, top=50,left=50");
 		}
 	</script> 
 	<script type="text/javascript">

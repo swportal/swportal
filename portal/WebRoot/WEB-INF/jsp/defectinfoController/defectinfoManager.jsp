@@ -968,7 +968,7 @@
 			
 
 			function openwin_searchdefect(pn,id,item){	
-				window.open ("/portal/defect/getDefectFromPie?projectname="+pn+"&codeid="+id+"&item="+item+"&rn="+Math.random(), "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
+				window.open ("/portal/defect/getDefectFromPie?projectname="+pn+"&codeid="+id+"&item="+item+"&rn="+Math.random(), "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=yes, location=no, status=no, top=50,left=50");
 			}
 		</script>
 		<script>

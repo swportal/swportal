@@ -708,7 +708,7 @@
 				window.open ("mainpage_projectstatus.jsp", "newwindow", "height=900, width=1440, toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no, top=50,left=150");
 			}
 			function openwin_searchdefect(pn,item){	
-				window.open ("/portal/defect/getDefect?projectname="+pn+"&item="+item, "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=yes, location=no, status=no, top=50,left=60");
+				window.open ("/portal/defect/getDefect?projectname="+pn+"&item="+item, "newwindow", "height=700, width=1800, toolbar =no, menubar=no, scrollbars=no, resizable=yes, location=no, status=no, top=50,left=50");
 				
 			}
 			function openwin_searchmodel(pn){	
