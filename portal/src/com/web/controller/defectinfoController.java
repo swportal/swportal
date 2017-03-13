@@ -575,20 +575,19 @@ public class defectinfoController {
         c10.setCellStyle(style); 
         
         for(int i=0;i<defectList.size();i++){
-					row=sheet.createRow((int)i+1);
-					Defect defect = (Defect)defectList.get(i);
-					row.createCell((short)0).setCellValue(new HSSFRichTextString(defect.getiD()));
-					row.createCell((short)1).setCellValue(new HSSFRichTextString(defect.gethEADLINE().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)2).setCellValue(new HSSFRichTextString(defect.getsERIOUSNESS().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)3).setCellValue(new HSSFRichTextString(defect.getmODELCODE().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)4).setCellValue(new HSSFRichTextString(defect.getsUBCOMPONENTNAME().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)5).setCellValue(new HSSFRichTextString(defect.getsUBMITTEDTIME().replaceAll("<", " &lt;").replaceAll(">", " &gt;"))); // 2016-11-18 PLATFORMDEVELOPER->SUBMITTEDTIME wuliying
-					row.createCell((short)6).setCellValue(new HSSFRichTextString(defect.getpRODUCTDEVELOPER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)7).setCellValue(new HSSFRichTextString(defect.getdEFECTSOLVEDVERSION().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)8).setCellValue(new HSSFRichTextString(defect.getrEQUESTER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)9).setCellValue(new HSSFRichTextString(defect.getsTATUS().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-					row.createCell((short)10).setCellValue(new HSSFRichTextString(defect.getsTATEOWNER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
-
+			row=sheet.createRow((int)i+1);
+			Defect defect = (Defect)defectList.get(i);
+			row.createCell((short)0).setCellValue(new HSSFRichTextString(defect.getiD()));
+			row.createCell((short)1).setCellValue(new HSSFRichTextString(defect.gethEADLINE().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)2).setCellValue(new HSSFRichTextString(defect.getsERIOUSNESS().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)3).setCellValue(new HSSFRichTextString(defect.getmODELCODE().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)4).setCellValue(new HSSFRichTextString(defect.getsUBCOMPONENTNAME().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)5).setCellValue(new HSSFRichTextString(defect.getsUBMITTEDTIME().replaceAll("<", " &lt;").replaceAll(">", " &gt;"))); // 2016-11-18 PLATFORMDEVELOPER->SUBMITTEDTIME wuliying
+			row.createCell((short)6).setCellValue(new HSSFRichTextString(defect.getpRODUCTDEVELOPER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)7).setCellValue(new HSSFRichTextString(defect.getdEFECTSOLVEDVERSION().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)8).setCellValue(new HSSFRichTextString(defect.getrEQUESTER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)9).setCellValue(new HSSFRichTextString(defect.getsTATUS().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
+			row.createCell((short)10).setCellValue(new HSSFRichTextString(defect.getsTATEOWNER().replaceAll("<", " &lt;").replaceAll(">", " &gt;")));
 		}
 		try{   
 	        workbook.write(response.getOutputStream());  

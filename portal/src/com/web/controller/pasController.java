@@ -89,7 +89,7 @@ public class pasController {
 		totalpage=(pasListAll.size()%pageSize==0)?(pasListAll.size()/pageSize):(pasListAll.size()/pageSize+1);
 		
 		
-		//2007-02-27 wuliying add for avoiding the hibernate call cycle
+		//2017-02-27 wuliying add for avoiding the hibernate call cycle
 		/*for(Pas pas:pasList){			
 			for(User user:pas.getUsers()){
 				if(user.getId().toString().equals(userid.toString())){
@@ -334,25 +334,24 @@ public class pasController {
         sheet.addMergedRegion(new CellRangeAddress(0, 1,(short)15,  (short)15));
         
         for(int i=0;i<pasList.size();i++){
-					row=sheet.createRow((int)i+2);
-					Pas pas = (Pas)pasList.get(i);
-					row.createCell((short)0).setCellValue(new HSSFRichTextString(i+1+""));
-					row.createCell((short)1).setCellValue(new HSSFRichTextString(pas.getPjtName()));
-					row.createCell((short)2).setCellValue(new HSSFRichTextString(pas.getMilestone()));
-					row.createCell((short)3).setCellValue(new HSSFRichTextString(pas.getProjType()));
-					row.createCell((short)4).setCellValue(new HSSFRichTextString(pas.getpIAPlanDate()));
-					row.createCell((short)5).setCellValue(new HSSFRichTextString(pas.getpIAActualDate()));
-					row.createCell((short)6).setCellValue(new HSSFRichTextString(pas.getpVRPlanDate())); 
-					row.createCell((short)7).setCellValue(new HSSFRichTextString(pas.getpVRActualDate()));
-					row.createCell((short)8).setCellValue(new HSSFRichTextString(pas.getpRAPlanDate()));
-					row.createCell((short)9).setCellValue(new HSSFRichTextString(pas.getpRAActualDate()));
-					row.createCell((short)10).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMTotal())));
-					row.createCell((short)11).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMClosed())));
-					row.createCell((short)12).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMResolved())));
-					row.createCell((short)13).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMOpened())));
-					row.createCell((short)14).setCellValue(new HSSFRichTextString(pas.getDevPL()));
-					row.createCell((short)15).setCellValue(new HSSFRichTextString(pas.getsWEM()));
-
+			row=sheet.createRow((int)i+2);
+			Pas pas = (Pas)pasList.get(i);
+			row.createCell((short)0).setCellValue(new HSSFRichTextString(i+1+""));
+			row.createCell((short)1).setCellValue(new HSSFRichTextString(pas.getPjtName()));
+			row.createCell((short)2).setCellValue(new HSSFRichTextString(pas.getMilestone()));
+			row.createCell((short)3).setCellValue(new HSSFRichTextString(pas.getProjType()));
+			row.createCell((short)4).setCellValue(new HSSFRichTextString(pas.getpIAPlanDate()));
+			row.createCell((short)5).setCellValue(new HSSFRichTextString(pas.getpIAActualDate()));
+			row.createCell((short)6).setCellValue(new HSSFRichTextString(pas.getpVRPlanDate())); 
+			row.createCell((short)7).setCellValue(new HSSFRichTextString(pas.getpVRActualDate()));
+			row.createCell((short)8).setCellValue(new HSSFRichTextString(pas.getpRAPlanDate()));
+			row.createCell((short)9).setCellValue(new HSSFRichTextString(pas.getpRAActualDate()));
+			row.createCell((short)10).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMTotal())));
+			row.createCell((short)11).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMClosed())));
+			row.createCell((short)12).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMResolved())));
+			row.createCell((short)13).setCellValue(new HSSFRichTextString(String.valueOf(pas.getpLMOpened())));
+			row.createCell((short)14).setCellValue(new HSSFRichTextString(pas.getDevPL()));
+			row.createCell((short)15).setCellValue(new HSSFRichTextString(pas.getsWEM()));
 		}
 		try{   
 	        workbook.write(response.getOutputStream());  
