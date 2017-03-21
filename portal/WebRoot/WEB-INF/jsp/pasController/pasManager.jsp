@@ -22,6 +22,26 @@
 				padding:0; 
 				height:90%
 			}
+			select {
+					<%--				  Chrome和Firefox里面的边框是不一样的，所以复写了一下--%>
+					<%--				  border: solid 1px #000;--%>
+				
+					<%--				  很关键：将默认的select选择框样式清除--%>
+					<%--				  appearance:none;--%>
+					<%--				  -moz-appearance:none;--%>
+					<%--				  -webkit-appearance:none;--%>
+				
+					<%--				  在选择框的最右侧中间显示小箭头图片--%>
+					<%--				  background: url("<%=request.getContextPath()%>/style/images/arrowdown.png") no-repeat scroll right center transparent;--%>
+				
+				
+					<%--				  为下拉小箭头留出一点位置，避免被文字覆盖--%>
+					<%--				  padding-right: 14px;--%>
+				}
+				
+				
+				<%--				清除ie的默认选择框样式清除，隐藏下拉箭头--%>
+				<%--				select::-ms-expand { display: none; }--%>
 		</style>
 		<style type="text/css">			
 			.main{ 
@@ -738,7 +758,7 @@
 						&nbsp; 
 						<select id="parentSelect" name="parentSelect" onChange="getResult(this.value);" style="font-size:14px; vertical-align:middle;  border-radius:5px; width:128px;height:33px; " >
 		         		<option value="choose" >- Select -</option>
-		         		<option value="ms" >Milestone</option>
+		         		<option value="ms">Milestone</option>
 		         		<option value="spt">Project Type</option>
 		         		<option value="pg">Prod.Group</option>
 		         		<option value="ps">Pjt. Status</option>

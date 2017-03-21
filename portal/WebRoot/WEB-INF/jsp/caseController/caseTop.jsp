@@ -9,6 +9,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=gb2312">  
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
      	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+		<%--  2017-03-21 wuliying add --%>
+     	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
 	    <style> 
 	    	td {text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 		    hr{
@@ -484,6 +486,11 @@
 				load(flag,"id","DESC",conflag);
 	  		}
 		</script>
+		<script language="JavaScript">
+			$(function(){
+				document.getElementById("selectitem").focus();
+			});
+		</script>
 	</head>  
  
 	<body onload="load(1, '${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','${usersession.hasPrivilegeByName('Case Delete')}','','')">  
@@ -494,10 +501,10 @@
 					<input type="text" placeholder="Search" name="selectitem" id="selectitem" title="Input ProdType;Chipset;Model;Description;OccurTime;OccurSite"  oninput="javascript:load(1,'${usersession.hasPrivilegeByName('Case Update')}','${usersession.hasPrivilegeByName('Case Confirm')}','${usersession.hasPrivilegeByName('Case Delete')}','','')"  style="color:#95a5a6; padding-left:5px;border-radius:5px;  width:160px; height:30px; vertical-align:middle;">
 					<li style="padding-left:10">
 						<c:if test="${usersession.hasPrivilegeByName('Case Add')}">
-							<input type="button"  onclick="addCase()" value="Add" style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
+							<input type="button"  onclick="addCase()" value=" Add "  class="button button-raised button-rounded button-small" />  &nbsp;&nbsp; <%--2017-03-21 wuliying delete style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "--%>
 						</c:if>
 						<c:if test="${usersession.hasPrivilegeByName('Case Delete')}">
-							<input type="button"  onclick="delCase()" value="Delete" style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+							<input type="button"  onclick="delCase()" value="Delete" class="button button-raised button-rounded button-small" />  
 						</c:if>						
 					</li>
 		        </li>

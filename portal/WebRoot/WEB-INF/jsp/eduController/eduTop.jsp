@@ -10,6 +10,8 @@
    		<title>Education Management</title>
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
      	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+     	<%--  2017-03-21 wuliying add --%>
+     	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
 	    <style type="text/css"> 
 	    	hr{
 		    	position:relative;
@@ -419,6 +421,11 @@
 		 		});
 			}
 		</script>
+		<script language="JavaScript">
+			$(function(){
+				document.getElementById("selectitem").focus();
+			});
+		</script>
   	</head> 
 	
   	<body onload="load(1,'${usersession.hasPrivilegeByName('Training Update')}','${usersession.hasPrivilegeByName('Training Delete')}','id','DESC')">
@@ -430,10 +437,10 @@
 	        </li>
 	       	<li>
 				<c:if test="${usersession.hasPrivilegeByName('Training Add')}">
-					<input type="button"  onclick="addEdu()" value="Add" style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
+					<input type="button"  onclick="addEdu()" value=" Add " class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
 				</c:if>
 				<c:if test="${usersession.hasPrivilegeByName('Training Delete')}">
-					<input type="button"  onclick="delEdu()" value="Delete" style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+					<input type="button"  onclick="delEdu()" value="Delete" class="button button-raised button-rounded button-small"/>  
 				</c:if>
 			</li>
 		</ul>

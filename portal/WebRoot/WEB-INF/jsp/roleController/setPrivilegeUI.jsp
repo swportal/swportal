@@ -14,6 +14,8 @@
   <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/style/blue/file.css" />
   <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/js/jquery_treeview/jquery.treeview.css" />
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+       	<%--  2017-03-21 wuliying add --%>
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
   
   <style type="text/css">
 			ul,li{
@@ -149,8 +151,8 @@
         <div id="InputDetailBar">
 <%--            <input type="image" src="${pageContext.request.contextPath}/style/images/save.png"/>--%>
 <%--            <a href="javascript:history.go(-1);"><img src="${pageContext.request.contextPath}/style/images/goBack.png"/></a>--%>
-            <input type="submit"  value="Save" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
-			<input type="button"  onclick="javascript:history.go(-1);" value="Back" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+            <input type="submit"  value="Save" class="button button-raised button-rounded button-small" />  &nbsp;&nbsp;
+			<input type="button"  onclick="javascript:history.go(-1);" value="Back" class="button button-raised button-rounded button-small" /> <%--style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%> 
         </div>
     </s:form>
 </div>	  

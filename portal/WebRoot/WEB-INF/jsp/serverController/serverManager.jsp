@@ -178,6 +178,11 @@
 		 		});
 			}
 	  	</script>
+	  	<script language="JavaScript">
+			$(function(){
+				document.getElementById("selectitem").focus();
+			});
+		</script>
   	</head> 
 	
   	<body onload="load(1,'${usersession.hasPrivilegeByName('Server Info.')}')">  

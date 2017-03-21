@@ -10,6 +10,8 @@
    		<title>Business Trip Management</title>
   		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
      	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+     	     	<%--  2017-03-21 wuliying add --%>
+     	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
 	    <style type="text/css"> 
 		    hr{
 		    	position:relative;
@@ -367,7 +369,12 @@
 	  	        appExcel.Workbooks.Add().Worksheets.Item(1).Paste();
 	  	        appExcel = null;
 	  	    }
-		</script>  			
+		</script>  	
+		<script language="JavaScript">
+			$(function(){
+				document.getElementById("selectitem").focus();
+			});
+		</script>		
   	</head> 
 	
   	<body onload="load(1,'${usersession.hasPrivilegeByName('Trip Update')}','${usersession.hasPrivilegeByName('Trip Delete')}','id','DESC')">
@@ -380,10 +387,10 @@
 	        </li>
 	        <li style="padding-left:850">
 					<c:if test="${usersession.hasPrivilegeByName('Trip Add')}">
-						<input type="button"  onclick="addTrip()" value="Add" style="color:#2c3e50; font-size:12px;font-weight:bold; border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
+						<input type="button"  onclick="addTrip()" value=" Add "  class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
 					</c:if>
 					<c:if test="${usersession.hasPrivilegeByName('Trip Delete')}">
-						<input type="button"  onclick="delTrip()" value="Delete" style="color:#2c3e50;font-size:12px; font-weight:bold; border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+						<input type="button"  onclick="delTrip()" value="Delete"  class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
 					</c:if>
 			</li>
 		</ul>

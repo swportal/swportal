@@ -7,6 +7,8 @@
   <head>
 	<%--   <title>User Management</title>--%>
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button.css" />
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
    <style type="text/css">
   			 #footer{
@@ -84,8 +86,8 @@
 			<li>
 				<strong>| User Management |</strong>&nbsp;&nbsp;&nbsp;	
 				<c:if test="${usersession.hasPrivilegeByName('User Add')}">
-							<input type="button"  onclick="window.location.href='/portal/user/toAddUser'" value="Add" style="color:#95a5a6;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
-							<input type="button"  onclick="javascript:del('${u.id }')" value="Delete" style="color:#95a5a6;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+							<input type="button"  onclick="window.location.href='/portal/user/toAddUser'" value=" Add " class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
+							<input type="button"  onclick="javascript:del('${u.id }')" value="Delete" class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>  
 				</c:if>
 			</li>
 		</ul>
@@ -138,15 +140,15 @@
         <c:if test="${!empty users }">
 			<c:forEach items="${users }" var="u">
             <tr bordercolor="#DEDEDE" bgcolor="#ffffff">
-               <td align="center" height="30px" style="font-size:12px; color:#004779;text-align:center;">${u.loginName}</td>		
-               <td align="center"  height="30px" style="font-size:12px; color:#004779;text-align:center;">${u.name}</td>	
-                <td align="center"  height="30px" style="font-size:12px; color:#004779;text-align:center;">${u.gender}&nbsp;</td>
-                <td align="center"  height="30px" style="font-size:12px; color:#004779;text-align:center;">
+               <td align="center" height="30px" style="font-size:12px; text-align:center;">${u.loginName}</td>		
+               <td align="center"  height="30px" style="font-size:12px; text-align:center;">${u.name}</td>	<%--20170316 wuliying delete color:#004779;--%>
+                <td align="center"  height="30px" style="font-size:12px; text-align:center;">${u.gender}&nbsp;</td>
+                <td align="center"  height="30px" style="font-size:12px; text-align:center;">
                 	<c:forEach items="${u.roles }" var="r">
 						${r.name}
 					</c:forEach>
                 </td>
-                <td align="center"  height="30px" style="font-size:12px; color:#004779;text-align:center;">${u.description}</td>
+                <td align="center"  height="30px" style="font-size:12px; text-align:center;">${u.description}</td>
                 <td align="center"  height="30px" style="font-size:12px; color:#004779;text-align:center;">
                 <c:if test="${usersession.hasPrivilegeByName('User Update')}">
                 	<a href="/portal/user/getUser?id=${u.id}">Edit</a>

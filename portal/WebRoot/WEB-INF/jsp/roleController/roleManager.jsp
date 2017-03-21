@@ -10,6 +10,8 @@
 <html>
   <head>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+   	<%--  2017-03-21 wuliying add --%>
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
     <title>Role Management</title>
     <style type="text/css">
@@ -65,8 +67,8 @@
 			<li>					
 				<strong>| Role  Management |</strong>&nbsp;&nbsp;&nbsp;
 				<c:if test="${usersession.hasPrivilegeByName('Role Add')}">
-							<input type="button"  onclick="window.location.href='/portal/role/toAddRole'" value="Add" style="color:#95a5a6;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
-							<input type="button"  onclick="javascript:del('${r.id }')" value="Delete" style="color:#95a5a6;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+							<input type="button"  onclick="window.location.href='/portal/role/toAddRole'" value=" Add " class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
+							<input type="button"  onclick="javascript:del('${r.id }')" value="Delete" class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete : style="color:#2c3e50; font-size:12px;font-weight:bold;   border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
 				</c:if>
 			</li>
 		</ul>
@@ -88,9 +90,9 @@
        	<c:if test="${!empty roles }">
 			<c:forEach items="${roles }" var="r">
 			 <tr bordercolor="#DEDEDE" bgcolor="#ffffff" >
-				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; color:#004779;text-align:center;">${r.name}</td>
-				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; color:#004779;text-align:center;">${r.description}</td>
-				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; color:#004779;text-align:center;">
+				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; text-align:center;">${r.name}</td><%--20170316 wuliying delete color:#004779;--%>
+				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; text-align:center;">${r.description}</td>
+				<td align="center" height="30px"  bordercolor="#DEDEDE" style="font-size:12px; text-align:center;">
 					<c:if test="${usersession.hasPrivilegeByName('Role Update')}">
 						<a href="/portal/role/getRole?id=${r.id}">Edit</a>
 					</c:if>

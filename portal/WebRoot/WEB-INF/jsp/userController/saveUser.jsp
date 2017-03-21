@@ -14,6 +14,8 @@
     <link href="<%=request.getContextPath()%>/FlatUI/docs/assets/css/demo.css" rel="stylesheet">
   <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.4.2.min.js"></script>
   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+  <%--  2017-03-21 wuliying add --%>
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
 	<%--    <title>User Information</title>--%>
     <style type="text/css">
 			ul,li{
@@ -146,8 +148,8 @@
 		        <div id="InputDetailBar">
 <%--		            <input type="image" src="<%=request.getContextPath()%>/style/images/save.png" onClick="saveUser()"/>--%>
 <%--		            <a href="javascript:history.go(-1);"><img src="<%=request.getContextPath()%>/style/images/goBack.png"/></a>--%>
-		            <input type="submit"  value="Save" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; " onClick="saveUser()"/>  &nbsp;&nbsp;
-					<input type="button"  onclick="javascript:history.go(-1);" value="Back" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  
+		            <input type="submit"  value="Save" class="button button-raised button-rounded button-small" onClick="saveUser()"/>  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete :style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "  --%>
+					<input type="button"  onclick="javascript:history.go(-1);" value="Back" class="button button-raised button-rounded button-small"  />  &nbsp;&nbsp; <%-- 2017-03-21 wuliying delete :style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "  --%>
 		        </div>
 		</form>
    	</div>	    

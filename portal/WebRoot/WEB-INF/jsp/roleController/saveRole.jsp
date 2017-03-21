@@ -12,6 +12,8 @@
 	    <link href="<%=request.getContextPath()%>/FlatUI/dist/css/flat-ui.css" rel="stylesheet">
 		<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/mainpagestyle.css" />
+		     	<%--  2017-03-21 wuliying add --%>
+     	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/style/button-flag.css" />
 		<style type="text/css">
 			ul,li{
 				margin:0;
@@ -85,8 +87,8 @@
            		<br/>
         
 	        	<!-- 表单操作 -->
-	            <input type="button"  onClick="saveRole()" value="Save" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
-	       		<input type="button"  onClick="javascript:history.go(-1);" value="Back" style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; "/>  &nbsp;&nbsp;
+	            <input type="button"  onClick="saveRole()" value="Save" class="button button-raised button-rounded button-small"/>  &nbsp;&nbsp; <%--style="color:#000000;  border-radius:5px; vertical-align:middle;height:30px;  width:60px; " --%>
+	       		<input type="button"  onClick="javascript:history.go(-1);" value="Back" class="button button-raised button-rounded button-small"/>  &nbsp;&nbsp;
 				<%--  <input type="image" src="<%=request.getContextPath()%>/style/images/save.png" onClick="saveRole()"/>--%>
 				<%--  <a href="javascript:history.go(-1);"><img src="${pageContext.request.contextPath}/style/images/goBack.png"/></a>--%>
 			</div>

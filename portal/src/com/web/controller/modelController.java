@@ -50,7 +50,7 @@ public class modelController {
 		
 		List<Model> modelList = new ArrayList<Model>();
 		List<Model> whereList = new ArrayList<Model>();
-		Integer pageSize=10;
+		Integer pageSize=16; //2017-03-13 wuliying change from 10 to 16 V1.4.9
 		
 		modelList = modelService.findModelList(curPage,pageSize,where);	
 		whereList = modelService.findAllWhere(where);	
