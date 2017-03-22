@@ -513,7 +513,7 @@
 							prevpagehtml = "<a onclick='load("+(currpage-1)+",ordItem,ordKey);' href='javascript:void(0);'><</a>";
 						}
 						if((currpage-0)<(pagecount-0)){
-							nextpagehtml = "<a onclick='load("+(currpage-0+1)+",ordItem,ordKey);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+							nextpagehtml = "<a onclick='load("+(currpage-0+1)+",ordItem,ordKey);' href='javascript:void(0);'><font color='#3498db'>></font></a>&nbsp;&nbsp;&nbsp;";
 							lastpagehtml = " <a onclick='load("+pagecount+",ordItem,ordKey);' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
 						}else{
 							nextpagehtml = "<a>></a>&nbsp;&nbsp;&nbsp;";

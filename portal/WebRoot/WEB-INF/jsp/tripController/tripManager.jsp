@@ -339,7 +339,7 @@
 					 	prevpagehtml = "<a onclick='load("+(curpage-1)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><</a>";
 					}
 					if(curpage < totalpage){
-						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'>></a>&nbsp;&nbsp;&nbsp;";
+						nextpagehtml = "<a onclick='load("+(curpage+1)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);' href='javascript:void(0);'><font color='#3498db'>></font></a>&nbsp;&nbsp;&nbsp;";
 					 	lastpagehtml="<a onclick='load("+(totalpage)+",\""+tripFlag+"\",\""+delflag+"\",\""+orderItem+"\",\""+orderKey+"\");' href='javascript:void(0);'><font color='#3498db'>>></font></a> ";
 					}
 					else{

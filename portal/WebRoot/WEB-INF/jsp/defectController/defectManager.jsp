@@ -232,7 +232,7 @@
 			 			fontStyle="<font color=red size=2>";
 			 		
 				 	str+="<td align='center'>"+fontStyle+ data[0].defectList[i].iD+"</font></td>"; 
-				 	str+="<td><div style='overflow: hidden; white-space: nowrap; text-overflow: ellipsis;' title='"+data[0].defectList[i].hEADLINE.replace('\'','&#39;')+"'> "+fontStyle+"&nbsp;"+data[0].defectList[i].hEADLINE +"</font></div></td>"; 
+				 	str+="<td><div style='overflow: hidden; white-space: nowrap; text-overflow: ellipsis;' title='"+data[0].defectList[i].hEADLINE.replace(new RegExp(/(')/g),'&#39;')+"'> "+fontStyle+"&nbsp;"+data[0].defectList[i].hEADLINE +"</font></div></td>"; 
 					str+="<td  align='center'> "+fontStyle+"&nbsp;"+data[0].defectList[i].sERIOUSNESS +"</font></td>"; 
 				 	str+="<td align='center'>"+fontStyle+ data[0].defectList[i].mODELCODE+"</font></td>";  
 		  			if(data[0].defectList[i].sUBCOMPONENTNAME.length==0){
